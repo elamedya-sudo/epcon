@@ -25,7 +25,7 @@ export default function DocumentsPage() {
     { src: "/images/belgelerimiz/iso-22000-745x1024.jpg", title: "ISO 22000", size: "d" },
     { src: "/images/belgelerimiz/iso-30001-745x1024.jpg", title: "ISO 30001", size: "d" },
     { src: "/images/belgelerimiz/iso-45001-745x1024.jpg", title: "ISO 45001", size: "d" },
-    { src: "/images/belgelerimiz/Is-Yeri-Acma-Ve-Calistirma-Ruhsati-2021-745x1024.JPG", title: "İşyeri Çalışma Ruhsatı", size: "d" },
+    { src: "/images/belgelerimiz/is-yeri-acma-ve-calisma-ruhsati.jpg", title: "İşyeri Çalışma Ruhsatı", size: "d" },
     { src: "/images/belgelerimiz/Marka-Yenileme-Belgesi-745x1024.jpg", title: "Marka Tescil", size: "d" },
     { src: "/images/belgelerimiz/Seref-KeleteliMesul-Mudurluk-Belgesi-745x1024.jpg", title: "Mesul Müdürlük", size: "d" },
     { src: "/images/belgelerimiz/seref-mesul-mudur-sertifikasi.jpg", title: "Mesul Müdür Sertifikası", size: "y" },
