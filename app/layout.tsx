@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer"; // Yeni eklediğimiz Footer'ı import ediyoruz
+import Footer from "@/components/Footer";
+import FloatingButtons from "@/components/FloatingButtons"; // Yeni bileşen eklendi
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -28,10 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className="scroll-smooth">
-      <body className={`${barlow.variable} ${barlowCondensed.variable} font-barlow antialiased bg-white text-text-dark`}>
+      <body className={`${barlow.variable} ${barlowCondensed.variable} font-barlow antialiased bg-white text-text-dark relative`}>
         <Header />
         {children}
-        <Footer /> {/* Footer tüm sayfaların en altında otomatik belirecek */}
+        <Footer />
+        <FloatingButtons /> {/* Sağ alt köşede yüzecek butonlar */}
       </body>
     </html>
   );

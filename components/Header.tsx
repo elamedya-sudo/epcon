@@ -1,15 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, MapPin, Menu, X, ShieldCheck } from "lucide-react";
+import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCorporateOpen, setIsCorporateOpen] = useState(false); // Mobil Kurumsal menü state'i
 
-  // Kurumsal sitemap yapımıza uygun menü elemanları
   const menuItems = [
     { name: "Ana Sayfa", href: "/" },
-    { name: "Hakkımızda", href: "/hakkimizda" },
+    {
+      name: "Kurumsal",
+      isDropdown: true,
+      items: [
+        { name: "Hakkımızda", href: "/hakkimizda" },
+        { name: "Kalite Standartlarımız", href: "/hakkimizda#kalite" },
+        { name: "Misyon & Vizyon", href: "/hakkimizda#misyon-vizyon" },
+        { name: "Belgelerimiz", href: "/belgelerimiz" }, // Sadece bu ayrı sayfa
+      ],
+    },
     { name: "Pest Kontrol", href: "/hizmetlerimiz/pest-kontrol" },
     { name: "Fümigasyon", href: "/hizmetlerimiz/fumigasyon" },
     { name: "Sektörel İlaçlama", href: "/sektorel-ilaclama" },
@@ -19,7 +28,7 @@ export default function Header() {
 
   return (
     <header className="w-full relative z-50 font-barlow">
-      {/* ── TOP STRIP (ÜST BİLGİ ŞERİDİ) - MOBİLDE GİZLİ (hidden sm:flex) ── */}
+      {/* ── TOP STRIP ── */}
       <div className="w-full bg-navy-deeper text-white/65 text-xs py-2.5 px-6 md:px-10 hidden sm:flex justify-between items-center gap-2 border-b border-white/5">
         <div className="flex items-center gap-4 md:gap-6">
           <span className="flex items-center gap-1.5">
@@ -41,9 +50,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ── MAIN NAVBAR (ANA MENÜ) ── */}
+      {/* ── MAIN NAVBAR ── */}
       <nav className="w-full bg-white border-b border-border h-20 px-6 md:px-10 flex items-center justify-between sticky top-0 shadow-sm">
-        {/* Yeni Logo Alanı */}
+        {/* Logo */}
         <div className="flex items-center h-full py-2">
           <a href="/" className="flex items-center h-full">
             <img 
@@ -55,19 +64,41 @@ export default function Header() {
         </div>
 
         {/* Masaüstü Menü Linkleri */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-          {menuItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-text-mid hover:text-navy transition-colors tracking-wide"
-            >
-              {item.name}
-            </a>
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 relative">
+          {menuItems.map((item, idx) => (
+            item.isDropdown ? (
+              <div key={idx} className="relative group">
+                <button className="flex items-center gap-1 text-sm font-medium text-text-mid hover:text-navy transition-colors tracking-wide py-8">
+                  {item.name} <ChevronDown size={14} className="mt-0.5 transition-transform group-hover:rotate-180" />
+                </button>
+                {/* Açılır Menü (Desktop) */}
+                <div className="absolute top-full left-0 w-56 bg-white border border-border rounded-b-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0">
+                  <div className="flex flex-col py-2">
+                    {item.items?.map((subItem, subIdx) => (
+                      <a 
+                        key={subIdx} 
+                        href={subItem.href}
+                        className="px-5 py-3 text-sm text-text-mid hover:bg-slate-50 hover:text-pest-green transition-colors"
+                      >
+                        {subItem.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                key={idx}
+                href={item.href}
+                className="text-sm font-medium text-text-mid hover:text-navy transition-colors tracking-wide py-8"
+              >
+                {item.name}
+              </a>
+            )
           ))}
         </div>
 
-        {/* Sağ Taraf: Telefon & CTA Butonu */}
+        {/* Sağ Taraf CTA */}
         <div className="hidden sm:flex items-center gap-4">
           <div className="flex flex-col text-right hidden xl:flex">
             <span className="text-xs text-text-muted">7/24 Acil Hat</span>
@@ -94,33 +125,51 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* ── MOBİL AÇILIR MENÜ (DRAWER) ── */}
+      {/* ── MOBİL AÇILIR MENÜ ── */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white border-b border-border shadow-xl lg:hidden z-50">
-          <div className="flex flex-col p-6 space-y-4">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="text-base font-semibold text-text-dark hover:text-pest-green transition-colors border-b border-border/50 pb-2"
-              >
-                {item.name}
-              </a>
+          <div className="flex flex-col p-6 space-y-2 max-h-[80vh] overflow-y-auto">
+            {menuItems.map((item, idx) => (
+              item.isDropdown ? (
+                <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
+                  <button 
+                    onClick={() => setIsCorporateOpen(!isCorporateOpen)}
+                    className="flex items-center justify-between py-2 text-base font-semibold text-text-dark hover:text-pest-green transition-colors"
+                  >
+                    {item.name}
+                    <ChevronDown size={18} className={`transition-transform duration-300 ${isCorporateOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {/* Mobil Dropdown İçeriği */}
+                  <div className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${isCorporateOpen ? "max-h-64 mt-2 opacity-100" : "max-h-0 opacity-0"}`}>
+                    {item.items?.map((subItem, subIdx) => (
+                      <a
+                        key={subIdx}
+                        href={subItem.href}
+                        onClick={() => setIsOpen(false)}
+                        className="py-2.5 text-sm text-text-mid hover:text-pest-green border-l-2 border-border pl-3"
+                      >
+                        {subItem.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={idx}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="py-2 text-base font-semibold text-text-dark hover:text-pest-green transition-colors border-b border-border/50 pb-2"
+                >
+                  {item.name}
+                </a>
+              )
             ))}
-            <div className="pt-2 flex flex-col gap-3">
+            <div className="pt-4 flex flex-col gap-3">
               <a
                 href="tel:+905316901071"
                 className="w-full bg-navy text-white text-center py-3 rounded-md font-medium text-sm flex items-center justify-center gap-2"
               >
                 <Phone size={16} /> Hemen Ara: 0531 690 10 71
-              </a>
-              <a
-                href="#form"
-                onClick={() => setIsOpen(false)}
-                className="w-full bg-pest-green text-white text-center py-3 rounded-md font-medium text-sm flex items-center justify-center"
-              >
-                Ücretsiz Teklif Al
               </a>
             </div>
           </div>
