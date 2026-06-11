@@ -30,11 +30,32 @@ export default function MainPestHero() {
 
         {/* Haşere Hapları (Pills) */}
         <div className="flex flex-wrap gap-2 max-w-[550px]">
-          {['🪳 Hamamböceği', '🦂 Akrep', '🐜 Karınca', '🦟 Sivrisinek', '🐛 Pire & Bit', '🐀 Fare'].map((pest) => (
-            <span key={pest} className="bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
-              {pest}
-            </span>
-          ))}
+          {/* Hamamböceği */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fab3.svg" alt="Hamamböceği" className="w-4 h-4" />
+            Hamamböceği
+          </span>
+          {/* Akrep */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <span>🦂</span> Akrep
+          </span>
+          {/* Karınca */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <span>🐜</span> Karınca
+          </span>
+          {/* Sivrisinek */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <span>🦟</span> Sivrisinek
+          </span>
+          {/* Pire & Bit */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fab2.svg" alt="Pire" className="w-4 h-4" />
+            Pire & Bit
+          </span>
+          {/* Fare */}
+          <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 rounded px-3 py-1.5 text-sm transition-all hover:bg-pest-green/15 hover:border-pest-green/35 hover:text-[#5dd88a] cursor-default">
+            <span>🐀</span> Fare
+          </span>
         </div>
 
         {/* CTA Butonları */}

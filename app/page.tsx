@@ -1,7 +1,10 @@
 import MainPestHero from "@/components/heros/MainPestHero";
 import TrustBar from "@/components/TrustBar";
 import HowItWorks from "@/components/HowItWorks";
-import PestServices from "@/components/PestServices"; // Yeni bileşeni ekledik
+import PestServices from "@/components/PestServices";
+import Testimonials from "@/components/Testimonials";
+import References from "@/components/References";
+import BottomCTA from "@/components/BottomCTA";
 
 export default function Home() {
   return (
@@ -18,10 +21,14 @@ export default function Home() {
       {/* 4. Bölüm: Haşere Türleri / Hizmetler */}
       <PestServices />
 
-      {/* 5. Bölüm: Müşteri Yorumları (Gelecek)
-          6. Bölüm: Referanslar ve İstatistikler (Gelecek) 
-          7. Bölüm: Footer Öncesi Son Çağrı (Gelecek)
-      */}
+      {/* 5. Bölüm: Müşteri Yorumları */}
+      <Testimonials />
+
+      {/* 6. Bölüm: Referans Logoları */}
+      <References />
+
+      {/* 7. Bölüm: Kapanış / Aksiyon Çağrısı */}
+      <BottomCTA />
     </main>
   );
 }

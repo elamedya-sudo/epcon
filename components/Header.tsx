@@ -43,10 +43,14 @@ export default function Header() {
 
       {/* ── MAIN NAVBAR (ANA MENÜ) ── */}
       <nav className="w-full bg-white border-b border-border h-20 px-6 md:px-10 flex items-center justify-between sticky top-0 shadow-sm">
-        {/* Logo Alanı */}
-        <div className="flex items-center">
-          <a href="/" className="font-barlowCondensed text-3xl font-extrabold tracking-tight text-navy uppercase">
-            EP<span className="text-pest-green">CON</span>
+        {/* Yeni Logo Alanı */}
+        <div className="flex items-center h-full py-2">
+          <a href="/" className="flex items-center h-full">
+            <img 
+              src="/images/logo/epcon-logo.png" 
+              alt="EPCON İlaçlama" 
+              className="h-11 md:h-12 w-auto object-contain transition-all"
+            />
           </a>
         </div>
 
