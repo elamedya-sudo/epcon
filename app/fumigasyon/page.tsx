@@ -3,7 +3,8 @@ import fs from "fs";
 import path from "path";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import FumigationSlider from "@/components/FumigationSlider"; // Yeni yaptığımız slider
+import FumigationSlider from "@/components/FumigationSlider";
+import LeadHero from "@/components/LeadHero"; // Yeni akıllı form bileşenimizi çağırıyoruz
 
 interface BlogPost {
   slug: string;
@@ -14,7 +15,6 @@ interface BlogPost {
 }
 
 export default async function FumigationPage() {
-  // Klasördeki lokal resimlerin (Başına eğik çizgi eklenmiş hatasız hali)
   const sliderImages = [
     "/images/fumigasyon/fumigasyon-resim.jpg", 
     "/images/fumigasyon/fumigasyon-resim2.jpg",
@@ -35,7 +35,6 @@ export default async function FumigationPage() {
       const fileContents = fs.readFileSync(filePath, "utf8");
       const allPosts: BlogPost[] = JSON.parse(fileContents);
       
-      // MANTIK: json içinden sadece kategorisi "Fümigasyon" veya "Fumigasyon" olanları süzüyoruz
       fumigationPosts = allPosts.filter(
         (post) => 
           post.category?.toLowerCase() === "fümigasyon" || 
@@ -49,21 +48,25 @@ export default async function FumigationPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. ÜST MAVİ BANNER */}
-      <section className="w-full bg-navy py-12 md:py-16 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase text-white tracking-tight mb-2">
-            Fümigasyon
-          </h1>
-          <div className="text-white/60 text-sm">
-            <Link href="/" className="hover:text-pest-green transition-colors">Anasayfa</Link> 
-            <span className="mx-2">/</span> 
-            <span className="text-white">Fümigasyon</span>
-          </div>
-        </div>
-      </section>
+      {/* 1. BÖLÜM: YENİ LEAD HERO (Tasarımı Farklılaştırıldı) */}
+      <LeadHero 
+        reverseLayout={true} // Formu sola aldı!
+        backgroundImage="/images/fumigasyon/fumigasyon-resim.jpg" // Arkaya gerçek fotoğrafı bastı!
+        badgeText="Uluslararası Onaylı Fümigasyon"
+        titleMain="Standartlara Uygun"
+        titleHighlight="Fümigasyon"
+        description={
+          <>Zararlı organizmaları yumurta, larva ve ergin dahil tüm yaşam evrelerinde %100 kesinlikle yok eden, <strong className="text-white/85 font-normal">WHO onaylı ve sertifikalı</strong> profesyonel fümigasyon hizmeti.</>
+        }
+        mekanTurleri={["Gemi / Yat", "Konteyner", "Ahşap Palet", "Depo / Antrepo", "Silolar"]}
+        features={[
+          { icon: <span>🪲</span>, label: "Ahşap Kurdu" },
+          { icon: <span>🐛</span>, label: "BMSB (Kokarca)" },
+          { icon: <span>📦</span>, label: "Palet İlaçlama" }
+        ]}
+      />
 
-      {/* 2. İÇERİK VE SLIDER BÖLÜMÜ */}
+      {/* 2. BÖLÜM: İÇERİK VE SLIDER (Orijinal haliyle korundu) */}
       <section className="py-16 md:py-20 px-6 md:px-10 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
@@ -74,7 +77,7 @@ export default async function FumigationPage() {
             </h2>
             <div className="prose prose-sm md:prose-base text-text-mid leading-relaxed">
               <p>
-                Böcekleri (Yumurta, larva, nimf, pupa ve ergin dönemlerinde) and diğer zararlı etmenleri (Nematod, mantar, bakteri gibi) öldürmek amacı ile kapalı bir ortamda (Belirli bir ısıda ve belirli miktarda) gaz halinde kimyasal bir madde (Fümigant) vermek ve belirli bir süre gazı bu ortamda tutma işlemidir.
+                Böcekleri (Yumurta, larva, nimf, pupa ve ergin dönemlerinde) ve diğer zararlı etmenleri (Nematod, mantar, bakteri gibi) öldürmek amacı ile kapalı bir ortamda (Belirli bir ısıda ve belirli miktarda) gaz halinde kimyasal bir madde (Fümigant) vermek ve belirli bir süre gazı bu ortamda tutma işlemidir.
               </p>
               <p>
                 İlaçlar sindirim, solunum, kontakt(değme) yoluyla etki ederler. Fümigantlar solunum yoluyla etkili olurlar, oksidas, peroksidas gibi enzimleri etki ederek solunuma engel olurlar ya da sinir sistemini felç ederler.
@@ -88,7 +91,7 @@ export default async function FumigationPage() {
             </div>
           </div>
 
-          {/* Sağ Kolon: Client Side Çalışan Yeni Harika Slider */}
+          {/* Sağ Kolon: Slider */}
           <div className="lg:col-span-4 w-full">
             <FumigationSlider images={sliderImages} />
           </div>
@@ -96,7 +99,7 @@ export default async function FumigationPage() {
         </div>
       </section>
 
-      {/* 3. DİNAMİK ALT HİZMETLER & YAZILAR (JSON'DAN GELENLER) */}
+      {/* 3. BÖLÜM: DİNAMİK ALT HİZMETLER & YAZILAR (JSON'dan çekilen bölüm korundu) */}
       <section className="bg-slate-50 py-16 px-6 md:px-10 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <h3 className="font-barlowCondensed text-2xl font-bold uppercase text-navy mb-8 text-center md:text-left">
@@ -108,14 +111,13 @@ export default async function FumigationPage() {
               {fumigationPosts.map((post, idx) => (
                 <Link 
                   key={idx} 
-                  // URL yapısı bozulmadan direkt kök dizine yönlendirir
                   href={`/${post.slug}`} 
                   className="bg-white border border-border p-5 rounded-xl hover:border-pest-green hover:shadow-lg transition-all group flex items-center justify-between"
                 >
-                  <span className="font-semibold text-navy group-hover:text-pest-green transition-colors">
+                  <span className="font-semibold text-navy group-hover:text-pest-green transition-colors line-clamp-2">
                     {post.title}
                   </span>
-                  <ArrowRight size={18} className="text-border group-hover:text-pest-green transition-colors transform group-hover:translate-x-1" />
+                  <ArrowRight size={18} className="text-border group-hover:text-pest-green transition-colors transform group-hover:translate-x-1 flex-shrink-0" />
                 </Link>
               ))}
             </div>
