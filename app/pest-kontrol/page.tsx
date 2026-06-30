@@ -8,6 +8,8 @@ import References from "@/components/References";
 import BottomCTA from "@/components/BottomCTA";
 import { ArrowRight } from "lucide-react"; 
 import Link from "next/link";
+// ÇÖZÜM: Dosyayı doğrudan import ediyoruz, fs ve path'e gerek kalmıyor
+import allPosts from "@/data/post.json";
 
 interface BlogPost {
   slug: string;
@@ -17,23 +19,17 @@ interface BlogPost {
 }
 
 export default async function PestKontrolPage() {
-  // Veritabanından Pest Kontrol ile ilgili hizmet/yazıları çek
-  let pestPosts: BlogPost[] = [];
-  try {
-    const filePath = path.join(process.cwd(), "data", "post.json");
-    if (fs.existsSync(filePath)) {
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const allPosts: BlogPost[] = JSON.parse(fileContents);
-      pestPosts = allPosts.filter(post => post.category?.toLowerCase().includes("pest"));
-    }
-  } catch (error) { console.error(error); }
+  // Veriyi import edilen JSON'dan filtreliyoruz
+  const pestPosts: BlogPost[] = allPosts.filter(
+    (post: BlogPost) => post.category?.toLowerCase().includes("pest")
+  );
 
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. LEAD HERO (Farklı tasarım anahtarlarıyla) */}
+      {/* 1. LEAD HERO */}
       <LeadHero 
-        reverseLayout={false} // Pest kontrol için formu sağda bırakıyoruz
+        reverseLayout={false}
         badgeText="İstanbul · Profesyonel Pest Kontrol"
         titleMain="Kurumsal Çözümlerle"
         titleHighlight="Tam Koruma"
@@ -48,7 +44,7 @@ export default async function PestKontrolPage() {
         ]}
       />
 
-      {/* 2. PEST KONTROL NEDİR? (Orijinal görsel ile) */}
+      {/* 2. PEST KONTROL NEDİR? */}
       <section className="py-16 md:py-20 px-6 md:px-10 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -61,12 +57,11 @@ export default async function PestKontrolPage() {
                 Entegre haşere mücadelesi yaklaşımında, haşerelerin biyolojisi, yaşayışı ve alışkanlıkları gibi bilimsel temellere dayalı kontrol yöntemleri kullanılır.
               </p>
               <p>
-                Ulusal ve uluslararası denetimler profesyonel bir pest kontrol hizmeti almak gerektirir. Denetimin yarısı güvenilir bir pest kontrol hizmeti, diğer yarısı da bir tesisin ve pest kontrol şirketinin son denetimden bu yana tüm zararlı faaliyetlerinin kapsamlı, yazılı belgelerini sunma yeteneğidir. Zararlı kontrolünde başarı pest kontrol şirketiyle ortak bir iş birliği içerisinde çalışmayla mümkündür.
+                Ulusal ve uluslararası denetimler profesyonel bir pest kontrol hizmeti almak gerektirir. Denetimin yarısı güvenilir bir pest kontrol hizmeti, diğer yarısı da bir tesisin ve pest kontrol şirketinin son denetimden bu yana tüm zararlı faaliyetlerinin kapsamlı, yazılı belgelerini sunma yeteneğidir.
               </p>
             </div>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl">
-            {/* Eski sitedeki o meşhur dünya görseli */}
             <img src="/images/pest-kontrol-dunya-gorseli.jpg" alt="Entegre Pest Kontrol" className="w-full h-auto" />
           </div>
         </div>
@@ -86,6 +81,13 @@ export default async function PestKontrolPage() {
           </div>
         </div>
       </section>
+      
+      <TrustBar />
+      <HowItWorks />
+      <PestServices />
+      <Testimonials />
+      <References />
+      <BottomCTA />
     </main>
   );
 }
