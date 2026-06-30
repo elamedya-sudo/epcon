@@ -2,6 +2,17 @@
 
 import React from 'react';
 
+// İstanbul ilçelerini bir dizi olarak tanımlıyoruz
+const ISTANBUL_ILCELERI = [
+  "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", 
+  "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", 
+  "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", 
+  "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", 
+  "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", 
+  "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", 
+  "Ümraniye", "Üsküdar", "Zeytinburnu"
+];
+
 export default function MainPestHero() {
   return (
     <section className="relative bg-navy-deeper overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
@@ -93,10 +104,11 @@ export default function MainPestHero() {
             <div>
               <label className="block text-xs font-medium text-text-mid mb-1 tracking-wider">İlçe</label>
               <select className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
-                <option value="">Seçin</option>
-                <option>Ataşehir</option>
-                <option>Kadıköy</option>
-                <option>Üsküdar</option>
+                <option value="">İlçe Seçin</option>
+                {/* İlçeleri dinamik olarak map ile basıyoruz */}
+                {ISTANBUL_ILCELERI.map((ilce, index) => (
+                  <option key={index} value={ilce}>{ilce}</option>
+                ))}
               </select>
             </div>
           </div>
