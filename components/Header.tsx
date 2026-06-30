@@ -109,7 +109,7 @@ export default function Header() {
             </a>
           </div>
           <a
-            href="#form"
+            href="/ucretsiz-teklif-al/"
             className="bg-pest-green hover:bg-pest-green-dark text-white text-sm font-medium px-5 py-2.5 rounded-md transition-all transform hover:-translate-y-0.5 shadow-sm flex items-center gap-2"
           >
             <ShieldCheck size={16} />

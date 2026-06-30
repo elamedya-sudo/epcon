@@ -3,7 +3,8 @@ import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingButtons from "@/components/FloatingButtons"; // Yeni bileşen eklendi
+import FloatingButtons from "@/components/FloatingButtons";
+import ScrollToTop from "@/components/ScrollToTop"; // Yeni bileşeni import ettik
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -33,7 +34,10 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <FloatingButtons /> {/* Sağ alt köşede yüzecek butonlar */}
+        
+        {/* Yüzen butonlar ve yukarı çık butonu burada birleşti */}
+        <ScrollToTop />
+        <FloatingButtons /> 
       </body>
     </html>
   );

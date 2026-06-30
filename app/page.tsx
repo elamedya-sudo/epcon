@@ -133,8 +133,9 @@ export default function Home() {
       <PestServices />
 
       {/* 6. REFERANSLAR VE YORUMLAR */}
+      <Testimonials />      
       <References />
-      <Testimonials />
+
 
       {/* 7. BOTTOM CTA */}
       <BottomCTA />
