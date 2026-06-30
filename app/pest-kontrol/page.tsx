@@ -1,8 +1,13 @@
 import React from "react";
-import fs from "fs";
-import path from "path";
-import Link from "next/link";
 import LeadHero from "@/components/LeadHero";
+import TrustBar from "@/components/TrustBar";
+import HowItWorks from "@/components/HowItWorks";
+import PestServices from "@/components/PestServices";
+import Testimonials from "@/components/Testimonials";
+import References from "@/components/References";
+import BottomCTA from "@/components/BottomCTA";
+import { ArrowRight } from "lucide-react"; 
+import Link from "next/link";
 
 interface BlogPost {
   slug: string;
