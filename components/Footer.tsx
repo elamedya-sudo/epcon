@@ -14,11 +14,11 @@ export default function Footer() {
   ];
 
   const services = [
-    { name: "Hamamböceği İlaçlama", href: "/pest-kontrol" },
-    { name: "Akrep İlaçlama", href: "/pest-kontrol" },
-    { name: "Pire & Bit İlaçlama", href: "/pest-kontrol" },
+    { name: "Hamamböceği İlaçlama", href: "/hamam-bocegi-ilaclama" },
+    { name: "Fare İlaçlama", href: "/fare-ilaclama" },
+    { name: "Akrep İlaçlama", href: "/akrep-ilaclama" },
+    { name: "Pire & Bit İlaçlama", href: "/pire-ilaclama" },
     { name: "Fümigasyon Hizmetleri", href: "/fumigasyon" },
-    { name: "Mekan Dezenfeksiyonu", href: "/pest-kontrol" },
   ];
 
   return (
