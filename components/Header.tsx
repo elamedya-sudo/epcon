@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Header() {
     { name: "Fümigasyon", href: "/fumigasyon" },
     { name: "Sektörel İlaçlama", href: "/sektorel-ilaclama" },
     { name: "Blog", href: "/blog" },
+    { name: "Referanslar", href: "/referanslar" },
     { name: "İletişim", href: "/iletisim" },
   ];
 

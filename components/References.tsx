@@ -1,17 +1,18 @@
 import React from "react";
+import Link from "next/link"; // Link bileşenini ekledik
 import { Clapperboard, Cross, BedDouble, Landmark, Factory, BookOpenCheck, ShoppingBasket, PlaneTakeoff } from "lucide-react";
 
 export default function References() {
-  // Ekran görüntüsündeki (image_3.png) kurum adları ve geçici ikonlar
+  // Her bir kurum tipi için referanslar sayfasına yönlendirecek "link" parametreleri eklendi
   const placeholderBrands = [
-    { icon: <Clapperboard size={32} />, name: "KULÜP", desc: "Süper Lig Futbol Kulübü" },
-    { icon: <Cross size={32} />, name: "HASTANE", desc: "Özel Hastane Grubu" },
-    { icon: <BedDouble size={32} />, name: "OTEL", desc: "5 Yıldızlı Otel Zinciri" },
-    { icon: <Landmark size={32} />, name: "BANKA", desc: "Ulusal Banka" },
-    { icon: <Factory size={32} />, name: "FABRİKA", desc: "Üretim Tesisi" },
-    { icon: <BookOpenCheck size={32} />, name: "EĞİTİM", desc: "Üniversite Kampüsü" },
-    { icon: <ShoppingBasket size={32} />, name: "MARKET", desc: "Zincir Süpermarket" },
-    { icon: <PlaneTakeoff size={32} />, name: "HAVALİMANI", desc: "Lojistik Terminali" },
+    { icon: <Clapperboard size={32} />, name: "KULÜP", desc: "Süper Lig Futbol Kulübü", link: "/referanslar?kategori=Otel / Tesis / Spor" },
+    { icon: <Cross size={32} />, name: "HASTANE", desc: "Özel Hastane Grubu", link: "/referanslar?kategori=Sağlık / Eğitim" },
+    { icon: <BedDouble size={32} />, name: "OTEL", desc: "5 Yıldızlı Otel Zinciri", link: "/referanslar?kategori=Otel / Tesis / Spor" },
+    { icon: <Landmark size={32} />, name: "BANKA", desc: "Ulusal Banka", link: "/referanslar" },
+    { icon: <Factory size={32} />, name: "FABRİKA", desc: "Üretim Tesisi", link: "/referanslar?kategori=Fabrika / Üretim" },
+    { icon: <BookOpenCheck size={32} />, name: "EĞİTİM", desc: "Üniversite Kampüsü", link: "/referanslar?kategori=Sağlık / Eğitim" },
+    { icon: <ShoppingBasket size={32} />, name: "MARKET", desc: "Zincir Süpermarket", link: "/referanslar?kategori=Gıda / Tarım" },
+    { icon: <PlaneTakeoff size={32} />, name: "HAVALİMANI", desc: "Lojistik Terminali", link: "/referanslar?kategori=Lojistik / Havacılık" },
   ];
 
   return (
@@ -32,14 +33,15 @@ export default function References() {
           </div>
         </div>
 
-        {/* Referans Kartları Grid Alanı */}
+        {/* Referans Kartları Grid Alanı (div yerine Link kullanıldı) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mb-16">
           {placeholderBrands.map((brand, index) => (
-            <div
+            <Link
               key={index}
-              className="bg-white border-2 border-border rounded-xl p-6 text-center cursor-pointer transition-all duration-300 hover:border-navy hover:bg-[#f5f7ff] hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(26,45,143,0.1)] group"
+              href={brand.link}
+              className="bg-white border-2 border-border rounded-xl p-6 text-center cursor-pointer transition-all duration-300 hover:border-navy hover:bg-[#f5f7ff] hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(26,45,143,0.1)] group block"
             >
-              <div className="flex items-center justify-center h-12 mb-3 text-text-mid group-hover:scale-125 transition-transform duration-300">
+              <div className="flex items-center justify-center h-12 mb-3 text-text-mid group-hover:text-navy group-hover:scale-125 transition-all duration-300">
                 {brand.icon}
               </div>
               <h4 className="font-barlowCondensed text-xl font-bold uppercase text-navy tracking-wide mb-1">
@@ -48,11 +50,11 @@ export default function References() {
               <p className="text-xs text-text-muted leading-relaxed">
                 {brand.desc}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 
-        {/* İstatistik Kutuları (image_3.png altı) */}
+        {/* İstatistik Kutuları */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
           <div className="bg-white border border-border rounded-xl p-6 text-center">
             <span className="font-extrabold font-barlowCondensed text-4xl text-navy">500+</span>
