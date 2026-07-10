@@ -41,7 +41,7 @@ export default function Header() {
           </span>
           <span className="flex items-center gap-1.5">
             <MapPin size={13} className="text-pest-green" />
-            İstanbul — Tüm İlçeler
+            İstanbul Başta Olmak Üzere Türkiye Geneli Hizmet
           </span>
         </div>
         <div className="flex items-center gap-4">
