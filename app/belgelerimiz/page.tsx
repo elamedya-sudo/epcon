@@ -13,6 +13,11 @@ export default function BelgelerimizPage() {
       icon: <ShieldCheck className="w-8 h-8 text-navy" />,
       items: [
         { 
+          adi: "Fümigasyon Operatör Belgesi", 
+          no: "86", kapsam: "Tarım ve Köyişleri Bakanlığı", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/2d-745-1024.jpg" 
+        },
+        { 
           adi: "Biyosidal Ürün Uygulama İzin Belgesi", 
           no: "BY-001", kapsam: "Halk Sağlığı Alanı", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/biyosidal-urun-izin-uygulama-belgesi.jpg" 
