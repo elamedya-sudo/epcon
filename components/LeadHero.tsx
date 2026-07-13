@@ -28,7 +28,6 @@ interface LeadHeroProps {
 }
 
 export default function LeadHero({
-  // Props'lara varsayılan olarak Şeref Bey'in brifindeki (Bölüm 4.2) metinleri verdik.
   badgeText = "ENTEGRE PEST KONTROL • FUMİGASYON • BİYOSİDAL UYGULAMALAR",
   titleMain = "Zararlı Yönetiminde Yetkili,",
   titleHighlight = "İzlenebilir ve Sürdürülebilir Çözümler",
@@ -48,6 +47,7 @@ export default function LeadHero({
   const [isIlceOpen, setIsIlceOpen] = useState(false);
   const [ilceSearch, setIlceSearch] = useState("");
   const [selectedIlce, setSelectedIlce] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const ilceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,6 +63,55 @@ export default function LeadHero({
   const filteredIlceler = ISTANBUL_ILCELERI.filter(ilce => 
     ilce.toLocaleLowerCase('tr-TR').includes(ilceSearch.toLocaleLowerCase('tr-TR'))
   );
+
+  // MAİL GÖNDERME FONKSİYONU
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const form = e.currentTarget;
+    const adSoyad = (form.elements.namedItem("adSoyad") as HTMLInputElement).value;
+    const telefon = (form.elements.namedItem("telefon") as HTMLInputElement).value;
+    const mekan = (form.elements.namedItem("mekan") as HTMLSelectElement).value;
+    const hizmet = (form.elements.namedItem("hizmet") as HTMLSelectElement).value;
+
+    if (!selectedIlce) {
+      alert("Lütfen bir ilçe seçiniz.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const payload = {
+      adSoyad,
+      telefon,
+      ilce: selectedIlce,
+      mekan,
+      hizmet: hizmet || "Hızlı Teklif (Ana Sayfa)",
+      bocek: "Belirtilmedi",
+      eposta: "Belirtilmedi",
+      not: ""
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      
+      if (res.ok) {
+        alert("Talebiniz başarıyla alındı! En kısa sürede dönüş yapacağız.");
+        form.reset();
+        setSelectedIlce("");
+      } else {
+        alert("Gönderim sırasında bir hata oluştu.");
+      }
+    } catch (error) {
+      alert("Bağlantı hatası oluştu.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="relative bg-navy-deeper overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
@@ -88,7 +137,7 @@ export default function LeadHero({
         </>
       )}
 
-      {/* ── METİNLER (Bölüm 4.2) ── */}
+      {/* ── METİNLER ── */}
       <div className={`relative z-10 lg:col-span-7 space-y-6 order-1 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
         <div className="inline-flex items-center gap-2 border border-pest-green/40 bg-pest-green/10 rounded px-[14px] py-[5px]">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -128,7 +177,7 @@ export default function LeadHero({
         </div>
       </div>
 
-      {/* ── FORM ALANI (Bölüm 4.3) ── */}
+      {/* ── FORM ALANI ── */}
       <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-7 md:p-8 shadow-2xl order-2 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
         <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase tracking-wide">
           TEKLİF TALEP ET
@@ -137,14 +186,14 @@ export default function LeadHero({
            Bilgilerinizi bırakın; uzman ekibimiz ihtiyacınızı değerlendirerek sizinle iletişime geçsin.
         </p>
 
-        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <input type="text" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
+            <input type="text" name="adSoyad" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <input type="tel" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
+              <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
             </div>
             
             {/* Aramalı İlçe Kutusu */}
@@ -198,16 +247,16 @@ export default function LeadHero({
 
           <div className="grid grid-cols-2 gap-3">
              <div>
-              <select className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
-                <option value="" disabled selected hidden>Mekân Türü</option>
+              <select name="mekan" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                <option value="" disabled hidden>Mekân Türü</option>
                 {mekanTurleri.map((mekan, idx) => (
                   <option key={idx} value={mekan}>{mekan}</option>
                 ))}
               </select>
             </div>
             <div>
-              <select className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
-                <option value="" disabled selected hidden>Hizmet Türü</option>
+              <select name="hizmet" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                <option value="" disabled hidden>Hizmet Türü</option>
                 {hizmetTurleri.map((hizmet, idx) => (
                   <option key={idx} value={hizmet}>{hizmet}</option>
                 ))}
@@ -215,8 +264,8 @@ export default function LeadHero({
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-2">
-            Teklif Talebimi Gönder
+          <button type="submit" disabled={isSubmitting} className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-2 disabled:opacity-60">
+            {isSubmitting ? "Gönderiliyor..." : "Teklif Talebimi Gönder"}
           </button>
           
           <div className="text-center mt-3">

@@ -114,10 +114,28 @@ export default function UcretsizTeklifAlPage() {
         {step === 4 && (
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-navy">Hangi ilçedesiniz?</h2>
-            <select className="w-full p-4 border-2 border-border rounded-xl outline-none focus:border-navy text-navy font-medium" onChange={(e) => { setFormData({...formData, ilce: e.target.value}); setStep(5); }}>
+            
+            <select 
+              className="w-full p-4 border-2 border-border rounded-xl outline-none focus:border-navy text-navy font-medium" 
+              value={formData.ilce}
+              onChange={(e) => setFormData({...formData, ilce: e.target.value})}
+            >
               <option value="">İlçe Seçin</option>
               {ISTANBUL_ILCELERI.map(i => <option key={i} value={i}>{i}</option>)}
             </select>
+            
+            <button 
+              onClick={() => {
+                if(!formData.ilce) {
+                   alert("Lütfen bir ilçe seçin!");
+                } else {
+                   setStep(5);
+                }
+              }}
+              className="w-full bg-navy text-white py-4 rounded-xl font-bold hover:bg-navy-dark transition-all mt-4"
+            >
+              Devam Et
+            </button>
           </div>
         )}
 
