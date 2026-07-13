@@ -1,23 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  /* Lacivert Tonları */
-  --color-navy: #1a2d8f;
-  --color-navy-dark: #111f6a;
-  --color-navy-deeper: #0c1545;
+  /* Brife Uygun Lacivert Tonları (#0B2341) */
+  --color-navy: #0B2341;
+  --color-navy-dark: #071629;
+  --color-navy-deeper: #040d1a;
 
-  /* Yeşil Tonları */
-  --color-pest-green: #1a9e3f;
-  --color-pest-green-dark: #137a30;
-  --color-pest-green-light: #e8f7ed;
+  /* Brife Uygun Yeşil Tonları (#5CB746) */
+  --color-pest-green: #5CB746;
+  --color-pest-green-dark: #4a9238;
+  --color-pest-green-light: #eaf6e5;
+  
+  /* Gri ve Arka Plan Tonları */
+  --color-surface-light: #f3f5f7;
 
   /* Metin ve Kenarlık Renkleri */
-  --color-text-dark: #0e1530;
-  --color-text-mid: #3a4060;
-  --color-text-muted: #7a82a8;
+  --color-text-dark: #1a202c;
+  --color-text-mid: #4a5568;
+  --color-text-muted: #718096;
   --color-border: #e2e6f0;
 
   /* Font Aileleri */
   --font-barlow: var(--font-barlow), sans-serif;
   --font-barlowCondensed: var(--font-barlow-condensed), sans-serif;
+}
+
+/* 
+  BRİF KURALI: 
+  Başlık bölümleri sabit menünün altında kalmamalı; 
+  masaüstünde en az 120 px güvenli üst boşluk bırakılmalıdır. 
+*/
+html {
+  scroll-padding-top: 120px;
+}
+
+/* 
+  BRİF KURALI: 
+  Gövde metni satır aralığı 1.5 - 1.7 
+*/
+body {
+  line-height: 1.6;
 }

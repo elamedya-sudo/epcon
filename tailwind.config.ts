@@ -9,19 +9,22 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          DEFAULT: '#1a2d8f',
-          dark: '#111f6a',
-          deeper: '#0c1545',
+          DEFAULT: '#0B2341', // Brif: Kurumsal Lacivert
+          dark: '#071629',
+          deeper: '#040d1a',
         },
         pest: {
-          green: '#1a9e3f',
-          'green-dark': '#137a30',
-          'green-light': '#e8f7ed',
+          green: '#5CB746', // Brif: Kurumsal Yeşil (CTA)
+          'green-dark': '#4a9238',
+          'green-light': '#eaf6e5', // Brif: Açık yeşil bilgi alanı
+        },
+        surface: {
+          light: '#f3f5f7', // Brif: Açık gri arka plan
         },
         text: {
-          dark: '#0e1530',
-          mid: '#3a4060',
-          muted: '#7a82a8',
+          dark: '#1a202c',
+          mid: '#4a5568', // Brif: 16-19px gövde metni kontrastı
+          muted: '#718096',
         },
         border: '#e2e6f0',
       },
