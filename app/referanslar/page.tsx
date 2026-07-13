@@ -4,66 +4,66 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Building2, ShieldCheck, Ship, Utensils, Landmark, GraduationCap, Package } from "lucide-react";
 
-// REFERANS VERİTABANI (Kategorize Edilmiş Hali)
+// REFERANS VERİTABANI (A.Ş. ve Ltd. Şti. temizlendi, Milli Saraylar eklendi)
 const referanslar = [
   // TARİHİ MEKANLAR & KAMU
   { isim: "Milli Saraylar Dolmabahçe Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Topkapı Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Yıldız Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Beylerbeyi Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Maslak Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Küçüksu Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Aynalı Kavak Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Edirne Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "İslam Medeniyetleri Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Beykoz Cam ve Billur Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Mimar Sinan Üniv. Resim ve Heykel Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Topkapı Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Yıldız Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Beylerbeyi Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Maslak Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Küçüksu Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Aynalı Kavak Kasrı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Edirne Sarayı", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar İslam Medeniyetleri Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Beykoz Cam ve Billur Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Resim ve Heykel Müzesi", kategori: "Tarihi Mekanlar / Kamu" },
+  { isim: "Milli Saraylar Ankara Palas", kategori: "Tarihi Mekanlar / Kamu" },
   { isim: "Türkiye Yeşilay Cemiyeti", kategori: "Tarihi Mekanlar / Kamu" },
-  { isim: "Ankara Palas", kategori: "Tarihi Mekanlar / Kamu" },
   { isim: "İBB Zabıta Müdürlüğü", kategori: "Tarihi Mekanlar / Kamu" },
   { isim: "Marmara Açık Ceza İnfaz Kurumu", kategori: "Tarihi Mekanlar / Kamu" },
   
   // GIDA & TARIM
-  { isim: "Tab Gıda San. A.Ş.", kategori: "Gıda / Tarım" },
-  { isim: "Köşkeroğlu Gıda Tic. Ltd. Şti.", kategori: "Gıda / Tarım" },
-  { isim: "Tatlıbak Gıda San. Tic. Ltd. Şti.", kategori: "Gıda / Tarım" },
-  { isim: "Arda Donuk Gıda A.Ş.", kategori: "Gıda / Tarım" },
-  { isim: "Kumbasar Yumurta (Damla Gıda A.Ş.)", kategori: "Gıda / Tarım" },
+  { isim: "Tab Gıda", kategori: "Gıda / Tarım" },
+  { isim: "Köşkeroğlu Gıda", kategori: "Gıda / Tarım" },
+  { isim: "Tatlıbak", kategori: "Gıda / Tarım" },
+  { isim: "Arda Donuk Gıda", kategori: "Gıda / Tarım" },
+  { isim: "Kumbasar Yumurta (Damla Gıda)", kategori: "Gıda / Tarım" },
   { isim: "Yumtat Yumurta", kategori: "Gıda / Tarım" },
   { isim: "Rençber Bakliyat", kategori: "Gıda / Tarım" },
-  { isim: "May Tohum A.Ş.", kategori: "Gıda / Tarım" },
-  { isim: "Loqo Global Gıda A.Ş.", kategori: "Gıda / Tarım" },
+  { isim: "May Tohum", kategori: "Gıda / Tarım" },
+  { isim: "Loqo Global Gıda", kategori: "Gıda / Tarım" },
   { isim: "Yalçın Et Gıda", kategori: "Gıda / Tarım" },
   { isim: "Anisah Gıda", kategori: "Gıda / Tarım" },
   { isim: "Kökel Kahve Deposu", kategori: "Gıda / Tarım" },
   { isim: "Arabica Trade", kategori: "Gıda / Tarım" },
-  { isim: "Hakmar Gıda", kategori: "Gıda / Tarım" },
+  { isim: "Hakmar", kategori: "Gıda / Tarım" },
   { isim: "Unkar Gıda", kategori: "Gıda / Tarım" },
-  { isim: "HMS Host Yiyecek İçecek", kategori: "Gıda / Tarım" },
+  { isim: "HMS Host", kategori: "Gıda / Tarım" },
   { isim: "Ala Türk Mutfağı", kategori: "Gıda / Tarım" },
   
   // FABRİKA & ÜRETİM (Sanayi)
-  { isim: "Şişecam A.Ş.", kategori: "Fabrika / Üretim" },
-  { isim: "Paşabahçe Cam San. ve Tic. A.Ş.", kategori: "Fabrika / Üretim" },
-  { isim: "Trakya Teneke Ambalaj Sanayi A.Ş.", kategori: "Fabrika / Üretim" },
-  { isim: "Hereke Halı ve Dokuma Fabrikası", kategori: "Fabrika / Üretim" },
+  { isim: "Şişecam", kategori: "Fabrika / Üretim" },
+  { isim: "Paşabahçe Cam", kategori: "Fabrika / Üretim" },
+  { isim: "Trakya Teneke Ambalaj", kategori: "Fabrika / Üretim" },
+  { isim: "Milli Saraylar Hereke Halı ve Dokuma", kategori: "Fabrika / Üretim" },
   { isim: "Dost Plastik", kategori: "Fabrika / Üretim" },
-  { isim: "Güçsan Plastik A.Ş.", kategori: "Fabrika / Üretim" },
-  { isim: "İzvar Ambalaj San. A.Ş.", kategori: "Fabrika / Üretim" },
+  { isim: "Güçsan Plastik", kategori: "Fabrika / Üretim" },
+  { isim: "İzvar Ambalaj", kategori: "Fabrika / Üretim" },
   { isim: "Verpak Ambalaj", kategori: "Fabrika / Üretim" },
   { isim: "Plasmerk Plastik", kategori: "Fabrika / Üretim" },
   { isim: "Enelkon Otomasyon", kategori: "Fabrika / Üretim" },
-  { isim: "Metran Maden A.Ş.", kategori: "Fabrika / Üretim" },
+  { isim: "Metran Maden", kategori: "Fabrika / Üretim" },
   { isim: "Omco Kalıp", kategori: "Fabrika / Üretim" },
 
   // LOJİSTİK & HAVACILIK
-  { isim: "İst. Sabiha Gökçen Uluslararası Havalimanı", kategori: "Lojistik / Havacılık" },
-  { isim: "DSV Lojistik A.Ş.", kategori: "Lojistik / Havacılık" },
-  { isim: "Galata Taşımacılık A.Ş.", kategori: "Lojistik / Havacılık" },
-  { isim: "Rüya Lojistik A.Ş.", kategori: "Lojistik / Havacılık" },
+  { isim: "İstanbul Sabiha Gökçen Havalimanı", kategori: "Lojistik / Havacılık" },
+  { isim: "DSV Lojistik", kategori: "Lojistik / Havacılık" },
+  { isim: "Galata Taşımacılık", kategori: "Lojistik / Havacılık" },
+  { isim: "Rüya Lojistik", kategori: "Lojistik / Havacılık" },
   { isim: "Saybir Lojistik", kategori: "Lojistik / Havacılık" },
   { isim: "SAS Depolama Lojistik", kategori: "Lojistik / Havacılık" },
-  { isim: "Birlog Nakliyat A.Ş.", kategori: "Lojistik / Havacılık" },
+  { isim: "Birlog Nakliyat", kategori: "Lojistik / Havacılık" },
   { isim: "Akkar Nakliyat", kategori: "Lojistik / Havacılık" },
   
   // SAĞLIK & EĞİTİM
@@ -71,21 +71,21 @@ const referanslar = [
   { isim: "Mono Laboratuvar", kategori: "Sağlık / Eğitim" },
   { isim: "Clinodevice Sağlık Ürünleri", kategori: "Sağlık / Eğitim" },
   { isim: "Nun Okulları", kategori: "Sağlık / Eğitim" },
-  { isim: "Ümraniye Cumhuriyet Anaokulu", kategori: "Sağlık / Eğitim" },
-  { isim: "Ümraniye Nene Hatun Anaokulu", kategori: "Sağlık / Eğitim" },
+  { isim: "Cumhuriyet Anaokulu", kategori: "Sağlık / Eğitim" },
+  { isim: "Nene Hatun Anaokulu", kategori: "Sağlık / Eğitim" },
 
-  // SPOR, TURİZM & DİĞER
+  // OTEL, TESİS & TEKNOPARK
   { isim: "Fenerbahçe Şükrü Saracoğlu Stadyumu", kategori: "Otel / Tesis / Spor" },
   { isim: "Fenerbahçe Dereağzı Tesisleri", kategori: "Otel / Tesis / Spor" },
-  { isim: "Fenerbahçe Can BartU Tesisleri", kategori: "Otel / Tesis / Spor" },
+  { isim: "Fenerbahçe Can Bartu Tesisleri", kategori: "Otel / Tesis / Spor" },
   { isim: "Fenerbahçe Topuk Yaylası Tesisleri", kategori: "Otel / Tesis / Spor" },
   { isim: "SGC Hotel", kategori: "Otel / Tesis / Spor" },
   { isim: "Dalyan Club", kategori: "Otel / Tesis / Spor" },
   { isim: "Okyanus Fly", kategori: "Otel / Tesis / Spor" },
   { isim: "Opet Yavuztürk", kategori: "Otel / Tesis / Spor" },
-  { isim: "YTÜ Teknopark A.Ş.", kategori: "Otel / Tesis / Spor" },
-  { isim: "İstanbul Teknokent A.Ş.", kategori: "Otel / Tesis / Spor" },
-  { isim: "Ursa Gemicilik Bakım Onarım Tersanecilik", kategori: "Otel / Tesis / Spor" }
+  { isim: "YTÜ Teknopark", kategori: "Otel / Tesis / Spor" },
+  { isim: "İstanbul Teknokent", kategori: "Otel / Tesis / Spor" },
+  { isim: "Ursa Gemicilik ve Tersanecilik", kategori: "Otel / Tesis / Spor" }
 ];
 
 const kategoriler = [
@@ -103,7 +103,6 @@ function ReferenceContent() {
   const initialCategory = searchParams.get("kategori") || "Tümü";
   const [seciliKategori, setSeciliKategori] = useState(initialCategory);
 
-  // URL parametresi değiştiğinde state'i güncelle (Anasayfadan gelirken çalışır)
   useEffect(() => {
     if (searchParams.get("kategori")) {
       setSeciliKategori(searchParams.get("kategori") as string);
@@ -115,24 +114,24 @@ function ReferenceContent() {
     : referanslar.filter(ref => ref.kategori === seciliKategori);
 
   return (
-    <main className="min-h-screen bg-slate-50 py-16 md:py-24">
+    <main className="min-h-screen bg-slate-50 py-16 md:py-24 font-barlow">
       
-      {/* 1. ÖNE ÇIKANLAR BÖLÜMÜ (Buraya logoları koyacağız) */}
+      {/* 1. ÖNE ÇIKANLAR BÖLÜMÜ */}
       <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
         <h1 className="font-barlowCondensed text-4xl md:text-5xl font-extrabold uppercase text-navy mb-4">
           Güveninize Layık Görüldük
         </h1>
-        <p className="text-text-mid max-w-2xl mx-auto mb-12">
+        <p className="text-text-mid max-w-2xl mx-auto mb-12 text-lg">
           Uzman mühendis kadromuzla, Türkiye'nin en seçkin kurumlarına, tarihi yapılarına ve sanayi devlerine entegre pest kontrol çözümleri sunuyoruz.
         </p>
         
-        {/* LOGOLAR BURAYA GELECEK */}
+        {/* LOGOLAR (Şişecam yerine Teknopark eklendi) */}
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-          <div className="text-xl font-extrabold text-navy/40 uppercase tracking-widest">Fenerbahçe SK</div>
-          <div className="text-xl font-extrabold text-navy/40 uppercase tracking-widest">Sabiha Gökçen</div>
-          <div className="text-xl font-extrabold text-navy/40 uppercase tracking-widest">Şişecam</div>
-          <div className="text-xl font-extrabold text-navy/40 uppercase tracking-widest">Milli Saraylar</div>
-          <div className="text-xl font-extrabold text-navy/40 uppercase tracking-widest">Tab Gıda</div>
+          <div className="text-xl md:text-2xl font-extrabold text-navy/50 uppercase tracking-widest">Fenerbahçe SK</div>
+          <div className="text-xl md:text-2xl font-extrabold text-navy/50 uppercase tracking-widest">Sabiha Gökçen</div>
+          <div className="text-xl md:text-2xl font-extrabold text-navy/50 uppercase tracking-widest">Teknopark</div>
+          <div className="text-xl md:text-2xl font-extrabold text-navy/50 uppercase tracking-widest">Milli Saraylar</div>
+          <div className="text-xl md:text-2xl font-extrabold text-navy/50 uppercase tracking-widest">Tab Gıda</div>
         </div>
       </section>
 
