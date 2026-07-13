@@ -126,7 +126,7 @@ export default function HakkimizdaPage() {
       </section>
 
       {/* 5.6 KURUCUMUZDAN */}
-      <section className="py-16 px-6 md:px-10 max-w-5xl mx-auto w-full mb-10">
+      <section id="kurucumuzdan" className="py-16 px-6 md:px-10 max-w-5xl mx-auto w-full mb-10">
         <h2 className="font-bold text-3xl text-navy mb-6">5.6 Kurucumuzdan</h2>
         <div className="bg-navy p-10 md:p-14 text-center">
           <p className="text-white text-lg md:text-xl italic font-light leading-relaxed mb-8">
