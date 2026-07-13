@@ -123,11 +123,13 @@ export default function Footer() {
         {/* Alt Telif ve İmza Satırı */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40">
           <div>
-            &copy; {currentYear} <strong>EPCON İlaçlama</strong>. Tüm Hakları Saklıdır.
+            &copy; {currentYear} <strong>EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.</strong>. Tüm Hakları Saklıdır.
           </div>
           
           <div className="flex items-center gap-4">
             <a href="/kvkk" className="hover:text-white transition-colors">KVKK Aydınlatma Metni</a>
+            <span className="text-white/10">|</span>
+            <a href="/gizlilik-politikasi" className="hover:text-white transition-colors">Gizlilik Politikası</a>
             <span className="text-white/10">|</span>
             <a href="/cerez-politikasi" className="hover:text-white transition-colors">Çerez Politikası</a>
           </div>
