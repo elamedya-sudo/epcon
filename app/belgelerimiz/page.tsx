@@ -62,12 +62,12 @@ export default function BelgelerimizPage() {
         { 
           adi: "BİFUDER Üyeliği", 
           no: "Üye", kapsam: "Biyosidal ve Fumigasyon Derneği", tarih: "Aktif Üye", 
-          imagePath: "/images/belgelerimiz/bifuder-placeholder.jpg" // İleride eklenebilir
+          imagePath: "/images/belgelerimiz/bifuder2.png" // İleride eklenebilir
         },
         { 
           adi: "Mesleki Sorumluluk Sigortası", 
           no: "SGR-00", kapsam: "Hizmet ve Operasyon Güvencesi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/sigorta-placeholder.jpg" // İleride eklenebilir
+          imagePath: "/images/belgelerimiz/sorumluluk.png" // İleride eklenebilir
         }
       ]
     }
