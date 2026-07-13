@@ -14,7 +14,7 @@ export default function HakkimizdaPage() {
       <section className="bg-navy py-12 md:py-16 px-6 md:px-10 mt-10 max-w-5xl mx-auto w-full">
         <div className="text-left">
           <span className="text-pest-green font-bold tracking-wider text-sm md:text-base uppercase mb-2 block">
-            SAYFA ÜSTÜ
+            EPCON ÇEVRE SAĞLIĞI SİSTEMLERİ
           </span>
           <h1 className="font-barlowCondensed text-3xl md:text-4xl font-extrabold uppercase text-white mb-2">
             HAKKIMIZDA
