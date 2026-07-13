@@ -14,7 +14,13 @@ export async function POST(req: Request) {
       },
     });
 
-    // 1. MAİL: SİZE (YÖNETİCİYE) GİDEN BİLDİRİM (Her zaman çalışır)
+    // ── DİNAMİK ALAN KONTROLLERİ ──
+    // Eğer veri boşsa veya "Belirtilmedi" olarak geldiyse o satırları mailden tamamen çıkarıyoruz
+    const epostaSatiri = eposta && eposta !== "Belirtilmedi" ? `<p><b>E-posta:</b> ${eposta}</p>` : "";
+    const bocekSatiri = bocek && bocek !== "Belirtilmedi" ? `<p><b>Haşere:</b> ${bocek}</p>` : "";
+    const notSatiri = not && not !== "Belirtilmedi" ? `<p><b>Not:</b> ${not}</p>` : "";
+
+    // 1. MAİL: SİZE (YÖNETİCİYE) GİDEN BİLDİRİM
     await transporter.sendMail({
       from: `"EPCON Web" <${process.env.EMAIL_USER}>`,
       to: 'epconcomtr@gmail.com', 
@@ -23,13 +29,13 @@ export async function POST(req: Request) {
         <h3>Yeni Teklif Talebi Geldi</h3>
         <p><b>Müşteri:</b> ${adSoyad}</p>
         <p><b>Telefon:</b> ${telefon}</p>
-        <p><b>E-posta:</b> ${eposta}</p>
+        ${epostaSatiri}
         <hr/>
         <p><b>Hizmet:</b> ${hizmet}</p>
         <p><b>Mekan:</b> ${mekan}</p>
-        <p><b>Haşere:</b> ${bocek}</p>
         <p><b>İlçe:</b> ${ilce}</p>
-        <p><b>Not:</b> ${not}</p>
+        ${bocekSatiri}
+        ${notSatiri}
       `,
     });
 
