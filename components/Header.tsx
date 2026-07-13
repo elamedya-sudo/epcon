@@ -18,9 +18,9 @@ export default function Header() {
       isDropdown: true,
       items: [
         { name: "Hakkımızda", href: "/hakkimizda" },
-        { name: "Misyon ve Vizyon", href: "/misyon-vizyon" },
-        { name: "Kalite Politikamız", href: "/kalite-politikamiz" },
-        { name: "Yetki, Belge ve Mesleki Üyeliklerimiz", href: "/belgelerimiz" },
+        { name: "Misyon ve Vizyon", href: "/hakkimizda#misyon" }, 
+        { name: "Kalite Politikamız", href: "/hakkimizda#kalite" },
+        { name: "Yetki, Belge ve Üyeliklerimiz", href: "/belgelerimiz" },
         { name: "Ekibimiz", href: "/ekibimiz" },
       ],
     },
