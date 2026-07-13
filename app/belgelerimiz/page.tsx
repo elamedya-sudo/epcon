@@ -52,6 +52,11 @@ export default function BelgelerimizPage() {
           adi: "ISO 14001:2015", 
           no: "9101925880", kapsam: "Çevre Yönetim Sistemi", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/iso-14001-745x1024.jpg" 
+        },
+        { 
+          adi: "ISO 10002:2018", 
+          no: "9101925880", kapsam: "Müşteri Memnuniyet Yönetim Sistemi", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/iso-10002-745x1024.jpg" 
         }
       ]
     },
