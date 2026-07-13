@@ -18,6 +18,11 @@ export default function BelgelerimizPage() {
           imagePath: "/images/belgelerimiz/2d-745-1024.jpg" 
         },
         { 
+          adi: "Propestgas Güvenli ve Etkin Kullanım Belgesi", 
+          no: "86", kapsam: "Barcan", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/barcan-745x1024.jpg" 
+        },
+        { 
           adi: "Biyosidal Ürün Uygulama İzin Belgesi", 
           no: "BY-001", kapsam: "Halk Sağlığı Alanı", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/biyosidal-urun-izin-uygulama-belgesi.jpg" 
@@ -57,6 +62,21 @@ export default function BelgelerimizPage() {
           adi: "ISO 14001:2015", 
           no: "9101925880", kapsam: "Çevre Yönetim Sistemi", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/iso-14001-745x1024.jpg" 
+        },
+        { 
+          adi: "ISO 22000:2018", 
+          no: "9101925882", kapsam: "Gıda Güvenliği Yönetim Sistemi", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/iso-22000-745x1024.jpg" 
+        },
+        { 
+          adi: "ISO 30001", 
+          no: "9101925878", kapsam: "Risk Yönetim Sistemi", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/iso-30001-745x1024.jpg" 
+        },
+        { 
+          adi: "ISO 45001", 
+          no: "9101925881", kapsam: "İş Sağlığı ve Güvenliği Yönetim Sistemi", tarih: "Geçerli", 
+          imagePath: "/images/belgelerimiz/iso-45001-745x1024.jpg" 
         },
         { 
           adi: "ISO 10002:2018", 
