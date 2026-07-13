@@ -10,7 +10,7 @@ export default function HakkimizdaPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 5.2 SAYFA ÜSTÜ (Hero - Brifteki gibi lacivert kutu) */}
+      {/* SAYFA ÜSTÜ (Hero - Brifteki gibi lacivert kutu) */}
       <section className="bg-navy py-12 md:py-16 px-6 md:px-10 mt-10 max-w-5xl mx-auto w-full">
         <div className="text-left">
           <span className="text-pest-green font-bold tracking-wider text-sm md:text-base uppercase mb-2 block">
@@ -71,7 +71,7 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
-      {/* 5.3 MİSYONUMUZ */}
+      {/* MİSYONUMUZ */}
       <section id="misyon" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
         <h2 className="font-bold text-3xl text-navy mb-6">5.3 Misyonumuz</h2>
         <div className="bg-pest-green-light border border-pest-green p-6 mb-6">
@@ -84,7 +84,7 @@ export default function HakkimizdaPage() {
         </p>
       </section>
 
-      {/* 5.4 VİZYONUMUZ */}
+      {/* VİZYONUMUZ */}
       <section id="vizyon" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
         <h2 className="font-bold text-3xl text-navy mb-6">5.4 Vizyonumuz</h2>
         <div className="bg-surface-light border border-navy p-6 mb-6">
@@ -97,7 +97,7 @@ export default function HakkimizdaPage() {
         </p>
       </section>
 
-      {/* 5.5 KALİTE POLİTİKAMIZ */}
+      {/* KALİTE POLİTİKAMIZ */}
       <section id="kalite" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
         <h2 className="font-bold text-3xl text-navy mb-6">5.5 Kalite politikamız</h2>
         <p className="text-text-dark text-[15px] mb-6">
@@ -125,7 +125,7 @@ export default function HakkimizdaPage() {
         </ul>
       </section>
 
-      {/* 5.6 KURUCUMUZDAN */}
+      {/* KURUCUMUZDAN */}
       <section id="kurucumuzdan" className="py-16 px-6 md:px-10 max-w-5xl mx-auto w-full mb-10">
         <h2 className="font-bold text-3xl text-navy mb-6">5.6 Kurucumuzdan</h2>
         <div className="bg-navy p-10 md:p-14 text-center">
