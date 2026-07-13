@@ -21,6 +21,7 @@ export default function Header() {
         { name: "Misyon ve Vizyon", href: "/hakkimizda#misyon" }, 
         { name: "Kalite Politikamız", href: "/hakkimizda#kalite" },
         { name: "Yetki, Belge ve Üyeliklerimiz", href: "/belgelerimiz" },
+        { name: "Kurucumuzdan", href: "/hakkimizda#kurucumuzdan" },
         { name: "Ekibimiz", href: "/ekibimiz" },
       ],
     },
