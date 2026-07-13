@@ -12,8 +12,10 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen bg-white">
       
-      {/* 1. HERO ALANI (Ana Mesaj, Kısa Form ve İki CTA) */}
-      <LeadHero />
+      {/* 1. HERO ALANI (Video kaynağı geri eklendi) */}
+      <LeadHero 
+        videoBackground="https://cdn.pixabay.com/video/2024/01/20/197489-905015030_large.mp4" 
+      />
       
       {/* 2. YEŞİL YETKİ VE GÜVEN BANDI */}
       <TrustBar />
@@ -33,7 +35,7 @@ export default function Home() {
       {/* 7. REFERANS SEKTÖRLERİ */}
       <References />
 
-      {/* 8. ALT GÜVEN KARTLARI (Brif Bölüm 4.10) */}
+      {/* 8. ALT GÜVEN KARTLARI */}
       <section className="bg-surface-light py-10 md:py-14 border-b border-border font-barlow">
         <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="flex flex-col items-center justify-center">
