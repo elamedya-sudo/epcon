@@ -9,15 +9,15 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER, // epconcomtr@gmail.com
-        pass: process.env.EMAIL_PASS, // 16 haneli uygulama şifresi
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
       },
     });
 
-    // 1. MAİL: SİZE (YÖNETİCİYE) GİDEN BİLDİRİM
+    // 1. MAİL: SİZE (YÖNETİCİYE) GİDEN BİLDİRİM (Her zaman çalışır)
     await transporter.sendMail({
       from: `"EPCON Web" <${process.env.EMAIL_USER}>`,
-      to: 'epconcomtr@gmail.com', // İstediğiniz adres
+      to: 'epconcomtr@gmail.com', 
       subject: `Yeni Teklif Talebi: ${adSoyad}`,
       html: `
         <h3>Yeni Teklif Talebi Geldi</h3>
@@ -33,21 +33,23 @@ export async function POST(req: Request) {
       `,
     });
 
-    // 2. MAİL: MÜŞTERİYE GİDEN OTOMATİK BİLGİLENDİRME (Auto-Reply)
-    await transporter.sendMail({
-      from: `"EPCON Çevre Sağlığı" <${process.env.EMAIL_USER}>`,
-      to: eposta, // Müşterinin girdiği mail adresi
-      subject: "Teklif Talebiniz Alındı - EPCON",
-      html: `
-        <h3>Sayın ${adSoyad},</h3>
-        <p>EPCON Çevre Sağlığı Sistemleri olarak teklif talebinizi aldık. Ziraat mühendislerimiz en kısa sürede talebinizi inceleyip sizinle iletişime geçecektir.</p>
-        <p><b>Talebiniz:</b> ${hizmet}</p>
-        <br/>
-        <p>İlginiz için teşekkür ederiz.<br/>
-        <b>EPCON Ekibi</b><br/>
-        <a href="https://www.epcon.com.tr">www.epcon.com.tr</a></p>
-      `,
-    });
+    // 2. MAİL: MÜŞTERİYE GİDEN OTOMATİK BİLGİLENDİRME (Sadece e-posta varsa çalışır)
+    if (eposta && eposta !== "Belirtilmedi" && eposta.includes("@")) {
+      await transporter.sendMail({
+        from: `"EPCON Çevre Sağlığı" <${process.env.EMAIL_USER}>`,
+        to: eposta,
+        subject: "Teklif Talebiniz Alındı - EPCON",
+        html: `
+          <h3>Sayın ${adSoyad},</h3>
+          <p>EPCON Çevre Sağlığı Sistemleri olarak teklif talebinizi aldık. Ziraat mühendislerimiz en kısa sürede talebinizi inceleyip sizinle iletişime geçecektir.</p>
+          <p><b>Talebiniz:</b> ${hizmet}</p>
+          <br/>
+          <p>İlginiz için teşekkür ederiz.<br/>
+          <b>EPCON Ekibi</b><br/>
+          <a href="https://www.epcon.com.tr">www.epcon.com.tr</a></p>
+        `,
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle, CheckCircle2 } from 'lucide-react';
 
 const ISTANBUL_ILCELERI = [
   "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", 
@@ -48,6 +48,7 @@ export default function LeadHero({
   const [ilceSearch, setIlceSearch] = useState("");
   const [selectedIlce, setSelectedIlce] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false); // Bitiş ekranı için stat
   const ilceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,7 +65,6 @@ export default function LeadHero({
     ilce.toLocaleLowerCase('tr-TR').includes(ilceSearch.toLocaleLowerCase('tr-TR'))
   );
 
-  // MAİL GÖNDERME FONKSİYONU
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -100,11 +100,11 @@ export default function LeadHero({
       });
       
       if (res.ok) {
-        alert("Talebiniz başarıyla alındı! En kısa sürede dönüş yapacağız.");
+        setIsSuccess(true); // Alert yerine başarı statını tetikliyoruz
         form.reset();
         setSelectedIlce("");
       } else {
-        alert("Gönderim sırasında bir hata oluştu.");
+        alert("Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.");
       }
     } catch (error) {
       alert("Bağlantı hatası oluştu.");
@@ -116,7 +116,7 @@ export default function LeadHero({
   return (
     <section className="relative bg-navy-deeper overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
       
-      {/* ── ARKA PLAN EFEKTLERİ VEYA GÖRSEL/VİDEO ── */}
+      {/* ── ARKA PLAN EFEKTLERİ ── */}
       {videoBackground ? (
         <div className="absolute inset-0 z-0 overflow-hidden bg-navy-deeper">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-70 pointer-events-none">
@@ -177,103 +177,129 @@ export default function LeadHero({
         </div>
       </div>
 
-      {/* ── FORM ALANI ── */}
+      {/* ── FORM & BAŞARI ALANI ── */}
       <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-7 md:p-8 shadow-2xl order-2 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
-        <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase tracking-wide">
-          TEKLİF TALEP ET
-        </h3>
-        <p className="text-sm text-text-mid mb-6 leading-relaxed">
-           Bilgilerinizi bırakın; uzman ekibimiz ihtiyacınızı değerlendirerek sizinle iletişime geçsin.
-        </p>
-
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <input type="text" name="adSoyad" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
+        
+        {isSuccess ? (
+          // BAŞARILI GÖNDERİM EKRANI
+          <div className="flex flex-col items-center justify-center py-10 text-center space-y-4 animate-in fade-in zoom-in duration-500">
+             <div className="w-16 h-16 bg-pest-green/10 text-pest-green rounded-full flex items-center justify-center mb-2 shadow-inner">
+                <CheckCircle2 size={36} />
+             </div>
+             <h3 className="font-barlowCondensed text-3xl font-bold text-navy uppercase tracking-wide">
+                Talebiniz Alındı!
+             </h3>
+             <p className="text-sm text-text-mid leading-relaxed px-4">
+                Uzman ekibimiz detayları inceleyip en kısa sürede vermiş olduğunuz numara üzerinden sizinle iletişime geçecektir.
+             </p>
+             <button 
+                onClick={() => setIsSuccess(false)} 
+                className="mt-6 font-bold text-navy text-sm hover:text-pest-green underline transition-colors"
+             >
+               Yeni Bir Talep Oluştur
+             </button>
           </div>
+        ) : (
+          // İLK FORM EKRANI
+          <>
+            <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase tracking-wide">
+              TEKLİF TALEP ET
+            </h3>
+            <p className="text-sm text-text-mid mb-6 leading-relaxed">
+              Bilgilerinizi bırakın; uzman ekibimiz ihtiyacınızı değerlendirerek sizinle iletişime geçsin.
+            </p>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
-            </div>
-            
-            {/* Aramalı İlçe Kutusu */}
-            <div className="relative" ref={ilceRef}>
-              <div 
-                className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm bg-white outline-none focus:border-navy transition-colors cursor-pointer flex justify-between items-center"
-                onClick={() => setIsIlceOpen(!isIlceOpen)}
-              >
-                <span className={selectedIlce ? "text-text-dark" : "text-text-muted"}>
-                  {selectedIlce || "İlçe Seçin"}
-                </span>
-                <span className="text-xs text-text-muted transition-transform duration-300" style={{ transform: isIlceOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div>
+                <input type="text" name="adSoyad" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
               </div>
 
-              {isIlceOpen && (
-                <div className="absolute z-50 w-full mt-1 bg-white border border-border rounded-md shadow-2xl max-h-60 overflow-y-auto">
-                  <div className="sticky top-0 bg-slate-50 p-2 border-b border-border">
-                    <input 
-                      type="text" 
-                      className="w-full border border-border rounded px-3 py-2 text-sm outline-none focus:border-pest-green transition-colors"
-                      placeholder="İlçe ara..."
-                      value={ilceSearch}
-                      onChange={(e) => setIlceSearch(e.target.value)}
-                      onClick={(e) => e.stopPropagation()}
-                      autoFocus
-                    />
-                  </div>
-                  <ul className="py-1">
-                    {filteredIlceler.length > 0 ? (
-                      filteredIlceler.map((ilce, idx) => (
-                        <li 
-                          key={idx} 
-                          className="px-4 py-2 text-sm hover:bg-pest-green/10 hover:text-navy cursor-pointer transition-colors"
-                          onClick={() => {
-                            setSelectedIlce(ilce);
-                            setIsIlceOpen(false);
-                            setIlceSearch(""); 
-                          }}
-                        >
-                          {ilce}
-                        </li>
-                      ))
-                    ) : (
-                      <li className="px-4 py-3 text-sm text-text-muted text-center italic">Sonuç bulunamadı</li>
-                    )}
-                  </ul>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
                 </div>
-              )}
-            </div>
-          </div>
+                
+                {/* Aramalı İlçe Kutusu */}
+                <div className="relative" ref={ilceRef}>
+                  <div 
+                    className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm bg-white outline-none focus:border-navy transition-colors cursor-pointer flex justify-between items-center"
+                    onClick={() => setIsIlceOpen(!isIlceOpen)}
+                  >
+                    <span className={selectedIlce ? "text-text-dark" : "text-text-muted"}>
+                      {selectedIlce || "İlçe Seçin"}
+                    </span>
+                    <span className="text-xs text-text-muted transition-transform duration-300" style={{ transform: isIlceOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+                  </div>
 
-          <div className="grid grid-cols-2 gap-3">
-             <div>
-              <select name="mekan" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
-                <option value="" disabled hidden>Mekân Türü</option>
-                {mekanTurleri.map((mekan, idx) => (
-                  <option key={idx} value={mekan}>{mekan}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <select name="hizmet" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
-                <option value="" disabled hidden>Hizmet Türü</option>
-                {hizmetTurleri.map((hizmet, idx) => (
-                  <option key={idx} value={hizmet}>{hizmet}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+                  {isIlceOpen && (
+                    <div className="absolute z-50 w-full mt-1 bg-white border border-border rounded-md shadow-2xl max-h-60 overflow-y-auto">
+                      <div className="sticky top-0 bg-slate-50 p-2 border-b border-border">
+                        <input 
+                          type="text" 
+                          className="w-full border border-border rounded px-3 py-2 text-sm outline-none focus:border-pest-green transition-colors"
+                          placeholder="İlçe ara..."
+                          value={ilceSearch}
+                          onChange={(e) => setIlceSearch(e.target.value)}
+                          onClick={(e) => e.stopPropagation()}
+                          autoFocus
+                        />
+                      </div>
+                      <ul className="py-1">
+                        {filteredIlceler.length > 0 ? (
+                          filteredIlceler.map((ilce, idx) => (
+                            <li 
+                              key={idx} 
+                              className="px-4 py-2 text-sm hover:bg-pest-green/10 hover:text-navy cursor-pointer transition-colors"
+                              onClick={() => {
+                                setSelectedIlce(ilce);
+                                setIsIlceOpen(false);
+                                setIlceSearch(""); 
+                              }}
+                            >
+                              {ilce}
+                            </li>
+                          ))
+                        ) : (
+                          <li className="px-4 py-3 text-sm text-text-muted text-center italic">Sonuç bulunamadı</li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
 
-          <button type="submit" disabled={isSubmitting} className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-2 disabled:opacity-60">
-            {isSubmitting ? "Gönderiliyor..." : "Teklif Talebimi Gönder"}
-          </button>
-          
-          <div className="text-center mt-3">
-             <span className="text-[11px] text-text-muted leading-tight block">
-                Bilgileriniz güvendedir. Talebinizi göndererek <Link href="/kvkk" className="underline hover:text-navy">KVKK Aydınlatma Metni</Link>'ni onaylamış olursunuz.
-             </span>
-          </div>
-        </form>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <select name="mekan" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                    <option value="" disabled hidden>Mekân Türü</option>
+                    {mekanTurleri.map((mekan, idx) => (
+                      <option key={idx} value={mekan}>{mekan}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <select name="hizmet" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                    <option value="" disabled hidden>Hizmet Türü</option>
+                    {hizmetTurleri.map((hizmet, idx) => (
+                      <option key={idx} value={hizmet}>{hizmet}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" disabled={isSubmitting} className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-2 disabled:opacity-60">
+                {isSubmitting ? "Gönderiliyor..." : "Teklif Talebimi Gönder"}
+              </button>
+              
+              <div className="text-center mt-3">
+                <span className="text-[11px] text-text-muted leading-tight block">
+                    Bilgileriniz güvendedir. Talebinizi göndererek <Link href="/kvkk" className="underline hover:text-navy">KVKK Aydınlatma Metni</Link>'ni onaylamış olursunuz.
+                </span>
+              </div>
+            </form>
+          </>
+        )}
+
       </div>
     </section>
   );
