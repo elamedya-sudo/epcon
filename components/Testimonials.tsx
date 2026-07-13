@@ -81,7 +81,7 @@ export default function Testimonials() {
               </div>
            </div>
            <a 
-            href="https://g.page/r/epcon-ilaclama/review" 
+            href="https://share.google/Uc4LyXAqntDAZTNos" 
             target="_blank"
             rel="noreferrer"
             className="border-2 border-white/20 hover:border-white text-white text-sm font-bold px-6 py-2.5 rounded-md transition-colors"
