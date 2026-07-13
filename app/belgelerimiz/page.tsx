@@ -55,7 +55,7 @@ export default function BelgelerimizPage() {
         },
         { 
           adi: "ISO 10002:2018", 
-          no: "9101925880", kapsam: "Müşteri Memnuniyet Yönetim Sistemi", tarih: "Geçerli", 
+          no: "91019258383", kapsam: "Müşteri Memnuniyet Yönetim Sistemi", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/iso-10002-745x1024.jpg" 
         }
       ]
