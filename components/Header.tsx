@@ -20,7 +20,7 @@ export default function Header() {
         { name: "Hakkımızda", href: "/hakkimizda" },
         { name: "Misyon ve Vizyon", href: "/misyon-vizyon" },
         { name: "Kalite Politikamız", href: "/kalite-politikamiz" },
-        { name: "Yetki, Belge ve Üyeliklerimiz", href: "/belgelerimiz" },
+        { name: "Yetki, Belge ve Mesleki Üyeliklerimiz", href: "/belgelerimiz" },
         { name: "Ekibimiz", href: "/ekibimiz" },
       ],
     },
