@@ -73,7 +73,7 @@ export default function HakkimizdaPage() {
 
       {/* MİSYONUMUZ */}
       <section id="misyon" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
-        <h2 className="font-bold text-3xl text-navy mb-6">5.3 Misyonumuz</h2>
+        <h2 className="font-bold text-3xl text-navy mb-6">Misyonumuz</h2>
         <div className="bg-pest-green-light border border-pest-green p-6 mb-6">
           <p className="text-base text-navy leading-relaxed">
             İnsan sağlığı ve çevre güvenliğini gözeterek; entegre pest kontrol, biyosidal uygulama ve fumigasyon hizmetlerini bilimsel, mevzuata uygun, izlenebilir ve sürdürülebilir bir yaklaşımla sunmak.
@@ -86,7 +86,7 @@ export default function HakkimizdaPage() {
 
       {/* VİZYONUMUZ */}
       <section id="vizyon" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
-        <h2 className="font-bold text-3xl text-navy mb-6">5.4 Vizyonumuz</h2>
+        <h2 className="font-bold text-3xl text-navy mb-6">Vizyonumuz</h2>
         <div className="bg-surface-light border border-navy p-6 mb-6">
           <p className="text-base text-navy leading-relaxed">
             Teknik yetkinliği, mühendislik yaklaşımı ve hizmet kalitesiyle zararlı yönetimi ve fumigasyon alanında Türkiye’de ve uluslararası pazarlarda güvenilir ve örnek gösterilen bir çözüm ortağı olmak.
@@ -99,7 +99,7 @@ export default function HakkimizdaPage() {
 
       {/* KALİTE POLİTİKAMIZ */}
       <section id="kalite" className="py-10 px-6 md:px-10 max-w-5xl mx-auto w-full">
-        <h2 className="font-bold text-3xl text-navy mb-6">5.5 Kalite politikamız</h2>
+        <h2 className="font-bold text-3xl text-navy mb-6">Kalite politikamız</h2>
         <p className="text-text-dark text-[15px] mb-6">
           EPCON olarak kalite politikamız; insan sağlığı, çevre güvenliği, mevzuat uyumu, teknik yetkinlik, izlenebilirlik ve sürekli iyileştirme esaslarına dayanır.
         </p>
@@ -127,7 +127,7 @@ export default function HakkimizdaPage() {
 
       {/* KURUCUMUZDAN */}
       <section id="kurucumuzdan" className="py-16 px-6 md:px-10 max-w-5xl mx-auto w-full mb-10">
-        <h2 className="font-bold text-3xl text-navy mb-6">5.6 Kurucumuzdan</h2>
+        <h2 className="font-bold text-3xl text-navy mb-6">Kurucumuzdan</h2>
         <div className="bg-navy p-10 md:p-14 text-center">
           <p className="text-white text-lg md:text-xl italic font-light leading-relaxed mb-8">
             “Zararlı yönetiminde kalıcı başarı; doğru teşhis, risk analizi, düzenli izleme ve hedefe yönelik müdahalenin birlikte yönetilmesiyle sağlanır. EPCON olarak, ziraat mühendisleri yönetiminde; yetkili, izlenebilir ve sürdürülebilir hizmet anlayışıyla çalışıyoruz.”
