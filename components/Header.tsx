@@ -2,22 +2,21 @@
 
 import React, { useState } from "react";
 import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown } from "lucide-react";
-import Link from "next/link"; // Link eklendi
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
 
   const toggleDropdown = (idx: number, e: React.MouseEvent) => {
-    e.preventDefault(); // Ana linke gitmesini engellemek için
+    e.preventDefault();
     setActiveDropdown(activeDropdown === idx ? null : idx);
   };
 
-  // Ana menü kategorilerine 'mainHref' eklendi
   const menuItems = [
     {
       name: "Kurumsal",
-      mainHref: "/hakkimizda", // Kurumsal tıklandığında Hakkımızda sayfasına gitsin
+      mainHref: "/hakkimizda",
       isDropdown: true,
       items: [
         { name: "Hakkımızda", href: "/hakkimizda" },
@@ -30,59 +29,49 @@ export default function Header() {
     },
     {
       name: "Pest Kontrol",
-      mainHref: "/pest-kontrol", // Pest Kontrol ana sayfasına yönlendirme
+      mainHref: "/entegre-zararli-yonetimi",
       isDropdown: true,
       items: [
-        { name: "Entegre Zararlı Yönetimi", href: "/entegre-zararli-yonetimi" },
+        { name: "Entegre Zararlı Yönetimi (IPM)", href: "/entegre-zararli-yonetimi" },
         { name: "Kemirgen Kontrolü", href: "/kemirgen-kontrolu" },
-        { name: "Yürüyen Haşere", href: "/yuruyen-hasere-mucadelesi" },
-        { name: "Uçan Haşere", href: "/ucan-hasere-mucadelesi" },
-        { name: "Depo Zararlıları", href: "/depo-zararlilari-yonetimi" },
-        { name: "Zararlı Türleri", href: "/zararli-turleri" },
+        { name: "Yürüyen Haşere Mücadelesi", href: "/yuruyen-hasere-mucadelesi" },
+        { name: "Uçan Haşere Mücadelesi", href: "/ucan-hasere-mucadelesi" },
+        { name: "Depo Zararlıları Yönetimi", href: "/depo-zararlilari-yonetimi" }
       ],
     },
     {
       name: "Fumigasyon",
-      mainHref: "/fumigasyon", // Fumigasyon ana sayfasına yönlendirme
+      mainHref: "/fumigasyon",
       isDropdown: true,
       items: [
         { name: "Fumigasyon Hizmetleri", href: "/fumigasyon" },
-        { name: "BMSB", href: "/bmsb-fumigasyonu" },
-        { name: "ISPM 15", href: "/ispm-15-hizmetleri" },
-        { name: "Konteyner", href: "/konteyner-fumigasyonu" },
-        { name: "Gemi ve Yat", href: "/gemi-yat-fumigasyonu" },
-        { name: "Depo ve Silo", href: "/depo-silo-fumigasyonu" },
-        { name: "Ürün ve Yük", href: "/urun-yuk-fumigasyonu" },
-        { name: "Gaz Ölçümü ve Gazdan Arındırma", href: "/gaz-olcumu-gazdan-arindirma" },
-        { name: "Fumigasyon ve İşlem Yöntemleri", href: "/fumigasyon-islem-yontemleri" },
+        { name: "BMSB Fumigasyonu", href: "/bmsb-fumigasyonu" },
+        { name: "ISPM 15 Ahşap Ambalaj", href: "/ispm-15-hizmetleri" },
+        { name: "Konteyner Fumigasyonu", href: "/konteyner-fumigasyonu" },
+        { name: "Gemi ve Yat Fumigasyonu", href: "/gemi-yat-fumigasyonu" },
+        { name: "Depo ve Silo Fumigasyonu", href: "/depo-silo-fumigasyonu" },
+        { name: "Ürün ve Yük Fumigasyonu", href: "/urun-yuk-fumigasyonu" },
+        { name: "Gaz Ölçümü ve Arındırma", href: "/gaz-olcumu-gazdan-arindirma" },
+        { name: "İşlem Yöntemlerimiz", href: "/fumigasyon-islem-yontemleri" },
       ],
     },
     {
       name: "İlaçlama",
-      mainHref: "/sektorel-ilaclama", // İlaçlama ana sayfasına yönlendirme (veya sektörel-ilaçlama)
+      mainHref: "/sektorel-ilaclama",
       isDropdown: true,
       items: [
-        { name: "Ev ve Daire", href: "/ev-daire-ilaclama" },
-        { name: "Villa", href: "/villa-ilaclama" },
+        { name: "İlaçlama Hizmetleri", href: "/sektorel-ilaclama" },
+        { name: "Ev ve Daire İlaçlama", href: "/ev-daire-ilaclama" },
+        { name: "Villa İlaçlama", href: "/villa-ilaclama" },
         { name: "Site ve Apartman", href: "/site-apartman-ilaclama" },
         { name: "İşyeri ve Ofis", href: "/isyeri-ofis-ilaclama" },
         { name: "Bahçe ve Dış Alan", href: "/bahce-dis-alan-ilaclama" },
-        { name: "Bitki Sağlığı", href: "/bitki-ilaclama" },
+        { name: "Bitki Sağlığı Uygulamaları", href: "/bitki-ilaclama" },
+        { name: "Acil Zararlı Müdahalesi", href: "/acil-zararli-mudahalesi" },
       ],
     },
     { name: "Belgelerimiz", href: "/belgelerimiz", isDropdown: false },
-    {
-      name: "Blog",
-      mainHref: "/blog", // Blog ana sayfasına yönlendirme
-      isDropdown: true,
-      items: [
-        { name: "Pest Kontrol", href: "/blog/pest-kontrol" },
-        { name: "Fumigasyon", href: "/blog/fumigasyon" },
-        { name: "İlaçlama", href: "/blog/ilaclama" },
-        { name: "Bitki Sağlığı", href: "/blog/bitki-sagligi" },
-        { name: "Sektörel Rehber", href: "/blog/sektorel-rehber" },
-      ],
-    },
+    { name: "Blog", href: "/blog", isDropdown: false }, // Hatalı alt menüler kaldırıldı, direkt link yapıldı
     { name: "Referanslar", href: "/referanslar", isDropdown: false },
     { name: "İletişim", href: "/iletisim", isDropdown: false },
   ];
@@ -132,7 +121,6 @@ export default function Header() {
           {menuItems.map((item, idx) => (
             item.isDropdown ? (
               <div key={idx} className="relative group h-full flex items-center">
-                {/* Ana link tıklanabilir hale getirildi */}
                 <Link 
                   href={item.mainHref || "#"} 
                   className="flex items-center gap-1 text-[15px] font-semibold text-text-mid hover:text-navy transition-colors tracking-wide py-8"
@@ -197,7 +185,6 @@ export default function Header() {
               item.isDropdown ? (
                 <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
                   <div className="flex items-center justify-between py-2">
-                    {/* Ana link tıklanabilir yapıldı */}
                     <Link 
                       href={item.mainHref || "#"} 
                       onClick={() => setIsOpen(false)}
@@ -205,7 +192,6 @@ export default function Header() {
                     >
                       {item.name}
                     </Link>
-                    {/* Oku tıklayınca menü açılır */}
                     <button 
                       onClick={(e) => toggleDropdown(idx, e)}
                       className="p-2 -mr-2 text-text-dark hover:text-pest-green transition-colors"

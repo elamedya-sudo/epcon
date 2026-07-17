@@ -206,9 +206,9 @@ export default function HamambocekPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Hamamböceği Neden Olur?", href: "/blog/hamambocegi-neden-olur" },
-              { title: "Alman ve Amerikan Hamamböceği Arasındaki Farklar", href: "/blog/alman-amerikan-hamambocegi-farklari" },
-              { title: "Hamamböceği Jel Uygulaması Nasıl Çalışır?", href: "/blog/hamambocegi-jel-uygulamasi-nasil-calisir" }
+              { title: "Hamamböceği Neden Olur?", href: "/hamambocegi-neden-olur" },
+              { title: "Alman ve Amerikan Hamamböceği Arasındaki Farklar", href: "/alman-amerikan-hamambocegi-farklari" },
+              { title: "Hamamböceği Jel Uygulaması Nasıl Çalışır?", href: "/hamambocegi-jel-uygulamasi-nasil-calisir" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>
