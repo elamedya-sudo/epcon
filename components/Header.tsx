@@ -29,7 +29,7 @@ export default function Header() {
     },
     {
       name: "Pest Kontrol",
-      mainHref: "/entegre-zararli-yonetimi",
+      mainHref: "/pest-kontrol",
       isDropdown: true,
       items: [
         { name: "Entegre Zararlı Yönetimi (IPM)", href: "/entegre-zararli-yonetimi" },
