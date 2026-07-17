@@ -206,9 +206,9 @@ export default function SivrisinekKarasinekPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Küçük Sinekler Neden Oluşur?", href: "/blog/kucuk-sinekler-neden-olusur" },
-              { title: "Sivrisinek Üreme Kaynakları Nelerdir?", href: "/blog/sivrisinek-ureme-kaynaklari" },
-              { title: "Elektrikli Sinek Tutucu Cihazlar Nasıl Konumlandırılır?", href: "/blog/eft-cihazlari-nasil-konumlandirilir" }
+              { title: "Küçük Sinekler Neden Oluşur?", href: "/kucuk-sinekler-neden-olusur" },
+              { title: "Sivrisinek Üreme Kaynakları Nelerdir?", href: "/sivrisinek-ureme-kaynaklari" },
+              { title: "Elektrikli Sinek Tutucu Cihazlar Nasıl Konumlandırılır?", href: "/eft-cihazlari-nasil-konumlandirilir" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>

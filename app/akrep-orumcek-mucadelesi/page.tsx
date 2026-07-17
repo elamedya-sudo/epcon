@@ -160,9 +160,9 @@ export default function AkrepOrumcekPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Akrepler Evlere Nereden Girer?", href: "/blog/akrepler-evlere-nereden-girer" },
-              { title: "Bahçede Akrep Riskini Azaltma Yöntemleri", href: "/blog/bahcede-akrep-riskini-azaltma-yontemleri" },
-              { title: "Örümcek Yoğunluğu Neden Artar?", href: "/blog/orumcek-yogunlugu-neden-artar" }
+              { title: "Akrepler Evlere Nereden Girer?", href: "/akrepler-evlere-nereden-girer" },
+              { title: "Bahçede Akrep Riskini Azaltma Yöntemleri", href: "/bahcede-akrep-riskini-azaltma-yontemleri" },
+              { title: "Örümcek Yoğunluğu Neden Artar?", href: "/orumcek-yogunlugu-neden-artar" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>

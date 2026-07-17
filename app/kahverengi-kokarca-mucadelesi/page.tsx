@@ -220,9 +220,9 @@ export default function KokarcaPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Kahverengi Kokarca Neden Evlere Girer?", href: "/blog/kahverengi-kokarca-neden-evlere-girer" },
-              { title: "Kokarcaya Karşı Bina Girişleri Nasıl Korunur?", href: "/blog/kokarcaya-karsi-bina-girisleri" },
-              { title: "BMSB İhracat İşlemleri Nedir?", href: "/blog/bmsb-ihracat-islemleri-nedir" }
+              { title: "Kahverengi Kokarca Neden Evlere Girer?", href: "/kahverengi-kokarca-neden-evlere-girer" },
+              { title: "Kokarcaya Karşı Bina Girişleri Nasıl Korunur?", href: "/kokarcaya-karsi-bina-girisleri" },
+              { title: "BMSB İhracat İşlemleri Nedir?", href: "/bmsb-ihracat-islemleri-nedir" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>

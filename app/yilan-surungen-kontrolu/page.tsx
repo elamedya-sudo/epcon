@@ -160,9 +160,9 @@ export default function YilanSurungenPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Bahçede Yılan Görülmesini Artıran Koşullar", href: "/blog/bahcede-yilan-gorulmesini-artiran-kosullar" },
-              { title: "Yılan Görüldüğünde Ne Yapılmalı?", href: "/blog/yilan-goruldugunde-ne-yapilmali" },
-              { title: "Kemirgen Aktivitesi ve Yılan Riski", href: "/blog/kemirgen-aktivitesi-ve-yilan-riski" }
+              { title: "Bahçede Yılan Görülmesini Artıran Koşullar", href: "/bahcede-yilan-gorulmesini-artiran-kosullar" },
+              { title: "Yılan Görüldüğünde Ne Yapılmalı?", href: "/yilan-goruldugunde-ne-yapilmali" },
+              { title: "Kemirgen Aktivitesi ve Yılan Riski", href: "/kemirgen-aktivitesi-ve-yilan-riski" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>

@@ -165,9 +165,9 @@ export default function PireKenePage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Evde Pire Olduğu Nasıl Anlaşılır?", href: "/blog/evde-pire-oldugu-nasil-anlasilir" },
-              { title: "Pire Uygulaması Öncesi Hazırlık", href: "/blog/pire-uygulamasi-oncesi-hazirlik" },
-              { title: "Bahçelerde Kene Riskini Artıran Koşullar", href: "/blog/bahcelerde-kene-riskini-artiran-kosullar" }
+              { title: "Evde Pire Olduğu Nasıl Anlaşılır?", href: "/evde-pire-oldugu-nasil-anlasilir" },
+              { title: "Pire Uygulaması Öncesi Hazırlık", href: "/pire-uygulamasi-oncesi-hazirlik" },
+              { title: "Bahçelerde Kene Riskini Artıran Koşullar", href: "/bahcelerde-kene-riskini-artiran-kosullar" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>

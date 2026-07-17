@@ -206,9 +206,9 @@ export default function KarincaPage() {
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy mb-8 uppercase">İlgili Yazılar</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Karınca Eve Neden Girer?", href: "/blog/karinca-eve-neden-girer" },
-              { title: "Karınca Yuvası Nasıl Tespit Edilir?", href: "/blog/karinca-yuvasi-nasil-tespit-edilir" },
-              { title: "Karınca Jel ve Yem Uygulaması Nasıl Çalışır?", href: "/blog/karinca-jel-ve-yem-uygulamasi-nasil-calisir" }
+              { title: "Karınca Eve Neden Girer?", href: "/karinca-eve-neden-girer" },
+              { title: "Karınca Yuvası Nasıl Tespit Edilir?", href: "/karinca-yuvasi-nasil-tespit-edilir" },
+              { title: "Karınca Jel ve Yem Uygulaması Nasıl Çalışır?", href: "/karinca-jel-ve-yem-uygulamasi-nasil-calisir" }
             ].map((blog, idx) => (
               <Link key={idx} href={blog.href} className="bg-white p-6 rounded-xl border border-border shadow-sm group hover:border-pest-green transition-all">
                 <h4 className="font-bold text-navy mb-4 group-hover:text-pest-green transition-colors">{blog.title}</h4>
