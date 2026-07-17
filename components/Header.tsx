@@ -59,7 +59,7 @@ export default function Header() {
     },
     {
       name: "İlaçlama",
-      mainHref: "/ilaclama-hizmetleri", // İlaçlama ana sayfasına yönlendirme (veya sektörel-ilaçlama)
+      mainHref: "/sektorel-ilaclama", // İlaçlama ana sayfasına yönlendirme (veya sektörel-ilaçlama)
       isDropdown: true,
       items: [
         { name: "Ev ve Daire", href: "/ev-daire-ilaclama" },
@@ -68,7 +68,6 @@ export default function Header() {
         { name: "İşyeri ve Ofis", href: "/isyeri-ofis-ilaclama" },
         { name: "Bahçe ve Dış Alan", href: "/bahce-dis-alan-ilaclama" },
         { name: "Bitki Sağlığı", href: "/bitki-ilaclama" },
-        { name: "Tüm İlaçlama Hizmetleri", href: "/ilaclama-hizmetleri" },
       ],
     },
     { name: "Belgelerimiz", href: "/belgelerimiz", isDropdown: false },
