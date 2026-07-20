@@ -37,7 +37,7 @@ export default function LeadHero({
     { icon: <span className="font-bold">✓</span>, label: "Ziraat Mühendisleri Yönetiminde" },
     { icon: <span className="font-bold">✓</span>, label: "Dijital Raporlama ve İzlenebilirlik" }
   ],
-  mekanTurleri = ["Ev / Daire", "Villa", "Site / Ortak Alan", "Ticari İşletme", "Fabrika / Endüstriyel Tesis", "Depo / Lojistik", "Fümigasyon Alanı"],
+  mekanTurleri = ["Ev / Daire", "Villa", "Site / Ortak Alan", "Ticari İşletme", "Fabrika / Endüstriyel Tesis", "Depo / Lojistik", "Fumigasyon Alanı"],
   hizmetTurleri = ["Entegre Pest Kontrol", "Konut İlaçlama", "Fümigasyon Hizmetleri", "Diğer"],
   backgroundImage,
   videoBackground,
