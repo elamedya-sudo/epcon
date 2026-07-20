@@ -29,7 +29,7 @@ export default function BahceIlaclamaPage() {
               Bahçe, avlu, peyzaj ve dış oturma alanlarınızda mevsimsel olarak artan sivrisinek, kene, pire, karınca, örümcek gibi zararlılara karşı koruyucu ve ortam huzurunu artırıcı uygulamalar yapıyoruz.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=bahce_dis_alan" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
                 Bahçe İlaçlama Teklifi Al
               </Link>
             </div>

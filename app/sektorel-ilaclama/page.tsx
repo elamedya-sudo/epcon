@@ -38,7 +38,7 @@ export default function IlaclamaPage() {
             Ev, villa, site, apartman, ofis, mağaza ve diğer yaşam veya çalışma alanlarında karşılaşılan zararlılara yönelik tek seferlik ve dönemsel uygulamalar gerçekleştiriyoruz. Bahçe ve peyzaj alanlarında ise bitki türü, zararlı veya hastalık belirtisi ve çevresel koşullar değerlendirilerek ziraat mühendisleri yönetiminde bitki sağlığı uygulamaları planlıyoruz.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=ilaclama_genel" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20">

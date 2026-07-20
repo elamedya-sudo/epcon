@@ -1,9 +1,9 @@
 import React from "react";
-import { MapPin, Phone, Mail, Building2, FileText, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Building2, Send, MessageCircle, Clock } from "lucide-react";
 
 export const metadata = {
-  title: "İletişim | EPCON İlaçlama",
-  description: "EPCON Çevre Sağlığı Sistemleri iletişim bilgileri, adres, telefon ve e-posta detayları.",
+  title: "İletişim | EPCON",
+  description: "EPCON Çevre Sağlığı Sistemleri iletişim bilgileri, adres, telefon, WhatsApp ve e-posta detayları.",
 };
 
 export default function ContactPage() {
@@ -28,91 +28,98 @@ export default function ContactPage() {
       <section className="py-16 md:py-20 px-6 md:px-10 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           
-          {/* SOL KOLON: Şirket Bilgileri ve Metinler */}
+          {/* SOL KOLON: Şirket Bilgileri */}
           <div className="flex flex-col space-y-8">
             <div>
               <p className="font-barlowCondensed text-xs font-semibold tracking-[0.12em] uppercase text-pest-green mb-2">
                 Bize Ulaşın
               </p>
               <h1 className="font-barlowCondensed text-3xl md:text-4xl font-extrabold uppercase text-navy tracking-tight mb-6">
-                İletişim & Şirket Bilgileri
+                İletişim Bilgileri
               </h1>
-              
-              {/* Künye Kartı */}
-              <div className="bg-slate-50 border border-border rounded-xl p-6 space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <Building2 size={20} className="text-navy flex-shrink-0 mt-0.5" />
+
+              {/* Kısa Açıklama ve Ünvan Kartı */}
+              <div className="bg-slate-50 border border-border rounded-xl p-6 md:p-8 mb-8">
+                <p className="text-sm md:text-base text-navy/80 leading-relaxed mb-6">
+                  Pest kontrol, fumigasyon, biyosidal uygulama ve bitki sağlığı hizmetleri hakkında bilgi ve teklif almak için bizimle iletişime geçebilirsiniz. Teknik ekibimiz talebinizi değerlendirerek sizinle iletişime geçecektir.
+                </p>
+                <div className="flex items-start gap-3 pt-6 border-t border-border">
+                  <Building2 size={22} className="text-navy flex-shrink-0 mt-1" />
                   <div>
-                    <span className="text-xs text-text-muted block mb-0.5">Ünvan</span>
-                    <strong className="text-sm text-navy">EPCON Çevre Sağlığı Sistemleri San. Tic. Ltd. Şti.</strong>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <FileText size={20} className="text-navy flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-xs text-text-muted block mb-0.5">Ticari Sicil Numarası</span>
-                    <strong className="text-sm text-navy">770133</strong>
+                    <span className="text-xs text-text-muted block mb-1">Tam Firma Ünvanı</span>
+                    <strong className="text-base text-navy block leading-snug">EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.</strong>
                   </div>
                 </div>
               </div>
 
               {/* İletişim Listesi */}
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-pest-green/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin size={20} className="text-pest-green" />
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-pest-green/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin size={24} className="text-pest-green" />
                   </div>
-                  <div className="mt-2 text-sm text-text-mid leading-relaxed">
-                    Armağanevler Mahallesi Güngör sokak<br />No:89/A Ümraniye/İstanbul
-                  </div>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-pest-green/10 flex items-center justify-center flex-shrink-0">
-                    <Phone size={20} className="text-pest-green" />
-                  </div>
-                  <div className="flex flex-col text-sm text-text-mid">
-                    <a href="tel:+905316901071" className="hover:text-navy transition-colors">+90 (531) 690 1071</a>
-                    <a href="tel:+902165057306" className="hover:text-navy transition-colors">+90 (216) 505 7306</a>
+                  <div className="mt-1">
+                    <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Adres</span>
+                    <span className="text-base text-navy font-medium leading-relaxed">
+                      Armağanevler Mahallesi Güngör Sokak<br />No:89/A Ümraniye/İstanbul
+                    </span>
                   </div>
                 </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-pest-green/10 flex items-center justify-center flex-shrink-0">
-                    <Mail size={20} className="text-pest-green" />
-                  </div>
-                  <a href="mailto:info@epcon.com.tr" className="text-sm text-text-mid hover:text-navy transition-colors">
-                    info@epcon.com.tr
-                  </a>
-                </li>
-              </ul>
-            </div>
 
-            {/* Hakkımızda Metinleri */}
-            <div className="prose prose-sm text-text-mid leading-relaxed pt-6 border-t border-border">
-              <p>
-                <strong>Epcon Çevre Sağlığı Sistemleri San. Ve Tic. Ltd. Şti.</strong> Haşere ve zararlıların denetimi engellenmesi ve kontrol altına alınması konularında hizmet verebilmek amacıyla kurulmuştur.
-              </p>
-              <p className="mt-4">
-                Firmamız, insan ve çevre sağlığı için oldukça önem taşıyan haşere ve zararlılara karşı mücadelede alışılagelmiş ilaçlama yöntemi yerine bilgi, araştırma, inceleme, fiziksel önlemlerin tespiti ve uygulanması, ekipman, gözlem, uygulama, raporlama, analiz ve eğitimden oluşan entegre pest kontrol sistemini en son teknolojiyi kullanarak, profesyonel bir yaklaşım içerisinde uygulamaktadır.
-              </p>
-              <p className="mt-4">
-                Firmamız uygulamadaki bu farklı yaklaşımı sayesinde eğitim kurumları, hastane, otel, banka, fabrika, konut ve iş yerlerinin (Haşere ve zararlıların insan, gıda ve çevre sağlığını tehdit ettiği tüm alanlarda) haşere ve zararlılardan arındırılmasını sağlamaktadır.
-              </p>
-              <p className="mt-4">
-                Teknik ekibimiz ziraat mühendislerinden oluşmakta ve düzenli eğitime tabi tutularak en modern araç ve ekipmanlarla hizmet sunmaktadır. Dünya Sağlık Örgütü (WHO) ve Sağlık Bakanlığı onaylı, çevre ve insan sağlığına duyarlı kimyasallar kullanmaktadır.
-              </p>
-              <p className="mt-4">
-                Firmamızın uygulayacağı Entegre Pest Kontrol sistemi; BRC (British Retail Consortium), IFS (International Food Standard), AIB (American Institute of Baking) ve TSE (Türk Standartları Enstitüsü) kalite yönetim sistemlerine ve uluslararası denetleme kuruluşlarının denetimlerine uygunluk taşımaktadır.
-              </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <li className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-pest-green/10 flex items-center justify-center flex-shrink-0">
+                      <Phone size={24} className="text-pest-green" />
+                    </div>
+                    <div className="mt-1 flex flex-col">
+                      <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Telefon</span>
+                      <a href="tel:+902165057306" className="text-base text-navy font-bold hover:text-pest-green transition-colors">0216 505 73 06</a>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-pest-green/10 flex items-center justify-center flex-shrink-0">
+                      <MessageCircle size={24} className="text-[#25d366]" />
+                    </div>
+                    <div className="mt-1 flex flex-col">
+                      <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">WhatsApp</span>
+                      <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="text-base text-navy font-bold hover:text-[#25d366] transition-colors">0531 690 10 71</a>
+                    </div>
+                  </li>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <li className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-pest-green/10 flex items-center justify-center flex-shrink-0">
+                      <Mail size={24} className="text-pest-green" />
+                    </div>
+                    <div className="mt-1 flex flex-col">
+                      <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">E-posta</span>
+                      <a href="mailto:info@epcon.com.tr" className="text-base text-navy font-medium hover:text-pest-green transition-colors">info@epcon.com.tr</a>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-pest-green/10 flex items-center justify-center flex-shrink-0">
+                      <Clock size={24} className="text-pest-green" />
+                    </div>
+                    <div className="mt-1 flex flex-col">
+                      <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Çalışma Saatleri</span>
+                      <span className="text-base text-navy font-medium">Pzt - Cmt: 08:00 - 20:00</span>
+                    </div>
+                  </li>
+                </div>
+              </ul>
             </div>
           </div>
 
           {/* SAĞ KOLON: İletişim Formu */}
-          <div className="bg-slate-50 border border-border rounded-2xl p-8 lg:p-10 h-fit sticky top-28">
+          <div className="bg-white border border-border shadow-xl shadow-slate-200/40 rounded-2xl p-8 lg:p-10 h-fit sticky top-28">
             <h3 className="font-barlowCondensed text-2xl font-bold uppercase text-navy mb-2">
-              Mesaj Göndermek İster misiniz?
+              Bize Mesaj Gönderin
             </h3>
             <p className="text-sm text-text-muted mb-8">
-              Yetkililerimiz tüm mesajları titizlikle incelemekte ve geri dönüş yapmaktadır.
+              Lütfen formu eksiksiz doldurun, uzman ekibimiz en kısa sürede size geri dönüş yapacaktır.
             </p>
 
             <form className="space-y-5">
@@ -121,14 +128,16 @@ export default function ContactPage() {
                   <input 
                     type="text" 
                     placeholder="Adınız Soyadınız" 
-                    className="w-full bg-white border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-pest-green focus:ring-1 focus:ring-pest-green transition-colors"
+                    required
+                    className="w-full bg-slate-50 border border-border rounded-lg px-4 py-3 text-sm text-navy focus:bg-white focus:outline-none focus:border-pest-green transition-colors placeholder:text-text-muted"
                   />
                 </div>
                 <div>
                   <input 
                     type="tel" 
                     placeholder="Telefon Numaranız" 
-                    className="w-full bg-white border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-pest-green focus:ring-1 focus:ring-pest-green transition-colors"
+                    required
+                    className="w-full bg-slate-50 border border-border rounded-lg px-4 py-3 text-sm text-navy focus:bg-white focus:outline-none focus:border-pest-green transition-colors placeholder:text-text-muted"
                   />
                 </div>
               </div>
@@ -137,30 +146,46 @@ export default function ContactPage() {
                   <input 
                     type="email" 
                     placeholder="E-posta Adresiniz" 
-                    className="w-full bg-white border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-pest-green focus:ring-1 focus:ring-pest-green transition-colors"
+                    className="w-full bg-slate-50 border border-border rounded-lg px-4 py-3 text-sm text-navy focus:bg-white focus:outline-none focus:border-pest-green transition-colors placeholder:text-text-muted"
                   />
                 </div>
                 <div>
                   <input 
                     type="text" 
                     placeholder="Konu" 
-                    className="w-full bg-white border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-pest-green focus:ring-1 focus:ring-pest-green transition-colors"
+                    required
+                    className="w-full bg-slate-50 border border-border rounded-lg px-4 py-3 text-sm text-navy focus:bg-white focus:outline-none focus:border-pest-green transition-colors placeholder:text-text-muted"
                   />
                 </div>
               </div>
               <div>
                 <textarea 
-                  rows={5}
+                  rows={4}
                   placeholder="Mesajınız..." 
-                  className="w-full bg-white border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-pest-green focus:ring-1 focus:ring-pest-green transition-colors resize-none"
+                  required
+                  className="w-full bg-slate-50 border border-border rounded-lg px-4 py-3 text-sm text-navy focus:bg-white focus:outline-none focus:border-pest-green transition-colors placeholder:text-text-muted resize-none"
                 ></textarea>
               </div>
+
+              {/* KVKK Kutusu */}
+              <div className="flex items-start gap-3 mt-2 bg-slate-50 p-3 rounded-lg border border-border/50">
+                <input 
+                  type="checkbox" 
+                  id="kvkk" 
+                  required 
+                  className="mt-1 w-4 h-4 text-pest-green bg-white border-gray-300 rounded focus:ring-pest-green focus:ring-2 cursor-pointer flex-shrink-0" 
+                />
+                <label htmlFor="kvkk" className="text-[13px] text-text-mid leading-snug cursor-pointer">
+                  Bilgileriniz güvendedir. Talebinizi göndererek <a href="/kvkk" className="text-navy font-semibold underline hover:text-pest-green transition-colors">KVKK Aydınlatma Metni</a>'ni okuduğumu ve kabul ettiğimi onaylıyorum.
+                </label>
+              </div>
+
               <button 
-                type="button" 
-                className="bg-pest-green hover:bg-pest-green-dark text-white font-bold py-3.5 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full md:w-auto"
+                type="submit" 
+                className="bg-navy hover:bg-navy-dark text-white font-bold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2 w-full mt-2"
               >
                 <Send size={18} />
-                Gönder
+                Mesajımı Gönder
               </button>
             </form>
           </div>

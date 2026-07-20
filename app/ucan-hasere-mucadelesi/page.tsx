@@ -34,7 +34,7 @@ export default function UcanHaserePage() {
               Sivrisinek, karasinek ve küçük sinek risklerini yalnızca ergin uygulamalarıyla değil; üreme kaynaklarının tespiti, larva mücadelesi, fiziksel önlemler, izleme ve hedefe yönelik uygulamalarla birlikte yönetiyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=ucan" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -42,7 +42,6 @@ export default function UcanHaserePage() {
               </a>
             </div>
           </div>
-          {/* Çalışan Hero Görseli */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
              <img src="https://images.unsplash.com/photo-1584852959828-095deeb5cb95?q=80&w=1000&auto=format&fit=crop" alt="Uçan Haşere Kontrolü" className="w-full h-full object-cover absolute inset-0" />
@@ -137,9 +136,9 @@ export default function UcanHaserePage() {
           <ul className="space-y-3 mb-8">
             {[
               "Cihaz numarası, konumu ve genel çalışma durumu",
-              "UV lamba çalışma, kararma, kırılma ve değişim ihtiyacı",
-              "Yapışkan levha doluluğu, kirliliği ve değişim tarihi",
-              "Yakalama miktarı ve gözlenen uçan zararlı grupları",
+              "UV lambalarının çalışma ve değişim ihtiyacının değerlendirilmesi",
+              "Yapışkan levha doluluğu ve değişim tarihinin kontrolü",
+              "Yakalama miktarının ve gözlenen uçan zararlı grupları",
               "Cihaz ve dönem bazında aktivite trendi",
               "Temizlik, bakım veya konum değişikliği önerileri"
             ].map((item, idx) => (
@@ -159,7 +158,6 @@ export default function UcanHaserePage() {
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-200">
-           {/* Geçici Görsel: Cihaz / Fabrika ortamı */}
            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000&auto=format&fit=crop" alt="EFT Cihaz Kontrolü" className="w-full h-full object-cover" />
         </div>
       </section>
@@ -192,8 +190,7 @@ export default function UcanHaserePage() {
             Mevsimsel koşullara ve saha risklerine uygun program için teklif talep edin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Buton Link olarak güncellendi */}
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=ucan" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

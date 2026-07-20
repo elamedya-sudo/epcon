@@ -99,7 +99,7 @@ export default function PestKontrolPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 items-center w-full justify-center">
-            <Link href="/ucretsiz-teklif-al" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm">
+            <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm">
               <ShieldCheck size={18} /> IPM Teknik Değerlendirme Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">

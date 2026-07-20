@@ -29,7 +29,7 @@ export default function BitkiIlaclamaPage() {
               Bahçe ve peyzaj bitkilerinizdeki yaprak sararması, dökülme, kuruma veya doğrudan gözlenen bitki zararlılarına karşı (yaprak biti, kırmızı örümcek, külleme vb.) ziraat mühendislerimiz teşhis ve uygulama planı hazırlar.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=bitki_sagligi" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
                 Bitki Sağlığı Teklifi Al
               </Link>
             </div>

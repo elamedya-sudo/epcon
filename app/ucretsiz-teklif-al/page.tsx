@@ -1,285 +1,520 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { ArrowLeft, ShieldCheck, Bug, Wind, Building2, Home, CheckCircle2, MapPin } from "lucide-react";
 
-function TeklifFormuIcerik() {
+const ISTANBUL_ILCELERI = [
+  "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu"
+];
+
+const FORM_CONFIG: any = {
+  // 1. GENEL FORM (Parametre olmadan gelenler için)
+  genel: {
+    title: "Genel Teklif ve İletişim Talebi",
+    btn: "TALEBİMİ GÖNDER",
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad / Firma Adı", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "İlçe / Konum", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "hizmet", label: "İlgilendiğiniz Hizmet", type: "select", required: true, options: ["Pest Kontrol / İlaçlama", "Fümigasyon Hizmetleri", "BMSB / İhracat İşlemleri", "Bitki Sağlığı Uygulamaları", "Acil Müdahale", "Diğer / Bilmiyorum"] },
+      { id: "not", label: "Mesajınız / Açıklama", type: "textarea", required: false }
+    ]
+  },
+  
+  // 2. DİĞER TÜM FORMLAR (Mevcut formlarınız)
+  ipm: { 
+    title: "IPM Teknik Değerlendirme Talebi", 
+    btn: "IPM TEKNİK DEĞERLENDİRME TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firma", label: "Firma Adı", type: "text", required: true },
+      { id: "yetkili", label: "Yetkili Adı Soyadı", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "sektor", label: "Sektör / Tesis Türü", type: "select", required: true, options: ["Gıda üretim", "Fabrika/üretim", "Depo/lojistik", "Havalimanı/terminal", "Otel", "Sağlık", "Eğitim", "Restoran/yemekhane", "AVM/ticari işletme", "Site/rezidans", "Kamu", "Diğer"] },
+      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
+      { id: "alan", label: "Yaklaşık Alan / Tesis Bilgisi", type: "text", required: true },
+      { id: "hizmetIhtiyaci", label: "Hizmet İhtiyacı", type: "select", options: ["Teknik ekip değerlendirsin", "Yeni IPM programı", "Periyodik pest kontrol", "Mevcut sistem değerlendirmesi", "Denetim/dokümantasyon", "Dijital raporlama/trend", "EFT kontrolü", "Mevcut probleme müdahale"] },
+      { id: "zararli", label: "Karşılaşılan Zararlı / Risk", type: "select", required: true, options: ["Kemirgen", "Yürüyen haşere", "Uçan haşere", "Depo zararlısı", "Pire/kene", "Tahta kurusu", "Birden fazla", "Önleyici hizmet", "Bilmiyorum", "Diğer"] }
+    ]
+  },
+  kemirgen: { 
+    title: "Kemirgen Kontrolü Teklif Talebi", 
+    btn: "KEMİRGEN KONTROLÜ TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firma", label: "Firma Adı veya Ad Soyad", type: "text", required: true },
+      { id: "yetkili", label: "Yetkili Adı Soyadı", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "tesis", label: "Tesis / Mekân Türü", type: "select", required: true, options: ["Ev", "Site", "İşyeri", "Fabrika", "Depo", "Gıda tesisi", "Diğer"] },
+      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
+      { id: "yaklasikAlan", label: "Yaklaşık Alan", type: "text", required: true },
+      { id: "belirtiler", label: "Görülen Belirtiler", type: "select", options: ["Canlı kemirgen", "Dışkı", "Kemirilmiş ambalaj/kablo", "Gece sesi", "İstasyon aktivitesi", "Bilmiyorum", "Diğer"] },
+      { id: "icDis", label: "İç Alan / Dış Alan", type: "select", required: true, options: ["İç alan", "Dış alan", "Her ikisi"] }
+    ]
+  },
+  yuruyen: { 
+    title: "Yürüyen Haşere Kontrolü Teklif Talebi", 
+    btn: "YÜRÜYEN HAŞERE KONTROLÜ TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma Adı veya Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "tesis", label: "Tesis / Mekân Türü", type: "select", required: true, options: ["Ev", "Villa", "Site", "İşyeri", "Restoran", "Fabrika", "Depo", "Diğer"] },
+      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
+      { id: "yaklasikAlan", label: "Yaklaşık Alan", type: "text", required: true },
+      { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Gümüşçün", "Örümcek", "Akrep", "Diğer", "Bilmiyorum"] },
+      { id: "bolum", label: "Sorunun Görüldüğü Bölüm", type: "select", required: true, options: ["Mutfak", "Gider/rögar", "Depo", "Teknik alan", "Bahçe", "Diğer"] }
+    ]
+  },
+  ucan: { 
+    title: "Uçan Haşere ve EFT Kontrol Talebi", 
+    btn: "UÇAN HAŞERE / EFT TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma Adı veya Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "tesis", label: "Tesis / Mekân Türü", type: "select", required: true, options: ["Gıda tesisi", "Restoran", "Otel", "Depo", "Fabrika", "Site", "Diğer"] },
+      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
+      { id: "yaklasikAlan", label: "Yaklaşık Alan", type: "text", required: true },
+      { id: "zararli", label: "Karşılaşılan Uçan Zararlı", type: "select", required: true, options: ["Karasinek", "Sivrisinek", "Küçük sinek", "Güve", "Diğer", "Bilmiyorum"] },
+      { id: "eftVarmi", label: "EFT Cihazı Bulunuyor mu?", type: "select", required: true, options: ["Evet", "Hayır", "Bilmiyorum"] },
+      { id: "eftAdet", label: "EFT Cihaz Adedi", type: "number", required: true },
+      { id: "hizmet", label: "Talep Edilen Hizmet", type: "select", options: ["Uçan haşere kontrolü", "EFT kontrolü", "EFT kurulumu/yerleşim planı", "Yapışkan levha", "UV lamba", "Trend analizi", "Teknik ekip değerlendirsin"] }
+    ]
+  },
+  depo: { 
+    title: "Depo Zararlıları Yönetimi Teklif Talebi", 
+    btn: "DEPO ZARARLILARI TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firma", label: "Firma Adı", type: "text", required: true },
+      { id: "yetkili", label: "Yetkili Adı Soyadı", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "depoTuru", label: "Depo / Tesis Türü", type: "select", required: true, options: ["Depo", "Silo", "Üretim", "Antrepo", "Diğer"] },
+      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
+      { id: "urunTuru", label: "Ürün Türü", type: "select", options: ["Tahıl", "Bakliyat", "Un", "Yem", "Kuru gıda", "Tütün", "Ahşap ürün", "Boş depo", "Diğer"] },
+      { id: "kapasite", label: "Yaklaşık Kapasite / Alan", type: "text", required: false },
+      { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Güve", "Un biti", "Tahıl biti", "Diğer depo zararlısı", "Bilmiyorum"] },
+      { id: "izleme", label: "Mevcut İzleme Sistemi", type: "select", required: true, options: ["Var", "Yok", "Bilmiyorum"] }
+    ]
+  },
+  hamambocegi: { 
+    title: "Hamamböceği Mücadelesi Teklif Talebi", 
+    btn: "HAMAMBÖCEĞİ TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  fare_sican: { 
+    title: "Fare ve Sıçan Mücadelesi Teklif Talebi", 
+    btn: "FARE / SIÇAN TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  tahta_kurusu: { 
+    title: "Tahta Kurusu Mücadelesi Teklif Talebi", 
+    btn: "TAHTA KURUSU TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  karinca: { 
+    title: "Karınca Mücadelesi Teklif Talebi", 
+    btn: "KARINCA TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  sivrisinek_karasinek: { 
+    title: "Sivrisinek ve Karasinek Mücadelesi Teklif Talebi", 
+    btn: "SİVRİSİNEK / KARASİNEK TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  kokarca: { 
+    title: "Kahverengi Kokarca Mücadelesi Teklif Talebi", 
+    btn: "KAHVERENGİ KOKARCA TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  pire_kene: { 
+    title: "Pire ve Kene Mücadelesi Teklif Talebi", 
+    btn: "PİRE / KENE TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  guve_depo: { 
+    title: "Güve ve Depo Zararlıları Teklif Talebi", 
+    btn: "DEPO ZARARLISI TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  akrep_orumcek: { 
+    title: "Akrep ve Örümcek Mücadelesi Teklif Talebi", 
+    btn: "AKREP / ÖRÜMCEK TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  yilan_surungen: { 
+    title: "Yılan ve Sürüngen Risk Değerlendirme Talebi", 
+    btn: "RİSK DEĞERLENDİRME TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Restoran/Kafe", "Fabrika/Üretim", "Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Zararlı Türü", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  ev_daire: { 
+    title: "Ev ve Daire İlaçlama Teklif Talebi", 
+    btn: "EV / DAİRE TEKLİF TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
+      { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  villa: { 
+    title: "Villa İlaçlama Teklif Talebi", 
+    btn: "VİLLA İLAÇLAMA TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
+      { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
+      { id: "icDis", label: "İç / Dış Alan", type: "select", required: true, options: ["İç alan", "Dış alan", "Her ikisi"] },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  site_apartman: { 
+    title: "Site ve Apartman İlaçlama Teklif Talebi", 
+    btn: "SİTE / APARTMAN TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad / Yönetim Yetkilisi", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "blok", label: "Blok / Ortak Alan Bilgisi", type: "text", required: false },
+      { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  isyeri_ofis: { 
+    title: "İşyeri ve Ofis İlaçlama Teklif Talebi", 
+    btn: "İŞYERİ / OFİS TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
+      { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  bahce_dis_alan: { 
+    title: "Bahçe ve Dış Alan İlaçlama Teklif Talebi", 
+    btn: "BAHÇE / DIŞ ALAN TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Sivrisinek", "Karasinek", "Pire/Kene", "Diğer", "Bilmiyorum"] },
+      { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  bitki_sagligi: { 
+    title: "Bitki Sağlığı Uygulaması Teklif Talebi", 
+    btn: "BİTKİ SAĞLIĞI TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "bitkiTuru", label: "Bitki / Ağaç Türü", type: "text", required: false },
+      { id: "alanTuru", label: "Alan Türü", type: "select", required: true, options: ["Bahçe", "Peyzaj", "Tarla", "Site", "Diğer"] },
+      { id: "zararliBelirti", label: "Gözlenen Zararlı / Belirti", type: "text", required: true },
+      { id: "alan", label: "Yaklaşık Alan / Bitki Adedi", type: "text", required: false },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  acil_mudahale: { 
+    title: "Acil Zararlı Müdahale Talebi", 
+    btn: "ACİL MÜDAHALE TALEBİMİ GÖNDER", 
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Yılan", "Akrep", "Örümcek", "Diğer", "Bilmiyorum"] },
+      { id: "sorunAlani", label: "Sorunun Görüldüğü Alan", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: true }
+    ]
+  },
+  bmsb: {
+    title: "BMSB İhracat Fümigasyonu Talebi",
+    btn: "BMSB TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe / Konum", type: "text", required: true },
+      { id: "hedefUlke", label: "Hedef Ülke", type: "select", required: true, options: ["Avustralya", "Yeni Zelanda", "Diğer"] },
+      { id: "urunTipi", label: "Yük / Ürün Tipi", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  konteyner: {
+    title: "Konteyner Fümigasyonu Teklif Talebi",
+    btn: "KONTEYNER TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe / Uygulama Yeri", type: "text", required: true },
+      { id: "konteynerTuru", label: "Konteyner Türü", type: "select", required: true, options: ["20'lik Konteyner", "40'lık Konteyner", "Diğer"] },
+      { id: "adet", label: "Konteyner Adedi", type: "number", required: true },
+      { id: "urunTipi", label: "İçindeki Yük / Ürün", type: "text", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  ispm15: {
+    title: "ISPM 15 Ahşap Ambalaj İşareti Talebi",
+    btn: "ISPM 15 TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe / Uygulama Yeri", type: "text", required: true },
+      { id: "ambalajTuru", label: "Ahşap Ambalaj Türü", type: "select", required: true, options: ["Ahşap Palet", "Ahşap Sandık", "Ahşap Kasa", "Kablo Makarası", "Diğer"] },
+      { id: "adet", label: "Tahmini Adet", type: "number", required: true },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+  ilaclama_genel: {
+    title: "İlaçlama ve Pest Kontrol Talebi",
+    btn: "TEKLİF TALEBİMİ GÖNDER",
+    fields: [
+      { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
+      { id: "mekan", label: "Mekân Türü", type: "select", options: ["Ev/Daire", "Villa", "Site/Apartman", "İşyeri/Ofis", "Fabrika/Depo", "Bahçe/Dış Alan", "Diğer"], required: true },
+      { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire/Kene", "Fare/Sıçan", "Uçan Haşere", "Tahta Kurusu", "Diğer", "Bilmiyorum"] },
+      { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
+    ]
+  },
+};
+
+function FormContent() {
   const searchParams = useSearchParams();
-  const formType = searchParams.get("type"); // URL'den parametreyi kesin olarak alır
-
-  const [step, setStep] = useState(1);
+  // Geçerli bir type yoksa "genel" formunu çalıştır
+  const typeParam = searchParams.get("type");
+  const type = (typeParam && FORM_CONFIG[typeParam]) ? typeParam : "genel";
+  const config = FORM_CONFIG[type];
+  
+  const [formData, setFormData] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [kvkkOnay, setKvkkOnay] = useState(false);
-  
-  const [formData, setFormData] = useState({
-    hizmet: "", mekan: "", bocek: "", ilce: "", adSoyad: "", firmaAdi: "", telefon: "", eposta: "", not: "",
-    yaklasikAlan: "", eftCihazi: "", urunTuru: "", belirtiler: ""
-  });
+  const [success, setSuccess] = useState(false);
 
-  // Parametre varsa doğrudan 5. adıma atla ve bilgileri doldur
+  // OTOMATİK DOLDURMA
   useEffect(() => {
-    if (formType) {
-      setStep(5);
-      
-      let otoHizmet = "Genel İlaçlama ve Pest Kontrol";
-      let otoMekan = "";
-      let otoBocek = "";
-
-      if (formType === "ipm") otoHizmet = "Entegre Zararlı Yönetimi - IPM";
-      else if (formType === "kemirgen") otoHizmet = "Kemirgen Kontrolü";
-      else if (formType === "yuruyen") otoHizmet = "Yürüyen Haşere Kontrolü";
-      else if (formType === "ucan") otoHizmet = "Uçan Haşere / EFT Kontrolü";
-      else if (formType === "depo") otoHizmet = "Depo Zararlıları Yönetimi";
-      else if (formType === "bmsb") otoHizmet = "BMSB İhracat İşlemleri";
-      else if (formType === "ispm15") otoHizmet = "ISPM 15 Ahşap Ambalaj";
-      else if (formType === "konteyner") otoHizmet = "Konteyner Fumigasyonu";
-      else if (formType === "hamambocegi") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Hamamböceği"; }
-      else if (formType === "fare") { otoHizmet = "Kemirgen Kontrolü"; otoBocek = "Fare / Sıçan"; }
-      else if (formType === "tahtakurusu") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Tahta Kurusu"; }
-      else if (formType === "karinca") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Karınca"; }
-      else if (formType === "sivrisinek") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Sivrisinek / Karasinek"; }
-      else if (formType === "kokarca") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Kahverengi Kokarca"; }
-      else if (formType === "pire") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Pire / Kene"; }
-      else if (formType === "akrep") { otoHizmet = "Böcek İlaçlama"; otoBocek = "Akrep / Örümcek"; }
-      else if (formType === "yilan") { otoHizmet = "Risk Değerlendirmesi"; otoBocek = "Yılan / Sürüngen"; }
-      else if (formType === "villa") { otoHizmet = "Villa İlaçlama"; otoMekan = "Villa"; }
-      else if (formType === "site") { otoHizmet = "Site ve Apartman İlaçlama"; otoMekan = "Site / Apartman"; }
-      else if (formType === "isyeri") { otoHizmet = "İşyeri ve Ofis İlaçlama"; otoMekan = "İşyeri / Ofis"; }
-      else if (formType === "bahce") { otoHizmet = "Bahçe ve Dış Alan İlaçlama"; otoMekan = "Bahçe / Dış Alan"; }
-      else if (formType === "acil") otoHizmet = "Acil Zararlı Müdahalesi";
-      else if (formType === "bitki") { otoHizmet = "Bitki Sağlığı Uygulaması"; otoMekan = "Bahçe / Peyzaj"; }
-      else if (formType === "ev") { otoHizmet = "Ev ve Daire İlaçlama"; otoMekan = "Ev / Daire"; }
-
-      setFormData(prev => ({ ...prev, hizmet: otoHizmet, mekan: otoMekan, bocek: otoBocek }));
+    const defaultValues: any = {
+      hamambocegi: { zararli: "Hamamböceği" },
+      fare_sican: { zararli: "Fare / Sıçan" },
+      tahta_kurusu: { zararli: "Tahta Kurusu" },
+      karinca: { zararli: "Karınca" },
+      sivrisinek_karasinek: { zararli: "Sivrisinek / Karasinek" },
+      kokarca: { zararli: "Kahverengi Kokarca" },
+      pire_kene: { zararli: "Pire / Kene" },
+      guve_depo: { zararli: "Güve / Depo Zararlısı" },
+      akrep_orumcek: { zararli: "Akrep / Örümcek" },
+      yilan_surungen: { zararli: "Yılan / Sürüngen" },
+      ev_daire: { mekan: "Ev / Daire", hizmet: "Ev ve Daire İlaçlama" },
+      villa: { mekan: "Villa", hizmet: "Villa İlaçlama" },
+      site_apartman: { mekan: "Site / Apartman", hizmet: "Site ve Apartman İlaçlama" },
+      isyeri_ofis: { mekan: "İşyeri / Ofis", hizmet: "İşyeri ve Ofis İlaçlama" },
+      bahce_dis_alan: { mekan: "Bahçe / Dış Alan", hizmet: "Bahçe ve Dış Alan İlaçlama" },
+      bitki_sagligi: { hizmet: "Bitki Sağlığı Uygulaması" },
+      acil_mudahale: { mekan: "Acil Müdahale", hizmet: "Acil Zararlı Müdahale" },
+    };
+    
+    if (type && defaultValues[type]) {
+      setFormData(defaultValues[type]);
+    } else {
+      setFormData({});
     }
-  }, [formType]);
+  }, [type]);
 
-  const ISTANBUL_ILCELERI = [
-    "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", 
-    "Bakırköy", "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", 
-    "Beyoğlu", "Büyükçekmece", "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", 
-    "Eyüpsultan", "Fatih", "Gaziosmanpaşa", "Güngören", "Kadıköy", "Kağıthane", 
-    "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe", "Sarıyer", 
-    "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", 
-    "Ümraniye", "Üsküdar", "Zeytinburnu"
-  ];
-  
-  const mekanlar: any = {
-    "İlaçlama": ["Ev / Daire", "Villa", "Site / Apartman", "Bahçe / Dış Alan"],
-    "Pest Kontrol": ["Fabrika / Tesis", "Depo / Lojistik", "Ofis / İşyeri", "Otel / Restoran"],
-    "Fümigasyon": ["Gemi / Yat", "Konteyner", "Silo / Depo", "Ahşap Palet (ISPM 15)"]
-  };
-  
-  const bocekler = ["Hamamböceği", "Kemirgen (Fare/Sıçan)", "Uçan Haşere (Sinek)", "Tahtakurusu / Pire", "Depo Zararlısı", "Diğer / Bilmiyorum"];
-
-  const getServiceIcon = (hizmet: string) => {
-    if(hizmet === "İlaçlama") return <Home className="w-8 h-8 mb-3" />;
-    if(hizmet === "Pest Kontrol") return <ShieldCheck className="w-8 h-8 mb-3" />;
-    return <Wind className="w-8 h-8 mb-3" />;
-  }
+  if (!config) return <div className="p-10 text-center text-navy font-bold">Form tanımlanmamış.</div>;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!kvkkOnay) {
-      alert("Lütfen KVKK Aydınlatma Metni'ni onaylayın.");
-      return;
-    }
     setIsSubmitting(true);
+
+    // Formdaki tüm dinamik alanları etiketleriyle birlikte diziye çevir
+    const submittedFields = config.fields.map((f: any) => ({
+      label: f.label,
+      value: formData[f.id] || "Belirtilmedi"
+    }));
+
+    // Auto-reply ve Admin maili için müşteri ismini ve e-postasını çıkart
+    const customerName = formData.adSoyad || formData.firmaAdSoyad || formData.yetkili || formData.firma || "Değerli Müşterimiz";
+    const customerEmail = formData.eposta || "";
+
+    const payload = {
+      formTitle: config.title,
+      customerName,
+      customerEmail,
+      fields: submittedFields
+    };
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
-      if (res.ok) setStep(6);
-      else alert("Gönderim sırasında bir hata oluştu.");
+
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        alert("Gönderim sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
+      }
     } catch (error) {
-      alert("Sistemsel bir bağlantı hatası oluştu.");
+      alert("Bağlantı hatası oluştu. Lütfen internet bağlantınızı kontrol edin.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  return (
-    <div className="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl border border-slate-100 relative z-10 w-full">
-      
-      {/* Sadece parametresiz girilirse İlerleme Çubuğu */}
-      {!formType && step < 6 && (
-        <div className="flex items-center mb-10 gap-4">
-          <button 
-            onClick={() => setStep(step > 1 ? step - 1 : 1)} 
-            className={`p-2 rounded-full transition-colors ${step > 1 ? 'hover:bg-slate-100 text-navy' : 'text-slate-300 cursor-not-allowed'}`}
-            disabled={step === 1}
-          >
-            <ArrowLeft />
-          </button>
-          <div className="flex gap-2 flex-1">
-            {[1, 2, 3, 4, 5].map(i => (
-              <div key={i} className={`h-2 flex-1 rounded-full transition-all duration-300 ${i <= step ? "bg-pest-green" : "bg-slate-100"}`} />
-            ))}
-          </div>
-          <span className="text-sm font-bold text-navy/50">{step} / 5</span>
-        </div>
-      )}
-
-      {/* Adımlar 1-4 (Genel form) */}
-      {!formType && step === 1 && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="mb-8">
-            <h2 className="font-barlowCondensed text-3xl md:text-4xl font-bold text-navy uppercase mb-2">Hangi hizmeti arıyorsunuz?</h2>
-            <p className="text-text-mid">Size en doğru ekibi yönlendirebilmemiz için ana kategoriyi seçin.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {["İlaçlama", "Pest Kontrol", "Fümigasyon"].map(h => (
-              <button key={h} onClick={() => { setFormData({...formData, hizmet: h}); setStep(2); }}
-                className="flex flex-col items-center justify-center p-6 border-2 border-slate-100 rounded-2xl hover:border-pest-green hover:bg-pest-green/5 hover:text-pest-green transition-all font-bold text-navy group"
-              >
-                <div className="text-navy group-hover:text-pest-green transition-colors">{getServiceIcon(h)}</div>
-                {h}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {!formType && step === 2 && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="mb-8">
-            <h2 className="font-barlowCondensed text-3xl md:text-4xl font-bold text-navy uppercase mb-2">Mekân türü nedir?</h2>
-            <p className="text-text-mid">Uygulama yapılacak alanın fiziksel yapısını belirtin.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {mekanlar[formData.hizmet]?.map((m: string) => (
-              <button key={m} onClick={() => { setFormData({...formData, mekan: m}); setStep(3); }}
-                className="flex items-center gap-3 p-5 border-2 border-slate-100 rounded-2xl hover:border-pest-green hover:bg-pest-green/5 transition-all font-bold text-navy text-left"
-              >
-                <Building2 className="w-5 h-5 text-pest-green opacity-70" /> {m}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {!formType && step === 3 && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="mb-8">
-            <h2 className="font-barlowCondensed text-3xl md:text-4xl font-bold text-navy uppercase mb-2">Karşılaştığınız sorun nedir?</h2>
-            <p className="text-text-mid">Hedef zararlıyı seçin. Bilmiyorsanız "Diğer" seçeneğiyle devam edebilirsiniz.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {bocekler.map(b => (
-              <button key={b} onClick={() => { setFormData({...formData, bocek: b}); setStep(4); }}
-                className="flex items-center gap-3 p-5 border-2 border-slate-100 rounded-2xl hover:border-pest-green hover:bg-pest-green/5 transition-all font-bold text-navy text-left"
-              >
-                <Bug className="w-5 h-5 text-pest-green opacity-70" /> {b}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {!formType && step === 4 && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="mb-8">
-            <h2 className="font-barlowCondensed text-3xl md:text-4xl font-bold text-navy uppercase mb-2">Hangi ilçedesiniz?</h2>
-            <p className="text-text-mid">Hizmet ağımız şu an için İstanbul ve çevresini kapsamaktadır.</p>
-          </div>
-          <div className="relative">
-            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-pest-green w-6 h-6" />
-            <select 
-              className="w-full p-5 pl-14 border-2 border-slate-200 rounded-2xl outline-none focus:border-pest-green text-navy font-bold appearance-none bg-white cursor-pointer" 
-              value={formData.ilce} onChange={(e) => setFormData({...formData, ilce: e.target.value})}
-            >
-              <option value="" disabled>Lütfen Bir İlçe Seçin...</option>
-              {ISTANBUL_ILCELERI.map(i => <option key={i} value={i}>{i}</option>)}
-            </select>
-          </div>
-          <button onClick={() => { if(!formData.ilce) alert("Lütfen ilçe seçin."); else setStep(5); }}
-            className="w-full bg-navy text-white py-4 rounded-xl font-bold hover:bg-navy-deeper transition-all mt-4 flex items-center justify-center gap-2 shadow-lg"
-          >
-            İletişim Adımına Geç <ArrowLeft className="w-5 h-5 rotate-180" />
-          </button>
-        </div>
-      )}
-
-      {/* Adım 5: Otomatik Seçili Dinamik Form */}
-      {step === 5 && (
-        <form className="space-y-5 animate-fadeIn" onSubmit={handleSubmit}>
-          <div className="mb-8">
-            <h2 className="font-barlowCondensed text-3xl md:text-4xl font-bold text-navy uppercase mb-2">
-              {formData.hizmet || "Teklif Talebi"}
-            </h2>
-            <p className="text-text-mid">Size en hızlı şekilde dönüş yapabilmemiz için iletişim bilgilerinizi girin.</p>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 gap-5">
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" placeholder="Adınız Soyadınız" required onChange={e => setFormData({...formData, adSoyad: e.target.value})} />
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" placeholder="Telefon Numaranız" required onChange={e => setFormData({...formData, telefon: e.target.value})} />
-          </div>
-          
-          <div className="grid sm:grid-cols-2 gap-5">
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" placeholder="Firma Adı (Opsiyonel)" onChange={e => setFormData({...formData, firmaAdi: e.target.value})} />
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" type="email" placeholder="E-posta Adresiniz" required onChange={e => setFormData({...formData, eposta: e.target.value})} />
-          </div>
-
-          <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium bg-slate-50 focus:bg-white transition-colors" required value={formData.ilce} onChange={(e) => setFormData({...formData, ilce: e.target.value})}>
-            <option value="">Hizmetin İstendiği İlçe</option>
-            {ISTANBUL_ILCELERI.map(i => <option key={i} value={i}>{i}</option>)}
-          </select>
-
-          {(formType === "ucan" || formType === "ipm") && (
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" placeholder="EFT (Sinek Tutucu) Cihazınız var mı? Adet?" onChange={e => setFormData({...formData, eftCihazi: e.target.value})} />
-          )}
-
-          {(formType === "depo" || formType === "bmsb" || formType === "ispm15" || formType === "konteyner") && (
-            <input className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors" placeholder="İşlem Görecek Ürün / Ambalaj Türü" onChange={e => setFormData({...formData, urunTuru: e.target.value})} />
-          )}
-
-          <textarea className="w-full p-4 border-2 border-slate-100 rounded-xl h-28 outline-none focus:border-pest-green text-navy font-medium placeholder:font-normal bg-slate-50 focus:bg-white transition-colors resize-none" placeholder="Karşılaştığınız sorunu veya tesisinizle ilgili ek detayları belirtin (Opsiyonel)" onChange={e => setFormData({...formData, not: e.target.value})} />
-          
-          <label className="flex items-start gap-3 mt-4 cursor-pointer group">
-            <div className="relative flex items-start pt-1">
-              <input type="checkbox" className="w-5 h-5 accent-pest-green cursor-pointer border-slate-300 rounded" required checked={kvkkOnay} onChange={(e) => setKvkkOnay(e.target.checked)} />
-            </div>
-            <span className="text-sm text-text-mid leading-snug">
-              İletişim formunda verdiğim verilerimin, talebimin işleme alınması amacıyla <Link href="/gizlilik-politikasi" className="text-navy font-bold hover:text-pest-green underline">KVKK ve Gizlilik Politikası</Link> kapsamında işlenmesini onaylıyorum.
-            </span>
-          </label>
-
-          <button type="submit" disabled={isSubmitting || !kvkkOnay} className="w-full bg-pest-green text-navy py-4 rounded-xl font-extrabold text-lg hover:bg-navy hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-xl mt-4">
-            {isSubmitting ? "Gönderiliyor..." : "Teklif Talebimi Gönder"}
-          </button>
-        </form>
-      )}
-
-      {/* Adım 6: Başarı Ekranı */}
-      {step === 6 && (
-        <div className="text-center space-y-6 py-8 animate-fadeIn">
-          <div className="w-20 h-20 bg-pest-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10 text-pest-green" />
-          </div>
-          <h2 className="font-barlowCondensed text-4xl font-bold text-navy uppercase">Talebiniz Başarıyla Alındı!</h2>
-          <p className="text-lg text-text-mid leading-relaxed max-w-md mx-auto">
-            Sayın <strong>{formData.adSoyad}</strong>, talebiniz teknik ekibimize ulaştı. Ziraat mühendislerimiz alanı ve sorunu değerlendirip en kısa sürede sizinle iletişime geçecektir.
-          </p>
-          <div className="pt-6">
-            <Link href="/" className="bg-navy text-white px-8 py-4 rounded-xl font-bold hover:bg-navy-deeper transition-colors inline-block">Ana Sayfaya Dön</Link>
-          </div>
-        </div>
-      )}
+  if (success) return (
+    <div className="max-w-xl mx-auto text-center py-20 px-6 bg-white rounded-3xl border border-slate-100 shadow-xl">
+      <CheckCircle2 className="mx-auto w-16 h-16 text-pest-green mb-4"/>
+      <h2 className="text-2xl font-bold text-navy">Talebiniz iletilmiştir.</h2>
+      <p className="mt-2 text-text-mid">Uzman ekibimiz detayları inceleyip en kısa sürede sizinle iletişime geçecektir.</p>
     </div>
   );
-}
 
-export default function UcretsizTeklifAlPage() {
   return (
-    <main className="min-h-screen bg-slate-50 py-20 px-6 font-barlow relative overflow-hidden flex items-center">
-      <div className="absolute inset-0 opacity-5 bg-[url('/images/pattern-dots.svg')] bg-repeat z-0"></div>
-      <Suspense fallback={<div className="max-w-2xl w-full mx-auto bg-white p-10 rounded-3xl shadow-xl text-center font-bold text-navy relative z-10">Form Yükleniyor...</div>}>
-        <TeklifFormuIcerik />
-      </Suspense>
-    </main>
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-8 md:p-12 bg-white rounded-3xl border border-slate-100 shadow-xl space-y-6">
+      <div className="border-b border-slate-100 pb-6 mb-8">
+        <h2 className="text-2xl font-extrabold text-navy uppercase tracking-tight">{config.title}</h2>
+      </div>
+      
+      {config.fields.map((f: any) => (
+        <div key={f.id} className="space-y-1">
+          <label className="block text-sm font-semibold text-navy/80 ml-1">{f.label} {f.required && <span className="text-pest-green">*</span>}</label>
+          {f.type === "select" ? (
+            <select 
+              required={f.required} 
+              value={formData[f.id] || ""}
+              onChange={e => setFormData({...formData, [f.id]: e.target.value})}
+              className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-pest-green focus:ring-2 focus:ring-pest-green/20 outline-none transition-all"
+            >
+              <option value="">Seçiniz...</option>
+              {f.options.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
+            </select>
+          ) : f.type === "textarea" ? (
+             <textarea 
+              value={formData[f.id] || ""}
+              onChange={e => setFormData({...formData, [f.id]: e.target.value})}
+              className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-pest-green focus:ring-2 focus:ring-pest-green/20 outline-none transition-all h-32 resize-none" 
+              placeholder={f.label}
+             />
+          ) : (
+            <input 
+              type={f.type} 
+              required={f.required} 
+              value={formData[f.id] || ""}
+              onChange={e => setFormData({...formData, [f.id]: e.target.value})}
+              className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-pest-green focus:ring-2 focus:ring-pest-green/20 outline-none transition-all placeholder:text-slate-400" 
+              placeholder={f.label} 
+            />
+          )}
+        </div>
+      ))}
+
+      <div className="flex items-center gap-3 pt-4">
+        <input type="checkbox" id="kvkk" required className="w-5 h-5 accent-pest-green cursor-pointer flex-shrink-0" />
+        <label htmlFor="kvkk" className="text-sm text-text-mid">
+          Bilgilerim güvendedir. <Link href="/kvkk" target="_blank" rel="noopener noreferrer" className="text-navy font-bold underline hover:text-pest-green transition-colors">KVKK Aydınlatma Metni'ni</Link> okudum ve onaylıyorum.
+        </label>
+      </div>
+
+      <button type="submit" disabled={isSubmitting} className="w-full bg-pest-green text-white py-5 rounded-2xl font-bold text-lg hover:bg-navy transition-all shadow-lg hover:shadow-xl disabled:opacity-70">
+        {isSubmitting ? "Gönderiliyor..." : config.btn}
+      </button>
+    </form>
   );
 }
+
+export default function UcretsizTeklifAlPage() { return <main className="min-h-screen bg-slate-50 py-20 px-6"><Suspense><FormContent /></Suspense></main>; }

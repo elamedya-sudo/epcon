@@ -31,7 +31,7 @@ export default function VillaIlaclamaPage() {
               Villalar; geniş iç hacimleri, peyzaj alanları ve farklı kat seviyeleriyle kompleks yapılardır. Zararlı problemlerine karşı yalnızca ev içini değil; bahçe, bodrum, çatı, otopark ve bina çevresini birlikte değerlendiriyoruz.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=villa" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
                 Villa İlaçlama Teklifi Al
               </Link>
             </div>

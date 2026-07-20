@@ -30,7 +30,7 @@ export default function Ispm15Page() {
               EPCON; ihracatta kullanılan uygun palet, sandık, kasa, takoz ve diğer ham ahşap ambalaj malzemelerine ISPM 15 kapsamında metil bromür fumigasyonu uygular.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">
+              <Link href="/ucretsiz-teklif-al?type=ispm15" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">
                 ISPM 15 Metil Bromür Teklifi Talep Et
               </Link>
             </div>
@@ -95,7 +95,7 @@ export default function Ispm15Page() {
         <div className="max-w-4xl mx-auto">
           <h2 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase mb-6">İhracat Ahşap Ambalajlarınız İçin Uygun İşlem Planı</h2>
           <p className="text-lg font-medium mb-8">Palet, sandık, kasa veya diğer ahşap ambalaj bilgilerinizi paylaşın; teknik ekibimiz ISPM 15 kapsamında metil bromür fumigasyonu uygunluğunu değerlendirsin.</p>
-          <Link href="/ucretsiz-teklif-al" className="inline-block bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">ISPM 15 Metil Bromür Teklifi Talep Et</Link>
+          <Link href="/ucretsiz-teklif-al?type=ispm15" className="inline-block bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">ISPM 15 Metil Bromür Teklifi Talep Et</Link>
         </div>
       </section>
     </main>

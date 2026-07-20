@@ -14,7 +14,7 @@ import {
 
 export const metadata = {
   title: "Yılan ve Sürüngen Risk Kontrolü | Çevresel Önlem | EPCON",
-  description: "Bahçe ve tesislerde yılan riskine karşı çevresel değerlendirme, kemirgen kontrolü, fiziksel önlem ve güvenli risk azaltma hizmeti."
+  description: "Bahçe ve tesislerde yılan riskine karşı çevresel değerlendirme, kemirgen kontrolü, fiziksel önlem ve güvenli risk azaltma hizmeti. EPCON’dan teklif alın."
 };
 
 export default function YilanSurungenPage() {
@@ -34,7 +34,7 @@ export default function YilanSurungenPage() {
               Bahçe, peyzaj, bina çevresi ve açık alanlardaki barınma, besin ve giriş koşulları değerlendirilerek güvenli risk azaltma planı oluşturuyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=yilan_surungen" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -140,9 +140,9 @@ export default function YilanSurungenPage() {
         <h3 className="font-barlowCondensed text-3xl font-bold text-navy text-center mb-10 uppercase">Sık Sorulan Sorular</h3>
         <div className="space-y-4">
           {[
-            { q: "Yılan görülmesi kemirgen problemiyle ilişkili olabilir mi?", a: "Kemirgenler besin kaynağı oluşturabilir; çevredeki kemirgen aktivitesi mutlaka değerlendirilmelidir." },
-            { q: "Kimyasal uygulama tek başına çözüm müdür?", a: "Çevre düzenlemesi, barınma alanlarının azaltılması, kemirgen kontrolü ve fiziksel önlemler temel unsurlardır." },
-            { q: "Yılan görüldüğünde ilk ne yapılmalıdır?", a: "Güvenli mesafe korunmalı, alan boşaltılmalı ve yetkili müdahale birimlerine haber verilmelidir." }
+            { q: "Yılan görüldüğünde ilk ne yapılmalıdır?", a: "Güvenli mesafe korunmalı, alan boşaltılmalı ve yetkili müdahale birimlerine haber verilmelidir." },
+            { q: "Yılan görüldüğünde kemirgen kontrolü neden önemlidir?", a: "Kemirgenler besin kaynağı oluşturabilir; çevredeki kemirgen aktivitesi mutlaka değerlendirilmelidir." },
+            { q: "Fiziksel önlemler yeterli midir?", a: "Çevre düzenlemesi, barınma alanlarının azaltılması, kemirgen kontrolü ve fiziksel önlemler temel unsurlardır." }
           ].map((faq, idx) => (
             <div key={idx} className="border border-slate-200 rounded-xl p-6 bg-white shadow-sm flex items-start gap-4">
               <HelpCircle className="text-pest-green w-6 h-6 flex-shrink-0 mt-1" />
@@ -178,7 +178,7 @@ export default function YilanSurungenPage() {
           <h2 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase mb-6">Çevresel Yılan Riskini Birlikte Değerlendirelim</h2>
           <p className="text-lg font-medium mb-8">Görülme noktası, çevre koşulları ve varsa kemirgen aktivitesi hakkında bilgi paylaşın. Teknik ekibimiz risk azaltma ve fiziksel önlem planı için sizinle iletişime geçsin.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">Uygulama ve Teklif Talep Et</Link>
+            <Link href="/ucretsiz-teklif-al?type=yilan_surungen" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">Uygulama ve Teklif Talep Et</Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">WhatsApp'tan Uzmana Sor</a>
           </div>
         </div>

@@ -29,7 +29,7 @@ export default function IsyeriOfisPage() {
               Ticari alanlardaki zararlı problemleri itibar kaybına, personel rahatsızlığına ve teknik arızalara neden olabilir. İş akışınızı aksatmadan, elektronik ekipmanlara zarar vermeyen ve koku bırakmayan hedefli yöntemler uyguluyoruz.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=isyeri_ofis" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
                 İşyeri İlaçlama Teklifi Al
               </Link>
             </div>
@@ -41,7 +41,7 @@ export default function IsyeriOfisPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+      <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
         <div className="bg-slate-50 border border-slate-100 p-8 rounded-3xl shadow-sm">
           <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase mb-6 flex items-center gap-3">
             <Target className="text-pest-green w-6 h-6" /> Ofislere Özel Yaklaşım

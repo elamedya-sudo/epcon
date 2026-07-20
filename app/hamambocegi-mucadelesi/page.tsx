@@ -35,7 +35,7 @@ export default function HamambocekPage() {
               Hamamböceği problemlerinde zararlının türü, yoğunluğu, saklanma alanları ve yayılma kaynakları değerlendirilerek mekâna özel mücadele ve takip planı oluşturuyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=hamambocegi" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -231,7 +231,7 @@ export default function HamambocekPage() {
             Alanınız ve karşılaştığınız sorun hakkında kısa bilgi paylaşın. Teknik ekibimiz uygun uygulama ve takip planı için sizinle iletişime geçsin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=hamambocegi" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

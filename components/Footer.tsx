@@ -9,7 +9,7 @@ export default function Footer() {
     { name: "Kurumsal", href: "/hakkimizda" },
     { name: "Entegre Zararlı Yönetimi", href: "/entegre-zararli-yonetimi-ipm" },
     { name: "Fumigasyon Hizmetleri", href: "/fumigasyon" },
-    { name: "İlaçlama Hizmetleri", href: "/ilaclama" },
+    { name: "İlaçlama Hizmetleri", href: "/sektorel-ilaclama" },
     { name: "Blog / Rehber", href: "/blog" },
     { name: "İletişim", href: "/iletisim" },
   ];
@@ -86,7 +86,6 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40">
           <div>&copy; {currentYear} <strong>EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.</strong> Tüm Hakları Saklıdır.</div>
           
-          {/* YASAL LİNKLER GERİ GETİRİLDİ */}
           <div className="flex items-center gap-4">
             <a href="/kvkk" className="hover:text-white transition-colors">KVKK Aydınlatma Metni</a>
             <span className="text-white/10">|</span>

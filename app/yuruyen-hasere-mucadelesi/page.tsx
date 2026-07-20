@@ -1,5 +1,19 @@
 import React from 'react';
-import { ShieldCheck, CheckCircle, Bug, MapPin, Target, Shield } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  ShieldAlert, 
+  AlertTriangle, 
+  Crosshair, 
+  MapPin, 
+  Building2, 
+  CheckCircle,
+  Search,
+  Activity,
+  ShieldCheck,
+  Bug,
+  Target,
+  Shield 
+} from 'lucide-react';
 
 export const metadata = {
   title: "Yürüyen Haşere Mücadelesi | EPCON",
@@ -25,15 +39,14 @@ export default function YuruyenHaserePage() {
               Hamamböceği, karınca ve diğer yürüyen zararlıların türünü, yoğunluğunu, giriş yollarını ve barınma alanlarını belirleyerek mekâna özel mücadele programları hazırlıyoruz. Uygulama yöntemi; hedef zararlı, alanın kullanım amacı ve risk seviyesi dikkate alınarak seçilir.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=yuruyen" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
-              </button>
+              </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
                 WhatsApp'tan Uzmana Sor
               </a>
             </div>
           </div>
-          {/* Geçiçi Görsel - Projenizde uygun resim varsa src yolunu değiştirebilirsiniz */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
              <img src="https://images.unsplash.com/photo-1627918442878-c0dd6c2a4c16?q=80&w=1000&auto=format&fit=crop" alt="Yürüyen Haşere Mücadelesi" className="w-full h-full object-cover absolute inset-0" />
@@ -128,9 +141,9 @@ export default function YuruyenHaserePage() {
             Zararlı türüne ve alanın özelliklerine uygun mücadele programı talep edin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=yuruyen" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
-            </button>
+            </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">
               WhatsApp'tan Uzmana Sor
             </a>

@@ -36,7 +36,7 @@ export default function FareSicanPage() {
               Kemirgen aktivitesini yalnızca yemleme ile değil; izleme, güvenli istasyon sistemleri, mekanik kontrol, yapısal risk analizi ve giriş noktası kontrolleriyle yönetiyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=fare_sican" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -232,7 +232,7 @@ export default function FareSicanPage() {
             Aktivite görülen alanı ve tesis özelliklerini paylaşın. Teknik ekibimiz uygun izleme, kontrol ve takip planı için sizinle iletişime geçsin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=fare_sican" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

@@ -35,7 +35,7 @@ export default function PireKenePage() {
               Hayvan hareketleri, çevresel kaynaklar, iç ve dış alan koşulları birlikte değerlendirilerek hedefe yönelik uygulama, hazırlık ve tekrar kontrolü planlıyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=pire_kene" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -184,7 +184,7 @@ export default function PireKenePage() {
           <h2 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase mb-6">Pire ve Kene Kaynağını Birlikte Değerlendirelim</h2>
           <p className="text-lg font-medium mb-8">İç veya dış alanı, hayvan hareketini ve görülen yoğunluğu paylaşın. Teknik ekibimiz uygun hazırlık, uygulama ve tekrar kontrolü için sizinle iletişime geçsin.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">Uygulama ve Teklif Talep Et</Link>
+            <Link href="/ucretsiz-teklif-al?type=pire_kene" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">Uygulama ve Teklif Talep Et</Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">WhatsApp'tan Uzmana Sor</a>
           </div>
         </div>

@@ -34,7 +34,7 @@ export default function DepoZararlilariPage() {
               Depolanmış ürün zararlılarını; tür teşhisi, feromon izleme, ürün ve alan kontrolleri, hijyen değerlendirmesi, hedefe yönelik uygulama ve gerektiğinde fumigasyon seçenekleriyle yönetiyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=depo" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -164,7 +164,7 @@ export default function DepoZararlilariPage() {
             Zararlı teşhisi, feromon izleme, trend analizi veya fumigasyon ihtiyacı için teknik değerlendirme talep edin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=depo" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

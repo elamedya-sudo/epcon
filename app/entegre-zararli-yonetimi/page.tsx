@@ -26,9 +26,9 @@ export default function IpmPage() {
             EPCON, işletmelerdeki zararlı risklerini yalnızca periyodik ilaçlama ile değil; keşif, risk analizi, saha haritalaması, düzenli izleme, önleyici faaliyetler, hedefe yönelik müdahale, dijital raporlama ve trend analiziyle yönetir. Ziraat mühendisleri yönetiminde hazırlanan IPM programları; işletmenin faaliyet alanına, yapısal özelliklerine, denetim gerekliliklerine ve mevcut zararlı risklerine göre özel olarak planlanır.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg">
-              IPM Teknik Değerlendirme Talep Et
-            </button>
+            <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm">
+              <ShieldCheck size={18} /> IPM Teknik Değerlendirme Talep Et
+            </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20">
               WhatsApp'tan Uzmana Sor
             </a>
@@ -240,14 +240,21 @@ export default function IpmPage() {
             Saha risklerinizi, mevcut zararlı aktivitesini, denetim ihtiyaçlarınızı ve hizmet beklentilerinizi değerlendirelim. İşletmenize uygun, ölçülebilir ve izlenebilir bir Entegre Zararlı Yönetimi programı hazırlayalım.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Not: Bu buton Bölüm 12.3'teki ortak modal formunu tetiklemelidir */}
-            <button className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
-              IPM Teknik Değerlendirme Talep Et
-            </button>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">
-              WhatsApp'tan Uzmana Sor
-            </a>
-          </div>
+      <Link 
+      href="/ucretsiz-teklif-al?type=ipm" 
+      className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg"
+    >
+      IPM Teknik Değerlendirme Talep Et
+    </Link>
+    <a 
+    href="https://wa.me/905316901071" 
+    target="_blank" 
+    rel="noreferrer" 
+    className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy"
+  >
+    WhatsApp'tan Uzmana Sor
+  </a>
+</div>
         </div>
       </section>
 

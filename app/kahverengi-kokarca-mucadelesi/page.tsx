@@ -37,7 +37,7 @@ export default function KokarcaPage() {
               Kahverengi kokarcanın bina girişleri, çatı ve cephe boşlukları ile kışlama alanları değerlendirilerek mevsimsel risk azaltma planı oluşturuyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=kokarca" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -45,7 +45,6 @@ export default function KokarcaPage() {
               </a>
             </div>
           </div>
-          {/* Çalışan Hero Görseli: Dış cephe / Bina */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
              <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1000&auto=format&fit=crop" alt="Kahverengi Kokarca Bina Kontrolü" className="w-full h-full object-cover absolute inset-0" />
@@ -56,7 +55,6 @@ export default function KokarcaPage() {
       {/* 2. KISA BİLGİ & BMSB YÖNLENDİRMESİ & RİSKLİ ALANLAR */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         
-        {/* Kısa Bilgi ve BMSB Uyarısı */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <div className="md:col-span-2 bg-slate-50 p-8 rounded-3xl border border-slate-100 flex items-center">
             <p className="text-lg text-navy font-medium leading-relaxed">
@@ -73,7 +71,6 @@ export default function KokarcaPage() {
           </div>
         </div>
 
-        {/* 3'lü Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white border border-border p-8 rounded-2xl shadow-sm">
             <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase mb-6 flex items-center gap-3">
@@ -245,7 +242,7 @@ export default function KokarcaPage() {
             Bina türü, konum ve görülen yoğunluk hakkında kısa bilgi paylaşın. Teknik ekibimiz fiziksel önlem ve uygun uygulama planı için sizinle iletişime geçsin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=kokarca" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

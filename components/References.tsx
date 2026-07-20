@@ -13,7 +13,7 @@ export default function References() {
     },
     { 
       icon: <Utensils size={32} />, 
-      name: "GIDA VE ÜRETİM", 
+      name: "FABRİKA VE ÜRETİM", 
       desc: "Denetim kriterlerine uygun entegre pest kontrol.", 
       link: "/referanslar?kategori=Gıda / Tarım" 
     },

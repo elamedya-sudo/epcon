@@ -35,7 +35,7 @@ export default function SivrisinekKarasinekPage() {
               Uçan haşere problemlerini yalnızca ergin uygulamasıyla değil; üreme kaynakları, larva dönemleri, giriş noktaları ve EFT/UV cihaz verileriyle birlikte değerlendiriyoruz.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=sivrisinek_karasinek" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Uygulama ve Teklif Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
@@ -43,7 +43,6 @@ export default function SivrisinekKarasinekPage() {
               </a>
             </div>
           </div>
-          {/* Çalışan Hero Görseli */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
              <img src="https://images.unsplash.com/photo-1518534107127-1fdf5690b205?q=80&w=1000&auto=format&fit=crop" alt="Profesyonel Uçan Haşere Kontrolü" className="w-full h-full object-cover absolute inset-0" />
@@ -231,7 +230,7 @@ export default function SivrisinekKarasinekPage() {
             Sineklerin görüldüğü alan ve zaman aralığını paylaşın. Teknik ekibimiz kaynak kontrolü, EFT izleme ve uygulama planı için sizinle iletişime geçsin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+            <Link href="/ucretsiz-teklif-al?type=sivrisinek_karasinek" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Uygulama ve Teklif Talep Et
             </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">

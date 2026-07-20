@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'; // Link bileşeni import edildi
 import { 
   ShieldAlert, 
   AlertTriangle, 
@@ -33,16 +34,16 @@ export default function KemirgenKontroluPage() {
             <p className="text-lg text-white/80 font-light leading-relaxed">
               EPCON, fare ve sıçan aktivitesini yalnızca yem tüketimi üzerinden değil; giriş yolları, barınma alanları, besin kaynakları ve çevresel koşullarla birlikte değerlendirir. Risk esaslı istasyon yerleşimi, düzenli izleme, mekanik kontrol ve dijital raporlama ile alana özel kemirgen yönetim programları oluşturur.
             </p>
+            {/* HERO BUTONLARI GÜNCELLENDİ */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
+              <Link href="/ucretsiz-teklif-al?type=kemirgen" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors text-center shadow-lg">
                 Teknik Değerlendirme Talep Et
-              </button>
+              </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-center border border-white/20">
                 WhatsApp'tan Uzmana Sor
               </a>
             </div>
           </div>
-          {/* Görsel Düzeltildi: Geçici olarak Unsplash'tan laboratuvar/denetim tarzı bir görsel çekildi */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop" alt="Kemirgen İzleme ve Kontrol" className="w-full h-full object-cover absolute inset-0" />
@@ -141,7 +142,7 @@ export default function KemirgenKontroluPage() {
         </div>
       </section>
 
-      {/* 5. ALT ÇAĞRI (CTA) */}
+      {/* 5. ALT ÇAĞRI (CTA) - BUTONLAR GÜNCELLENDİ */}
       <section className="py-16 px-6 md:px-10 bg-pest-green text-navy text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase mb-6">
@@ -151,9 +152,9 @@ export default function KemirgenKontroluPage() {
             Alanınıza özel istasyon yerleşimi, izleme sıklığı ve kontrol programı için teklif talep edin.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
-              IPM Teknik Değerlendirme Talep Et
-            </button>
+            <Link href="/ucretsiz-teklif-al?type=kemirgen" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+              Kemirgen Kontrolü Talep Et
+            </Link>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">
               WhatsApp'tan Uzmana Sor
             </a>

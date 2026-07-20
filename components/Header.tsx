@@ -68,18 +68,42 @@ export default function Header() {
   return (
     <header className="w-full sticky top-0 z-50 font-barlow bg-white shadow-md flex flex-col">
       
-      {/* ── 1. ÜST BANT ── */}
-      <div className="w-full bg-navy-deeper text-white/80 text-xs py-2.5 px-4 md:px-10 flex overflow-x-auto whitespace-nowrap hide-scrollbar border-b border-white/5">
-        <div className="flex items-center gap-4 min-w-max mx-auto md:mx-0 md:justify-between w-full">
+      {/* ── 1. ÜST BANT (Mobil Kayan Yazı) ── */}
+      <div className="w-full bg-navy-deeper text-white/90 text-xs py-2.5 overflow-hidden border-b border-white/5 relative flex items-center">
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .marquee-mobile {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 15s linear infinite;
+            padding-left: 10px;
+          }
+          @media (min-width: 768px) {
+            .marquee-mobile {
+              animation: none;
+              width: 100%;
+              justify-content: space-between;
+              padding: 0 40px;
+              margin: 0 auto;
+              max-width: 80rem; /* max-w-7xl */
+            }
+          }
+        `}} />
+        
+        <div className="marquee-mobile gap-6 md:gap-4 min-w-max">
           <div className="flex items-center gap-3 md:gap-4">
             <span>Hizmet Saatleri: Pzt-Cmt 08.00-20.00</span>
-            <span className="opacity-50">|</span>
+            <span className="hidden md:inline opacity-50">|</span>
             <span className="flex items-center gap-1">
               <MapPin size={12} className="text-pest-green" />
               İstanbul merkezli, Türkiye genelinde hizmet
             </span>
           </div>
-          <div className="flex items-center gap-3 md:gap-4 ml-4 md:ml-auto">
+          <div className="flex items-center gap-3 md:gap-4">
+            <span className="hidden md:inline opacity-50">|</span>
             <a href="tel:+902165057306" className="hover:text-white transition-colors">0216 505 73 06</a>
             <span className="opacity-50">|</span>
             <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium">

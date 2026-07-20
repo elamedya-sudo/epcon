@@ -23,7 +23,7 @@ export default function KonteynerPage() {
               İthalat ve ihracat yüklerinde konteyner tipi, yükün niteliği, ambalaj ve istif yapısı, gaz dolaşımı ve işlem nedeni değerlendirilerek uygun fumigasyon planı hazırlanır.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">Konteyner Fumigasyonu Teklifi Al</Link>
+              <Link href="/ucretsiz-teklif-al?type=konteyner" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">Konteyner Fumigasyonu Teklifi Al</Link>
             </div>
           </div>
         </div>

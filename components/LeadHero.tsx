@@ -48,7 +48,7 @@ export default function LeadHero({
   const [ilceSearch, setIlceSearch] = useState("");
   const [selectedIlce, setSelectedIlce] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false); // Bitiş ekranı için stat
+  const [isSuccess, setIsSuccess] = useState(false);
   const ilceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function LeadHero({
       });
       
       if (res.ok) {
-        setIsSuccess(true); // Alert yerine başarı statını tetikliyoruz
+        setIsSuccess(true);
         form.reset();
         setSelectedIlce("");
       } else {
@@ -114,51 +114,52 @@ export default function LeadHero({
   };
 
   return (
-    <section className="relative bg-navy-deeper overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
+    <section className="relative bg-slate-50 overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
       
       {/* ── ARKA PLAN EFEKTLERİ ── */}
       {videoBackground ? (
-        <div className="absolute inset-0 z-0 overflow-hidden bg-navy-deeper">
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-70 pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50">
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60 pointer-events-none mix-blend-multiply">
             <source src={videoBackground} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper/90 via-navy-deeper/50 to-navy-deeper/30" />
+          {/* Aydınlık Tema İçin Beyaz Geçiş */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/40" />
         </div>
       ) : backgroundImage ? (
-        <div className="absolute inset-0 z-0">
-          <img src={backgroundImage} alt="Hero Background" className="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper via-navy-deeper/90 to-navy-deeper/80" />
+        <div className="absolute inset-0 z-0 bg-slate-50">
+          <img src={backgroundImage} alt="Hero Background" className="w-full h-full object-cover opacity-30 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/50" />
         </div>
       ) : (
         <>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
-          <div className="hidden lg:block absolute right-[-60px] top-[-80px] w-[55%] h-[130%] bg-gradient-to-br from-navy to-navy-dark transform -skew-x-6 z-0 opacity-60" />
-          <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-5 blur-[60px] z-0" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
+          <div className="hidden lg:block absolute right-[-60px] top-[-80px] w-[55%] h-[130%] bg-gradient-to-br from-slate-100 to-slate-200 transform -skew-x-6 z-0 opacity-60" />
+          <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-10 blur-[60px] z-0" />
         </>
       )}
 
-      {/* ── METİNLER ── */}
+      {/* ── METİNLER (Aydınlık Temaya Uygun Renkler) ── */}
       <div className={`relative z-10 lg:col-span-7 space-y-6 order-1 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
-        <div className="inline-flex items-center gap-2 border border-pest-green/40 bg-pest-green/10 rounded px-[14px] py-[5px]">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-barlowCondensed text-xs font-semibold text-[#5dd88a] tracking-wider uppercase">
+        <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-[14px] py-[5px]">
+          <span className="w-2 h-2 rounded-full bg-pest-green animate-pulse" />
+          <span className="font-barlowCondensed text-xs font-bold text-pest-green tracking-wider uppercase">
             {badgeText}
           </span>
         </div>
 
-        <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
+        <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy uppercase leading-[1.05]">
           {titleMain} <br />
           <span className="text-pest-green">{titleHighlight}</span>
         </h1>
 
-        <p className="text-base md:text-lg text-white/70 font-light max-w-[550px] leading-relaxed">
+        <p className="text-base md:text-lg text-text-mid font-medium max-w-[550px] leading-relaxed">
           {description}
         </p>
 
         {features && features.length > 0 && (
           <div className="flex flex-col gap-2 max-w-[550px] mt-2">
              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-white/80 text-sm">
+                <div key={idx} className="flex items-center gap-2 text-navy/80 font-medium text-sm">
                   <div className="text-pest-green">{feature.icon}</div>
                   <span>{feature.label}</span>
                 </div>
@@ -167,10 +168,10 @@ export default function LeadHero({
         )}
 
         <div className="flex flex-wrap gap-3 items-center pt-4">
-          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-white font-medium rounded-md px-8 py-4 flex items-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm">
+          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm shadow-md">
             Keşif ve Teklif Talep Et
           </Link>
-          <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white rounded-md px-6 py-[15px] flex items-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
+          <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="border border-navy/20 hover:border-navy/40 bg-transparent hover:bg-navy/5 text-navy font-bold rounded-md px-6 py-[15px] flex items-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
             <MessageCircle size={18} className="text-[#25d366]"/>
             WhatsApp'tan Uzmana Sor
           </a>
@@ -178,7 +179,7 @@ export default function LeadHero({
       </div>
 
       {/* ── FORM & BAŞARI ALANI ── */}
-      <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-7 md:p-8 shadow-2xl order-2 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
+      <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-7 md:p-8 shadow-2xl order-2 border border-slate-100 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
         
         {isSuccess ? (
           // BAŞARILI GÖNDERİM EKRANI

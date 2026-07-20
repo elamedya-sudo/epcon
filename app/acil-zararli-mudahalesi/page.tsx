@@ -29,7 +29,7 @@ export default function AcilMudahalePage() {
               İşletmenizde, kargonuzda veya evinizde aniden ortaya çıkan tehlikeli türlere (yılan, akrep) veya yoğun istila durumlarına (kedi/köpek sonrası yoğun pire, ürün sonrası güve patlaması) karşı hızlı teknik destek ve müdahale sağlıyoruz.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-orange-500 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-orange-600 transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=acil_mudahale" className="bg-orange-500 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-orange-600 transition-colors shadow-lg inline-block text-center">
                 Acil Müdahale Talep Et
               </Link>
               <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20">

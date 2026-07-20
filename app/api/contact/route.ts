@@ -4,66 +4,68 @@ import nodemailer from 'nodemailer';
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { hizmet, mekan, bocek, ilce, adSoyad, firmaAdi, telefon, eposta, not, yaklasikAlan, eftCihazi, urunTuru } = data;
+    
+    // Gelen dinamik veriler
+    const { formTitle, customerName, customerEmail, fields } = data;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
     });
 
-    const buildRow = (label: string, value: string | undefined) => {
-      return value ? `<p style="margin:5px 0; color:#333;"><b>${label}:</b> ${value}</p>` : "";
+    // Dinamik alanları HTML satırlarına çeviren fonksiyon
+    const buildRow = (label: string, value: string) => {
+      if (!value || value === "Belirtilmedi") return ""; // Boş olanları maile eklemiyoruz
+      return `
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #eee; color: #666; width: 35%; font-size: 14px;"><b>${label}</b></td>
+          <td style="padding: 10px; border-bottom: 1px solid #eee; color: #0F203C; font-size: 14px;">${value}</td>
+        </tr>
+      `;
     };
+
+    const fieldsHtml = fields.map((f: any) => buildRow(f.label, f.value)).join('');
 
     // 1. YÖNETİCİ MAİLİ
     await transporter.sendMail({
       from: `"EPCON Sistem" <${process.env.EMAIL_USER}>`,
       to: 'epconcomtr@gmail.com', 
-      subject: `Yeni Talep: ${hizmet} - ${adSoyad}`,
+      subject: `Yeni Web Talebi: ${formTitle} - ${customerName}`,
       html: `
-        <div style="font-family: Arial, sans-serif; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; max-width: 600px;">
-          <div style="background-color: #0F203C; padding: 20px; text-align: center;">
-             <h2 style="color: #8DC63F; margin: 0;">YENİ WEB TALEBİ</h2>
+        <div style="font-family: Arial, sans-serif; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; max-width: 650px; margin: auto;">
+          <div style="background-color: #0F203C; padding: 25px; text-align: center;">
+             <h2 style="color: #8DC63F; margin: 0; text-transform: uppercase;">YENİ BİR TALEP ALDINIZ</h2>
+             <p style="color: #ffffff; margin: 8px 0 0 0; font-size: 15px;">Form: <b>${formTitle}</b></p>
           </div>
-          <div style="padding: 20px;">
-            <h3 style="color: #0F203C; border-bottom: 1px solid #eee; padding-bottom: 5px;">Müşteri Bilgileri</h3>
-            ${buildRow("Ad Soyad", adSoyad)}
-            ${buildRow("Firma Adı", firmaAdi)}
-            ${buildRow("Telefon", telefon)}
-            ${buildRow("E-posta", eposta)}
-            ${buildRow("İlçe / Bölge", ilce)}
-            
-            <h3 style="color: #0F203C; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top:20px;">Hizmet Detayları</h3>
-            ${buildRow("Talep Edilen Hizmet", hizmet)}
-            ${buildRow("Mekan Türü", mekan)}
-            ${buildRow("Hedef Zararlı", bocek)}
-            ${buildRow("Ürün / Yük Türü", urunTuru)}
-            ${buildRow("EFT / Ekipman", eftCihazi)}
-            ${buildRow("Yaklaşık Alan", yaklasikAlan)}
-            
-            <div style="margin-top:20px; padding:15px; background:#f8f9fa; border-left:4px solid #8DC63F;">
-              <b>Müşteri Notu:</b><br/>${not}
-            </div>
+          <div style="padding: 30px; background-color: #f8fafc;">
+            <table style="width: 100%; border-collapse: collapse; background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              <tbody>
+                ${fieldsHtml}
+              </tbody>
+            </table>
           </div>
         </div>
       `,
     });
 
-    // 2. MÜŞTERİYE OTOMATİK BİLGİLENDİRME
-    if (eposta && eposta.includes("@")) {
+    // 2. MÜŞTERİYE OTOMATİK BİLGİLENDİRME (Eğer E-posta girildiyse çalışır)
+    if (customerEmail && customerEmail.includes("@")) {
       await transporter.sendMail({
         from: `"EPCON Çevre Sağlığı" <${process.env.EMAIL_USER}>`,
-        to: eposta,
+        to: customerEmail,
         subject: "Talebiniz Alındı - EPCON",
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px;">
-            <p>Sayın <b>${adSoyad}</b>,</p>
-            <p>Web sitemiz üzerinden iletmiş olduğunuz <strong>${hizmet}</strong> talebiniz teknik ekibimize ulaşmıştır. Ziraat mühendislerimiz alanınızı ve riskleri değerlendirerek en kısa sürede sizinle iletişime geçecektir.</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; color: #333; line-height: 1.6;">
+            <p>Sayın <b>${customerName}</b>,</p>
+            <p>Web sitemiz üzerinden doldurmuş olduğunuz <strong>${formTitle}</strong> tarafımıza başarıyla ulaşmıştır.</p>
+            <p>Uzman mühendis ekibimiz, iletmiş olduğunuz bilgileri (tesis/mekan, alan, zararlı vb.) inceleyerek en kısa sürede sizinle iletişime geçecek ve çözüm sürecini planlayacaktır.</p>
             <p>Bizi tercih ettiğiniz için teşekkür ederiz.</p>
-            <p style="font-size: 12px; color: #666; margin-top:30px;">
-              <b>EPCON Çevre Sağlığı Sistemleri</b><br/>
-              0216 505 73 06 | www.epcon.com.tr
-            </p>
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+              <b style="color: #0F203C; font-size: 15px;">EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.</b><br/>
+              <span style="font-size: 13px; color: #666;">
+                0216 505 73 06 | <a href="https://www.epcon.com.tr" style="color: #8DC63F; text-decoration: none;">www.epcon.com.tr</a>
+              </span>
+            </div>
           </div>
         `,
       });
@@ -71,6 +73,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("Mail Error:", error);
     return NextResponse.json({ success: false }, { status: 500 });
   }
 }

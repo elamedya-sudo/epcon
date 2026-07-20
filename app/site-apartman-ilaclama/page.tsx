@@ -30,7 +30,7 @@ export default function SiteApartmanPage() {
               Toplu yaşam alanlarında bireysel müdahaleler sorunu çözmez. Bloklar, otopark, sığınak, çöp odaları, rögarlar ve peyzaj alanları site yönetimiyle koordineli olarak aynı anda ilaçlanmalıdır.
             </p>
             <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
+              <Link href="/ucretsiz-teklif-al?type=site_apartman" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block text-center">
                 Site/Apartman İlaçlama Teklifi Al
               </Link>
             </div>
