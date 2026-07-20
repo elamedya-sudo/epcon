@@ -59,7 +59,6 @@ export default function Header() {
         { name: "Acil Zararlı Müdahalesi", href: "/acil-zararli-mudahalesi" },
       ],
     },
-    { name: "Belgelerimiz", href: "/belgelerimiz", isDropdown: false },
     { name: "Blog", href: "/blog", isDropdown: false },
     { name: "Referanslar", href: "/referanslar", isDropdown: false },
     { name: "İletişim", href: "/iletisim", isDropdown: false },
