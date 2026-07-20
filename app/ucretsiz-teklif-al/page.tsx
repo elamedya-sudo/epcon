@@ -19,7 +19,7 @@ const FORM_CONFIG: any = {
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "eposta", label: "E-posta", type: "email", required: false },
       { id: "ilce", label: "İlçe / Konum", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "hizmet", label: "İlgilendiğiniz Hizmet", type: "select", required: true, options: ["Pest Kontrol / İlaçlama", "Fümigasyon Hizmetleri", "BMSB / İhracat İşlemleri", "Bitki Sağlığı Uygulamaları", "Acil Müdahale", "Diğer / Bilmiyorum"] },
+      { id: "hizmet", label: "İlgilendiğiniz Hizmet", type: "select", required: true, options: ["Pest Kontrol / İlaçlama", "Fumigasyon Hizmetleri", "BMSB / İhracat İşlemleri", "Bitki Sağlığı Uygulamaları", "Acil Müdahale", "Diğer / Bilmiyorum"] },
       { id: "not", label: "Mesajınız / Açıklama", type: "textarea", required: false }
     ]
   },
@@ -323,7 +323,7 @@ const FORM_CONFIG: any = {
     ]
   },
   bmsb: {
-    title: "BMSB İhracat Fümigasyonu Talebi",
+    title: "BMSB İhracat Fumigasyonu Talebi",
     btn: "BMSB TALEBİMİ GÖNDER",
     fields: [
       { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },
@@ -335,7 +335,7 @@ const FORM_CONFIG: any = {
     ]
   },
   konteyner: {
-    title: "Konteyner Fümigasyonu Teklif Talebi",
+    title: "Konteyner Fumigasyonu Teklif Talebi",
     btn: "KONTEYNER TALEBİMİ GÖNDER",
     fields: [
       { id: "firmaAdSoyad", label: "Firma / Ad Soyad", type: "text", required: true },

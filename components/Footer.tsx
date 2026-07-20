@@ -30,8 +30,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-white/10">
           
           <div className="lg:col-span-4 flex flex-col space-y-5">
-            <div className="bg-white/90 p-2 rounded-lg inline-block self-start">
-              <img src="/images/logo/epcon-logo.png" alt="EPCON" className="h-10 w-auto object-contain" />
+            <div className="self-start">
+              <h3 className="font-barlowCondensed text-xl font-bold text-white uppercase tracking-wider">
+                EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.
+              </h3>
             </div>
             <p className="text-sm text-white/60 leading-relaxed max-w-sm">
               Hizmet yeterliliğini TSE belgesiyle kanıtlamış olan firmamız; fümigasyon ruhsatlı uzman kadrosuyla, İstanbul merkezli olarak Türkiye genelinde endüstriyel, ticari ve konut alanlarına yönelik profesyonel pest kontrol hizmetleri sunmaktadır.
