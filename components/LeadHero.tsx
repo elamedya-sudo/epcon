@@ -81,15 +81,18 @@ export default function LeadHero({
 
     setIsSubmitting(true);
 
+    // YENİ API (route.ts) İÇİN GÜNCELLENMİŞ PAYLOAD
     const payload = {
-      adSoyad,
-      telefon,
-      ilce: selectedIlce,
-      mekan,
-      hizmet: hizmet || "Hızlı Teklif (Ana Sayfa)",
-      bocek: "Belirtilmedi",
-      eposta: "Belirtilmedi",
-      not: ""
+      formTitle: "Ana Sayfa Hızlı Teklif Talebi",
+      customerName: adSoyad || "Değerli Müşterimiz",
+      customerEmail: "Belirtilmedi",
+      fields: [
+        { label: "Ad Soyad", value: adSoyad },
+        { label: "Telefon", value: telefon },
+        { label: "İlçe / Konum", value: selectedIlce },
+        { label: "Mekân Türü", value: mekan },
+        { label: "Hizmet Türü", value: hizmet || "Hızlı Teklif (Ana Sayfa)" }
+      ]
     };
 
     try {
