@@ -24,7 +24,7 @@ const FORM_CONFIG: any = {
     ]
   },
   
-  // 2. DİĞER TÜM FORMLAR (Mevcut formlarınız)
+  // 2. DİĞER TÜM FORMLAR
   ipm: { 
     title: "IPM Teknik Değerlendirme Talebi", 
     btn: "IPM TEKNİK DEĞERLENDİRME TALEBİMİ GÖNDER", 
@@ -89,16 +89,15 @@ const FORM_CONFIG: any = {
     title: "Depo Zararlıları Yönetimi Teklif Talebi", 
     btn: "DEPO ZARARLILARI TALEBİMİ GÖNDER", 
     fields: [
-      { id: "firma", label: "Firma Adı", type: "text", required: true },
-      { id: "yetkili", label: "Yetkili Adı Soyadı", type: "text", required: true },
+      { id: "firmaAdSoyad", label: "Firma Adı / Ad Soyad", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
-      { id: "eposta", label: "E-posta", type: "email", required: true },
-      { id: "depoTuru", label: "Depo / Tesis Türü", type: "select", required: true, options: ["Depo", "Silo", "Üretim", "Antrepo", "Diğer"] },
-      { id: "uygulamaYeri", label: "Uygulama Yeri (İl, ilçe veya tesis adı)", type: "text", required: true },
-      { id: "urunTuru", label: "Ürün Türü", type: "select", options: ["Tahıl", "Bakliyat", "Un", "Yem", "Kuru gıda", "Tütün", "Ahşap ürün", "Boş depo", "Diğer"] },
-      { id: "kapasite", label: "Yaklaşık Kapasite / Alan", type: "text", required: false },
-      { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Güve", "Un biti", "Tahıl biti", "Diğer depo zararlısı", "Bilmiyorum"] },
-      { id: "izleme", label: "Mevcut İzleme Sistemi", type: "select", required: true, options: ["Var", "Yok", "Bilmiyorum"] }
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "İlçe / Konum", type: "text", required: true },
+      { id: "tesisTuru", label: "Tesis Türü", type: "select", required: true, options: ["Depo / Antrepo", "Tahıl Silosu", "Fabrika / Üretim Alanı", "Diğer"] },
+      { id: "urunTipi", label: "Depolanan Ürün Cinsi", type: "text", required: true },
+      { id: "hedefZararli", label: "Karşılaşılan Zararlı Türü", type: "text", required: false },
+      { id: "hacim", label: "Tahmini Alan / Hacim", type: "text", required: true },
+      { id: "not", label: "Ek Açıklama", type: "textarea", required: false }
     ]
   },
   hamambocegi: { 
@@ -228,8 +227,8 @@ const FORM_CONFIG: any = {
       { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
       { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
@@ -242,8 +241,8 @@ const FORM_CONFIG: any = {
       { id: "adSoyad", label: "Ad Soyad", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
       { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
       { id: "icDis", label: "İç / Dış Alan", type: "select", required: true, options: ["İç alan", "Dış alan", "Her ikisi"] },
@@ -258,8 +257,8 @@ const FORM_CONFIG: any = {
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "eposta", label: "E-posta", type: "email", required: false },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "blok", label: "Blok / Ortak Alan Bilgisi", type: "text", required: false },
       { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
@@ -273,8 +272,8 @@ const FORM_CONFIG: any = {
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "eposta", label: "E-posta", type: "email", required: false },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Hamamböceği", "Karınca", "Pire", "Fare", "Diğer", "Bilmiyorum"] },
       { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
@@ -287,8 +286,8 @@ const FORM_CONFIG: any = {
       { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "zararli", label: "Karşılaşılan Sorun", type: "select", required: true, options: ["Sivrisinek", "Karasinek", "Pire/Kene", "Diğer", "Bilmiyorum"] },
       { id: "alan", label: "Yaklaşık Alan", type: "text", required: false },
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
@@ -301,7 +300,7 @@ const FORM_CONFIG: any = {
       { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "bitkiTuru", label: "Bitki / Ağaç Türü", type: "text", required: false },
       { id: "alanTuru", label: "Alan Türü", type: "select", required: true, options: ["Bahçe", "Peyzaj", "Tarla", "Site", "Diğer"] },
       { id: "zararliBelirti", label: "Gözlenen Zararlı / Belirti", type: "text", required: true },
@@ -316,8 +315,8 @@ const FORM_CONFIG: any = {
       { id: "adSoyad", label: "Ad Soyad / Firma", type: "text", required: true },
       { id: "telefon", label: "Telefon", type: "tel", required: true },
       { id: "ilce", label: "İlçe", type: "select", options: ISTANBUL_ILCELERI, required: true },
-      { id: "mekan", label: "Mekân Türü", type: "text", required: true }, // Otomatik
-      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true }, // Otomatik
+      { id: "mekan", label: "Mekân Türü", type: "text", required: true },
+      { id: "hizmet", label: "Hizmet Türü", type: "text", required: true },
       { id: "zararli", label: "Karşılaşılan Zararlı", type: "select", required: true, options: ["Yılan", "Akrep", "Örümcek", "Diğer", "Bilmiyorum"] },
       { id: "sorunAlani", label: "Sorunun Görüldüğü Alan", type: "text", required: true },
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: true }
@@ -372,11 +371,53 @@ const FORM_CONFIG: any = {
       { id: "not", label: "Kısa Açıklama", type: "textarea", required: false }
     ]
   },
+  gemi_yat: {
+    title: "Gemi ve Yat Fumigasyonu Talebi",
+    btn: "FÜMİGASYON TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Acente / Şirket / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: true },
+      { id: "gemiAdi", label: "Gemi / Yat Adı", type: "text", required: true },
+      { id: "liman", label: "Bulunduğu Liman / Tersane", type: "text", required: true },
+      { id: "islemBolumu", label: "İşlem Yapılacak Bölüm", type: "select", required: true, options: ["Yük Ambarı", "Yaşam Mahalli", "Mutfak / Kiler", "Makine / Teknik Alan", "Tüm Gemi", "Diğer"] },
+      { id: "hacim", label: "Tahmini Hacim / Tonaj", type: "text", required: false },
+      { id: "not", label: "Operasyon Notu / Mesajınız", type: "textarea", required: false }
+    ]
+  },
+  urun_yuk: {
+    title: "Ürün ve Yük Fumigasyonu Talebi",
+    btn: "ÜRÜN / YÜK TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / İhracatçı Adı", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "İlçe / Yükün Bulunduğu Yer", type: "text", required: true },
+      { id: "urunCinsi", label: "Yük / Ürün Cinsi", type: "text", required: true },
+      { id: "ambalaj", label: "Ambalaj Şekli", type: "select", required: true, options: ["Dökme", "Bigbag / Çuval", "Koli / Palet", "Ahşap Sandık", "Diğer"] },
+      { id: "miktar", label: "Miktar / Tonaj", type: "text", required: true },
+      { id: "hedefUlke", label: "İhracat Edilecek Ülke (Varsa)", type: "text", required: false },
+      { id: "not", label: "Ek Açıklama", type: "textarea", required: false }
+    ]
+  },
+  gaz_olcumu: {
+    title: "Gaz Ölçümü ve Arındırma Talebi",
+    btn: "ÖLÇÜM TALEBİMİ GÖNDER",
+    fields: [
+      { id: "firmaAdSoyad", label: "Firma / Gümrükçü / Ad Soyad", type: "text", required: true },
+      { id: "telefon", label: "Telefon", type: "tel", required: true },
+      { id: "eposta", label: "E-posta", type: "email", required: false },
+      { id: "ilce", label: "Bulunduğu Liman / Gümrük / Adres", type: "text", required: true },
+      { id: "alanTuru", label: "İşlem Yapılacak Alan", type: "select", required: true, options: ["İthalat Konteyneri", "Gemi Ambarı", "Fümigeli Depo / Silo", "Diğer Ticari Yük"] },
+      { id: "fumigant", label: "Kullanılan Fümigant (Biliniyorsa)", type: "select", required: false, options: ["Alüminyum Fosfit", "Metil Bromür", "Sülfüril Florür", "Bilmiyorum"] },
+      { id: "adet", label: "Konteyner / Ambar Adedi", type: "number", required: true },
+      { id: "not", label: "Operasyon Notu", type: "textarea", required: false }
+    ]
+  }
 };
 
 function FormContent() {
   const searchParams = useSearchParams();
-  // Geçerli bir type yoksa "genel" formunu çalıştır
   const typeParam = searchParams.get("type");
   const type = (typeParam && FORM_CONFIG[typeParam]) ? typeParam : "genel";
   const config = FORM_CONFIG[type];
@@ -420,13 +461,11 @@ function FormContent() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Formdaki tüm dinamik alanları etiketleriyle birlikte diziye çevir
     const submittedFields = config.fields.map((f: any) => ({
       label: f.label,
       value: formData[f.id] || "Belirtilmedi"
     }));
 
-    // Auto-reply ve Admin maili için müşteri ismini ve e-postasını çıkart
     const customerName = formData.adSoyad || formData.firmaAdSoyad || formData.yetkili || formData.firma || "Değerli Müşterimiz";
     const customerEmail = formData.eposta || "";
 
@@ -517,4 +556,13 @@ function FormContent() {
   );
 }
 
-export default function UcretsizTeklifAlPage() { return <main className="min-h-screen bg-slate-50 py-20 px-6"><Suspense><FormContent /></Suspense></main>; }
+// HATA ÇÖZÜMÜ BURADA: Suspense bileşenine fallback eklendi.
+export default function UcretsizTeklifAlPage() { 
+  return (
+    <main className="min-h-screen bg-slate-50 py-20 px-6">
+      <Suspense fallback={<div className="text-center font-bold text-navy py-20">Form Yükleniyor...</div>}>
+        <FormContent />
+      </Suspense>
+    </main>
+  ); 
+}

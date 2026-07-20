@@ -13,7 +13,8 @@ import {
   Flame,
   CheckCircle,
   ArrowRight,
-  ShieldAlert
+  ShieldAlert,
+  Package
 } from "lucide-react";
 
 export const metadata = {
@@ -30,7 +31,6 @@ interface BlogPost {
 }
 
 export default async function FumigationPage() {
-  // Sizin JSON okuma mimariniz SEO için aynen korundu
   let fumigationPosts: BlogPost[] = [];
 
   try {
@@ -130,6 +130,7 @@ export default async function FumigationPage() {
               { icon: <PackageSearch className="w-8 h-8 text-pest-green" />, title: "Konteyner Fumigasyonu", desc: "Konteyner, yük, izolasyon, gaz ölçümü ve gazdan arındırma süreci.", href: "/konteyner-fumigasyonu" },
               { icon: <Ship className="w-8 h-8 text-pest-green" />, title: "Gemi ve Yat Fumigasyonu", desc: "Ambar, yaşam mahalli, depo ve uygun kapalı bölümlerde kontrollü uygulama.", href: "/gemi-yat-fumigasyonu" },
               { icon: <Warehouse className="w-8 h-8 text-pest-green" />, title: "Depo ve Silo Fumigasyonu", desc: "Depolanmış ürün zararlılarına karşı hacim ve ürün esaslı teknik planlama.", href: "/depo-silo-fumigasyonu" },
+              { icon: <Package className="w-8 h-8 text-pest-green" />, title: "Ürün ve Yük Fumigasyonu", desc: "Ürün niteliği, ambalaj yapısı, hedef zararlı, kullanım amacı ve sevkiyat şartlarına göre uygunluğu değerlendirilen kontrollü fumigasyon hizmeti.", href: "/urun-yuk-fumigasyonu" },
               { icon: <Wind className="w-8 h-8 text-pest-green" />, title: "Gaz Ölçümü ve Arındırma", desc: "Kontrollü havalandırma, son gaz ölçümü ve güvenli kullanıma/sevkiyata açma.", href: "/gaz-olcumu-gazdan-arindirma" }
             ].map((srv, idx) => (
               <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-border group hover:border-pest-green transition-all flex flex-col h-full">
