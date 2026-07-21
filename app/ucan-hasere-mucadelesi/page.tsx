@@ -44,7 +44,7 @@ export default function UcanHaserePage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1584852959828-095deeb5cb95?q=80&w=1000&auto=format&fit=crop" alt="Uçan Haşere Kontrolü" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/31731152/pexels-photo-31731152.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Uçan Haşere Kontrolü" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>
@@ -158,7 +158,7 @@ export default function UcanHaserePage() {
           </div>
         </div>
         <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-200">
-           <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000&auto=format&fit=crop" alt="EFT Cihaz Kontrolü" className="w-full h-full object-cover" />
+           <img src="https://images.pexels.com/photos/36649487/pexels-photo-36649487.jpeg?q=80&w=1000&auto=format&fit=crop" alt="EFT Cihaz Kontrolü" className="w-full h-full object-cover" />
         </div>
       </section>
 

@@ -46,7 +46,7 @@ export default function KemirgenKontroluPage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop" alt="Kemirgen İzleme ve Kontrol" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/69221/pexels-photo-69221.jpeg" alt="Kemirgen İzleme ve Kontrol" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>

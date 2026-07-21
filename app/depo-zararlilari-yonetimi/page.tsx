@@ -45,7 +45,7 @@ export default function DepoZararlilariPage() {
           {/* Çalışan Hero Görseli: Depo / Lojistik */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?q=80&w=1000&auto=format&fit=crop" alt="Depo Zararlıları Yönetimi" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/36484131/pexels-photo-36484131.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Depo Zararlıları Yönetimi" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>

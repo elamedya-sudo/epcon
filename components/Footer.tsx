@@ -7,7 +7,7 @@ export default function Footer() {
   const quickLinks = [
     { name: "Ana Sayfa", href: "/" },
     { name: "Kurumsal", href: "/hakkimizda" },
-    { name: "Entegre Zararlı Yönetimi", href: "/entegre-zararli-yonetimi-ipm" },
+    { name: "Entegre Zararlı Yönetimi", href: "/entegre-zararli-yonetimi" },
     { name: "Fumigasyon Hizmetleri", href: "/fumigasyon" },
     { name: "İlaçlama Hizmetleri", href: "/sektorel-ilaclama" },
     { name: "Blog / Rehber", href: "/blog" },

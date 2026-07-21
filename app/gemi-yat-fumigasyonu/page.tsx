@@ -63,7 +63,7 @@ export default function GemiYatPage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1000&auto=format&fit=crop" alt="Gemi ve Yat Fümigasyonu" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/12116619/pexels-photo-12116619.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Gemi ve Yat Fümigasyonu" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>

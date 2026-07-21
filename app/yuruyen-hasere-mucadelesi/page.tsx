@@ -49,7 +49,7 @@ export default function YuruyenHaserePage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1627918442878-c0dd6c2a4c16?q=80&w=1000&auto=format&fit=crop" alt="Yürüyen Haşere Mücadelesi" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/4176541/pexels-photo-4176541.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Yürüyen Haşere Mücadelesi" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>

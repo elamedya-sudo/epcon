@@ -42,7 +42,7 @@ export default function IslemYontemleriPage() {
           {/* Çalışan Hero Görseli */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&auto=format&fit=crop" alt="Fumigasyon ve İşlem Yöntemleri" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/8532874/pexels-photo-8532874.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Fumigasyon ve İşlem Yöntemleri" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>

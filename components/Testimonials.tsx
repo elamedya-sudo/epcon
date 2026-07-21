@@ -72,7 +72,7 @@ export default function Testimonials() {
         {/* Google Puanı ve Buton (Brifte dinamik ve butonlu olması istenmişti)[cite: 5] */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6 border-t border-white/10">
            <div className="flex items-center gap-3">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" className="w-6 h-6" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/40px-Google_%22G%22_logo.svg.png" alt="Google" className="w-6 h-6" />
               <span className="text-white font-bold text-lg">4,9/5</span>
               <div className="flex text-[#FFB800]">
                 {[...Array(5)].map((_, i) => (
