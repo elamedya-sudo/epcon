@@ -46,3 +46,14 @@ html {
 body {
   line-height: 1.6;
 }
+
+/* GİZLİ ÇEVİRİ MOTORU AYARLARI */
+.goog-te-banner-frame { display: none !important; }
+.goog-te-menu-value { display: none !important; }
+.goog-te-gadget { display: none !important; }
+.goog-te-gadget-icon { display: none !important; }
+.skiptranslate > iframe { display: none !important; }
+body { top: 0 !important; }
+/* Hover yapıldığında çıkan orijinal metin baloncuğunu gizle */
+#goog-gt-tt { display: none !important; }
+.goog-text-highlight { background: transparent !important; box-shadow: none !important; }

@@ -7,20 +7,28 @@ import Link from "next/link";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
-  const [lang, setLang] = useState<"TR" | "EN">("TR");
+  const [currentLang, setCurrentLang] = useState("TR");
 
-  // Sayfa yüklendiğinde hafızadaki dili kontrol et
+  // Sayfa yüklendiğinde aktif dili kontrol et
   useEffect(() => {
-    const savedLang = localStorage.getItem("epcon_lang") as "TR" | "EN";
-    if (savedLang) {
-      setLang(savedLang);
+    if (document.cookie.includes("googtrans=/tr/en")) {
+      setCurrentLang("EN");
+    } else {
+      setCurrentLang("TR");
     }
   }, []);
 
-  const toggleLanguage = (selectedLang: "TR" | "EN") => {
-    setLang(selectedLang);
-    localStorage.setItem("epcon_lang", selectedLang);
-    // İleride metinleri sözlük yapısıyla çevirmek isterseniz burada tetikleme yapabilirsiniz.
+  // Dil değiştirme fonksiyonu
+  const switchLanguage = (lang: "TR" | "EN") => {
+    if (lang === "EN") {
+      document.cookie = "googtrans=/tr/en; path=/";
+      document.cookie = `googtrans=/tr/en; domain=${window.location.hostname}; path=/`;
+    } else {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
+    }
+    // Değişikliğin uygulanması için anlık yenileme (Kullanıcı uyarı görmez)
+    window.location.reload();
   };
 
   const toggleDropdown = (idx: number, e: React.MouseEvent) => {
@@ -29,14 +37,14 @@ export default function Header() {
   };
 
   const menuItems = [
-    { name: lang === "EN" ? "Corporate" : "Kurumsal", href: "/hakkimizda", isDropdown: false },
-    { name: lang === "EN" ? "Our Team" : "Ekibimiz", href: "/ekibimiz", isDropdown: false },
+    { name: "Kurumsal", href: "/hakkimizda", isDropdown: false },
+    { name: "Ekibimiz", href: "/ekibimiz", isDropdown: false },
     {
-      name: lang === "EN" ? "Pest Control" : "Pest Kontrol",
+      name: "Pest Kontrol",
       mainHref: "/pest-kontrol",
       isDropdown: true,
       items: [
-        { name: lang === "EN" ? "Integrated Pest Management (IPM)" : "Entegre Zararlı Yönetimi (IPM)", href: "/entegre-zararli-yonetimi" },
+        { name: "Entegre Zararlı Yönetimi (IPM)", href: "/entegre-zararli-yonetimi" },
         { name: "Kemirgen Kontrolü", href: "/kemirgen-kontrolu" },
         { name: "Yürüyen Haşere Mücadelesi", href: "/yuruyen-hasere-mucadelesi" },
         { name: "Uçan Haşere Mücadelesi", href: "/ucan-hasere-mucadelesi" },
@@ -60,7 +68,7 @@ export default function Header() {
       ],
     },
     {
-      name: lang === "EN" ? "Disinsection" : "İlaçlama",
+      name: "İlaçlama",
       mainHref: "/sektorel-ilaclama",
       isDropdown: true,
       items: [
@@ -75,12 +83,12 @@ export default function Header() {
       ],
     },
     { name: "Blog", href: "/blog", isDropdown: false },
-    { name: lang === "EN" ? "References" : "Referanslar", href: "/referanslar", isDropdown: false },
-    { name: lang === "EN" ? "Contact" : "İletişim", href: "/iletisim", isDropdown: false },
+    { name: "Referanslar", href: "/referanslar", isDropdown: false },
+    { name: "İletişim", href: "/iletisim", isDropdown: false },
   ];
 
   return (
-    <header className="w-full sticky top-0 z-50 font-barlow bg-white shadow-md flex flex-col">
+    <header className="w-full sticky top-0 z-50 font-barlow bg-white shadow-md flex flex-col notranslate">
       
       {/* ── 1. ÜST BANT (Mobil Kayan Yazı) ── */}
       <div className="w-full bg-navy-deeper text-white/90 text-xs py-2.5 overflow-hidden border-b border-white/5 relative flex items-center">
@@ -107,20 +115,20 @@ export default function Header() {
           }
         `}} />
         
-        <div className="marquee-mobile gap-6 md:gap-4 min-w-max">
+        <div className="marquee-mobile gap-6 md:gap-4 min-w-max translate">
           <div className="flex items-center gap-3 md:gap-4">
-            <span>{lang === "EN" ? "Working Hours: Mon-Sat 08:00-20:00" : "Hizmet Saatleri: Pzt-Cmt 08.00-20.00"}</span>
+            <span>Hizmet Saatleri: Pzt-Cmt 08.00-20.00</span>
             <span className="hidden md:inline opacity-50">|</span>
             <span className="flex items-center gap-1">
               <MapPin size={12} className="text-pest-green" />
-              {lang === "EN" ? "Based in Istanbul, serving across Turkey" : "İstanbul merkezli, Türkiye genelinde hizmet"}
+              İstanbul merkezli, Türkiye genelinde hizmet
             </span>
           </div>
           <div className="flex items-center gap-3 md:gap-4">
             <span className="hidden md:inline opacity-50">|</span>
-            <a href="tel:+902165057306" className="hover:text-white transition-colors">0216 505 73 06</a>
+            <a href="tel:+902165057306" className="hover:text-white transition-colors notranslate">0216 505 73 06</a>
             <span className="opacity-50">|</span>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium">
+            <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
               WhatsApp: 0531 690 10 71
             </a>
           </div>
@@ -137,7 +145,7 @@ export default function Header() {
         </div>
 
         {/* Masaüstü Menü */}
-        <div className="hidden lg:flex items-center gap-5 xl:gap-7 relative h-full">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7 relative h-full translate">
           {menuItems.map((item, idx) => (
             item.isDropdown ? (
               <div key={idx} className="relative group h-full flex items-center">
@@ -160,30 +168,30 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Sağ Taraf Butonlar ve Profesyonel Dil Seçici */}
+        {/* Sağ Taraf Butonlar ve Dil Seçici */}
         <div className="hidden sm:flex items-center gap-3">
           
-          {/* Dil Değiştirici */}
+          {/* PROFESYONEL DİL BUTONLARI */}
           <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
             <button 
-              onClick={() => toggleLanguage("TR")}
-              className={`px-2.5 py-1 text-xs font-bold rounded transition-all ${lang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
+              onClick={() => switchLanguage("TR")}
+              className={`px-2.5 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
             >
               TR
             </button>
             <button 
-              onClick={() => toggleLanguage("EN")}
-              className={`px-2.5 py-1 text-xs font-bold rounded transition-all ${lang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
+              onClick={() => switchLanguage("EN")}
+              className={`px-2.5 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
             >
               EN
             </button>
           </div>
 
-          <Link href="/belgelerimiz" className="bg-navy hover:bg-navy-deeper text-white text-sm font-bold px-5 py-2.5 rounded-md transition-all flex items-center gap-2">
-            <FileText size={16} /> {lang === "EN" ? "Documents" : "Belgelerimiz"}
+          <Link href="/belgelerimiz" className="bg-navy hover:bg-navy-deeper text-white text-sm font-bold px-5 py-2.5 rounded-md transition-all flex items-center gap-2 translate">
+            <FileText size={16} /> Belgelerimiz
           </Link>
-          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-white text-sm font-bold px-6 py-2.5 rounded-md transition-all flex items-center gap-2 shadow-sm">
-            <ShieldCheck size={18} /> {lang === "EN" ? "Get Quote" : "Teklif Al"}
+          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-white text-sm font-bold px-6 py-2.5 rounded-md transition-all flex items-center gap-2 shadow-sm translate">
+            <ShieldCheck size={18} /> Teklif Al
           </Link>
         </div>
 
@@ -199,53 +207,55 @@ export default function Header() {
             
             {/* Mobilde Dil Seçici */}
             <div className="flex items-center justify-between pb-4 border-b border-border/50 mb-2">
-              <span className="text-sm font-bold text-navy flex items-center gap-2">
+              <span className="text-sm font-bold text-navy flex items-center gap-2 translate">
                 <Globe size={16} className="text-pest-green" /> Dil / Language
               </span>
               <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
                 <button 
-                  onClick={() => toggleLanguage("TR")}
-                  className={`px-3 py-1 text-xs font-bold rounded transition-all ${lang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
+                  onClick={() => switchLanguage("TR")}
+                  className={`px-3 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
                 >
                   Türkçe
                 </button>
                 <button 
-                  onClick={() => toggleLanguage("EN")}
-                  className={`px-3 py-1 text-xs font-bold rounded transition-all ${lang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
+                  onClick={() => switchLanguage("EN")}
+                  className={`px-3 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
                 >
                   English
                 </button>
               </div>
             </div>
 
-            {menuItems.map((item, idx) => (
-              item.isDropdown ? (
-                <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
-                  <div className="flex items-center justify-between py-2">
-                    <Link href={item.mainHref || "#"} onClick={() => setIsOpen(false)} className="text-base font-bold text-text-dark hover:text-pest-green transition-colors flex-grow">
-                      {item.name}
-                    </Link>
-                    <button onClick={(e) => toggleDropdown(idx, e)} className="p-2 -mr-2 text-text-dark hover:text-pest-green">
-                      <ChevronDown size={18} className={`transition-transform duration-300 ${activeDropdown === idx ? "rotate-180" : ""}`} />
-                    </button>
+            <div className="translate">
+              {menuItems.map((item, idx) => (
+                item.isDropdown ? (
+                  <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
+                    <div className="flex items-center justify-between py-2">
+                      <Link href={item.mainHref || "#"} onClick={() => setIsOpen(false)} className="text-base font-bold text-text-dark hover:text-pest-green transition-colors flex-grow">
+                        {item.name}
+                      </Link>
+                      <button onClick={(e) => toggleDropdown(idx, e)} className="p-2 -mr-2 text-text-dark hover:text-pest-green">
+                        <ChevronDown size={18} className={`transition-transform duration-300 ${activeDropdown === idx ? "rotate-180" : ""}`} />
+                      </button>
+                    </div>
+                    <div className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${activeDropdown === idx ? "max-h-[500px] mt-2 opacity-100" : "max-h-0 opacity-0"}`}>
+                      {item.items?.map((subItem, subIdx) => (
+                        <Link key={subIdx} href={subItem.href} onClick={() => setIsOpen(false)} className="py-2.5 text-sm font-medium text-text-mid hover:text-pest-green border-l-2 border-border pl-3">{subItem.name}</Link>
+                      ))}
+                    </div>
                   </div>
-                  <div className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${activeDropdown === idx ? "max-h-[500px] mt-2 opacity-100" : "max-h-0 opacity-0"}`}>
-                    {item.items?.map((subItem, subIdx) => (
-                      <Link key={subIdx} href={subItem.href} onClick={() => setIsOpen(false)} className="py-2.5 text-sm font-medium text-text-mid hover:text-pest-green border-l-2 border-border pl-3">{subItem.name}</Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
-              )
-            ))}
+                ) : (
+                  <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
+                )
+              ))}
+            </div>
             
-            <div className="pt-6 flex flex-col gap-3">
+            <div className="pt-6 flex flex-col gap-3 translate">
               <Link href="/belgelerimiz" className="w-full bg-navy text-white text-center py-3 rounded-md font-bold text-base" onClick={() => setIsOpen(false)}>
-                {lang === "EN" ? "Documents" : "Belgelerimiz"}
+                Belgelerimiz
               </Link>
               <Link href="/ucretsiz-teklif-al" className="w-full bg-pest-green text-white text-center py-3 rounded-md font-bold text-base" onClick={() => setIsOpen(false)}>
-                {lang === "EN" ? "Get Quote" : "Teklif Al"}
+                Teklif Al
               </Link>
             </div>
           </div>
