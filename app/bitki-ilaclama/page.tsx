@@ -63,8 +63,8 @@ export default function BitkiIlaclamaPage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             {/* Çalışan ve uygun bir doğa/bitki koruma görseli eklendi */}
-             <img src="https://images.unsplash.com/photo-1592424001844-3ed458ebbb14?q=80&w=1000&auto=format&fit=crop" alt="Bitki Sağlığı ve Zirai Uygulama" className="w-full h-full object-cover absolute inset-0" />
+             {/* Yerel webp görseli buraya eklendi */}
+             <img src="/images/ilaclama/bitki-ilaclama.webp" alt="Bitki Sağlığı ve Zirai Uygulama" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>
