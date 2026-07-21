@@ -37,7 +37,7 @@ export default function LeadHero({
     { icon: <span className="font-bold">✓</span>, label: "Ziraat Mühendisleri Yönetiminde" },
     { icon: <span className="font-bold">✓</span>, label: "Dijital Raporlama ve İzlenebilirlik" }
   ],
-  mekanTurleri = ["Ev / Daire", "Villa", "Site / Ortak Alan", "Ticari İşletme", "Fabrika / Endüstriyel Tesis", "Depo / Lojistik", "Fumigasyon Alanı"],
+  mekanTurleri = ["Ev / Daire", "Villa", "Site / Ortak Alan", "Ticari İşletme", "Fabrika / Endüstriyel Tesis", "Depo / Lojistik", "Fümigasyon Alanı"],
   hizmetTurleri = ["Entegre Pest Kontrol", "Konut İlaçlama", "Fümigasyon Hizmetleri", "Diğer"],
   backgroundImage,
   videoBackground,
@@ -81,7 +81,6 @@ export default function LeadHero({
 
     setIsSubmitting(true);
 
-    // YENİ API (route.ts) İÇİN GÜNCELLENMİŞ PAYLOAD
     const payload = {
       formTitle: "Ana Sayfa Hızlı Teklif Talebi",
       customerName: adSoyad || "Değerli Müşterimiz",
@@ -117,31 +116,34 @@ export default function LeadHero({
   };
 
   return (
-    <section className="relative bg-slate-50 overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
+    <section className="relative bg-navy-deeper overflow-hidden min-h-[86vh] px-6 py-16 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center font-barlow">
       
       {/* ── ARKA PLAN EFEKTLERİ ── */}
       {videoBackground ? (
-        <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50">
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60 pointer-events-none mix-blend-multiply">
+        <div className="absolute inset-0 z-0 overflow-hidden bg-navy-deeper">
+          {/* ÇÖZÜM BURADA: scale-[1.15] ile video büyütülüp kenarları kırpıldı */}
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-70 pointer-events-none transform scale-[1.15] origin-center">
             <source src={videoBackground} type="video/mp4" />
           </video>
-          {/* Aydınlık Tema İçin Beyaz Geçiş */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/40" />
+          {/* Sola doğru koyu, sağa doğru şeffaf ana gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper/95 via-navy-deeper/50 to-transparent" />
+          {/* ÇÖZÜM 2: Ne olur ne olmaz diye videonun alt kısmına hafif bir koyu filtre eklendi */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-deeper via-navy-deeper/80 to-transparent" />
         </div>
       ) : backgroundImage ? (
-        <div className="absolute inset-0 z-0 bg-slate-50">
-          <img src={backgroundImage} alt="Hero Background" className="w-full h-full object-cover opacity-30 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/50" />
+        <div className="absolute inset-0 z-0 bg-navy-deeper">
+          <img src={backgroundImage} alt="Hero Background" className="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper via-navy-deeper/80 to-navy-deeper/50" />
         </div>
       ) : (
         <>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
-          <div className="hidden lg:block absolute right-[-60px] top-[-80px] w-[55%] h-[130%] bg-gradient-to-br from-slate-100 to-slate-200 transform -skew-x-6 z-0 opacity-60" />
-          <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-10 blur-[60px] z-0" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
+          <div className="hidden lg:block absolute right-[-60px] top-[-80px] w-[55%] h-[130%] bg-gradient-to-br from-white/5 to-white/0 transform -skew-x-6 z-0" />
+          <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-20 blur-[60px] z-0" />
         </>
       )}
 
-      {/* ── METİNLER (Aydınlık Temaya Uygun Renkler) ── */}
+      {/* ── METİNLER ── */}
       <div className={`relative z-10 lg:col-span-7 space-y-6 order-1 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
         <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-[14px] py-[5px]">
           <span className="w-2 h-2 rounded-full bg-pest-green animate-pulse" />
@@ -150,19 +152,19 @@ export default function LeadHero({
           </span>
         </div>
 
-        <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy uppercase leading-[1.05]">
+        <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
           {titleMain} <br />
           <span className="text-pest-green">{titleHighlight}</span>
         </h1>
 
-        <p className="text-base md:text-lg text-text-mid font-medium max-w-[550px] leading-relaxed">
+        <p className="text-base md:text-lg text-white/80 font-light max-w-[550px] leading-relaxed">
           {description}
         </p>
 
         {features && features.length > 0 && (
           <div className="flex flex-col gap-2 max-w-[550px] mt-2">
              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-navy/80 font-medium text-sm">
+                <div key={idx} className="flex items-center gap-2 text-white/90 font-medium text-sm">
                   <div className="text-pest-green">{feature.icon}</div>
                   <span>{feature.label}</span>
                 </div>
@@ -171,10 +173,10 @@ export default function LeadHero({
         )}
 
         <div className="flex flex-wrap gap-3 items-center pt-4">
-          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm shadow-md">
+          <Link href="/ucretsiz-teklif-al" className="bg-pest-green hover:bg-pest-green-dark text-navy font-bold rounded-md px-8 py-4 flex items-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm shadow-md">
             Keşif ve Teklif Talep Et
           </Link>
-          <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="border border-navy/20 hover:border-navy/40 bg-transparent hover:bg-navy/5 text-navy font-bold rounded-md px-6 py-[15px] flex items-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
+          <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="border border-white/20 hover:border-white/40 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-6 py-[15px] flex items-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
             <MessageCircle size={18} className="text-[#25d366]"/>
             WhatsApp'tan Uzmana Sor
           </a>
@@ -185,7 +187,6 @@ export default function LeadHero({
       <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-7 md:p-8 shadow-2xl order-2 border border-slate-100 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
         
         {isSuccess ? (
-          // BAŞARILI GÖNDERİM EKRANI
           <div className="flex flex-col items-center justify-center py-10 text-center space-y-4 animate-in fade-in zoom-in duration-500">
              <div className="w-16 h-16 bg-pest-green/10 text-pest-green rounded-full flex items-center justify-center mb-2 shadow-inner">
                 <CheckCircle2 size={36} />
@@ -204,7 +205,6 @@ export default function LeadHero({
              </button>
           </div>
         ) : (
-          // İLK FORM EKRANI
           <>
             <h3 className="font-barlowCondensed text-2xl font-bold text-navy uppercase tracking-wide">
               TEKLİF TALEP ET
@@ -223,7 +223,6 @@ export default function LeadHero({
                   <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
                 </div>
                 
-                {/* Aramalı İlçe Kutusu */}
                 <div className="relative" ref={ilceRef}>
                   <div 
                     className="w-full border-2 border-border rounded-md px-[14px] py-[11px] text-sm bg-white outline-none focus:border-navy transition-colors cursor-pointer flex justify-between items-center"

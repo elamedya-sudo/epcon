@@ -14,7 +14,7 @@ export default function Home() {
       
       {/* 1. HERO ALANI (Video kaynağı geri eklendi) */}
       <LeadHero 
-        videoBackground="https://cdn.pixabay.com/video/2024/01/20/197489-905015030_large.mp4" 
+        videoBackground="/videos/epcon.mp4"
       />
       
       {/* 2. YEŞİL YETKİ VE GÜVEN BANDI */}
