@@ -35,7 +35,6 @@ export default function Header() {
 
   const menuItems = [
     { name: "Kurumsal", href: "/hakkimizda", isDropdown: false },
-    // "Ekibimiz" linki Şeref Bey'in talebiyle buradan kaldırıldı.
     {
       name: "Pest Kontrol",
       mainHref: "/pest-kontrol",
@@ -221,7 +220,8 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="translate">
+            {/* flex flex-col sınıfı buraya eklendi */}
+            <div className="translate flex flex-col">
               {menuItems.map((item, idx) => (
                 item.isDropdown ? (
                   <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
@@ -240,7 +240,8 @@ export default function Header() {
                     </div>
                   </div>
                 ) : (
-                  <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
+                  // Link içine block sınıfı eklendi
+                  <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="block py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
                 )
               ))}
             </div>
