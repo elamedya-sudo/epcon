@@ -15,11 +15,10 @@ export default function Home() {
       
       {/* 1. HERO ALANI (Video kaynağı geri eklendi) */}
       <LeadHero 
-        videoBackground="/videos/epcon.mp4"
+        videoBackground="/videos/epcon-hy.mp4"
       />
       <ReferenceLogos />
-      {/* 2. YEŞİL YETKİ VE GÜVEN BANDI */}
-      <TrustBar />
+
 
       {/* 3. ÜÇ ANA HİZMET KARTI (Konut, IPM, Fümigasyon) */}
       <MainServices />
