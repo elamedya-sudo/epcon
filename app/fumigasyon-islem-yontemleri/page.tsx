@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Flame, 
   Wind, 
@@ -46,6 +47,8 @@ export default function IslemYontemleriPage() {
           </div>
         </div>
       </section>
+
+      <ReferenceLogos />
 
       {/* 2. BİLGİLENDİRME VE KURAL ALANI */}
       <section className="py-16 px-6 md:px-10 max-w-7xl mx-auto">

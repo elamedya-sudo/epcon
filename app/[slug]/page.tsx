@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   CheckCircle2, 
   HelpCircle, 
@@ -215,6 +216,7 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
         </div>
 
       </div>
+      <ReferenceLogos />
     </main>
   );
 }

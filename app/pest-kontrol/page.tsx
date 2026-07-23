@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldCheck, 
   Map, 
@@ -108,6 +109,9 @@ export default function PestKontrolPage() {
           </div>
         </div>
       </section>
+
+      {/* REFERANS LOGOLARI ŞERİDİ BURAYA EKLENDİ */}
+      <ReferenceLogos />
 
       {/* 2. GÜVEN VE HİZMET ALTYAPISI */}
       <section className="bg-surface-light border-b border-border py-12 px-6 md:px-10">

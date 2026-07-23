@@ -7,6 +7,7 @@ import PestServices from "@/components/PestServices";
 import Testimonials from "@/components/Testimonials";
 import References from "@/components/References";
 import BottomCTA from "@/components/BottomCTA";
+import ReferenceLogos from "@/components/ReferenceLogos";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       <LeadHero 
         videoBackground="/videos/epcon.mp4"
       />
-      
+      <ReferenceLogos />
       {/* 2. YEŞİL YETKİ VE GÜVEN BANDI */}
       <TrustBar />
 

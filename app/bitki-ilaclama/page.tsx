@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Leaf, 
   CheckCircle, 
@@ -68,7 +69,7 @@ export default function BitkiIlaclamaPage() {
           </div>
         </div>
       </section>
-
+      <ReferenceLogos />
       {/* 2. KARŞILAŞILAN SORUNLAR & SÜREÇ */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
         <div className="bg-slate-50 border border-slate-100 p-8 rounded-3xl shadow-sm">

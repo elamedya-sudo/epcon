@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Search, 
   LineChart, 
@@ -50,6 +51,7 @@ export default function DepoZararlilariPage() {
         </div>
       </section>
 
+      <ReferenceLogos />
       {/* 2. NEDEN ÖNEMLİDİR & YAYGIN ZARARLILAR */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
         <div className="space-y-6">

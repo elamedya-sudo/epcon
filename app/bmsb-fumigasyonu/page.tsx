@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldCheck, 
   Ship, 
@@ -44,6 +45,7 @@ export default function BmsbPage() {
         </div>
       </section>
 
+      <ReferenceLogos />
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 mb-12">
           <h2 className="font-barlowCondensed text-3xl font-bold text-navy uppercase mb-4">BMSB Hizmeti Neyi Kapsar?</h2>

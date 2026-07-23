@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldAlert, 
   MapPin, 
@@ -44,11 +45,11 @@ export default function YilanSurungenPage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?q=80&w=1000&auto=format&fit=crop" alt="Yılan ve Sürüngen Kontrolü" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/38571564/pexels-photo-38571564.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Yılan ve Sürüngen Kontrolü" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>
-
+      <ReferenceLogos />
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div className="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100 mb-12">
           <p className="text-lg text-navy font-medium leading-relaxed">

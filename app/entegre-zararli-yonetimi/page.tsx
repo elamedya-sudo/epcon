@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { ShieldCheck, Search, Activity, FileText, CheckCircle, ArrowRight, Settings } from 'lucide-react';
 // Not: Projenizdeki mevcut bileşenleri import edebilirsiniz (TrustBar, BottomCTA vb.)
 
@@ -35,6 +36,9 @@ export default function IpmPage() {
           </div>
         </div>
       </section>
+
+      {/* 2. REFERANS LOGOLARI */}
+      <ReferenceLogos />
 
       {/* 2. IPM NEDİR VE NEDEN GEREKLİDİR? */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">

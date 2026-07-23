@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   PackageSearch, 
   MapPin, 
@@ -47,7 +48,7 @@ export default function GuveDepoPage() {
           </div>
         </div>
       </section>
-
+      <ReferenceLogos />
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div className="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100 mb-12">
           <p className="text-lg text-navy font-medium leading-relaxed">

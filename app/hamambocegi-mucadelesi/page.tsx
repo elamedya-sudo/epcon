@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldAlert, 
   MapPin, 
@@ -46,11 +47,11 @@ export default function HamambocekPage() {
           {/* Çalışan Hero Görseli: Temiz mutfak / Uygulama alanı */}
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1584820927498-cafe4c238b99?q=80&w=1000&auto=format&fit=crop" alt="Profesyonel Hamamböceği Kontrolü" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/19294665/pexels-photo-19294665.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Profesyonel Hamamböceği Kontrolü" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>
-
+      <ReferenceLogos />
       {/* 2. KISA BİLGİ & RİSKLİ ALANLAR */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div className="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-100 mb-12">

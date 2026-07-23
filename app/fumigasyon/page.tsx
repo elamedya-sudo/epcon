@@ -2,6 +2,7 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 import Link from "next/link";
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldCheck, 
   Wind, 
@@ -93,6 +94,7 @@ export default async function FumigationPage() {
           <span className="flex items-center gap-2"><Activity className="w-5 h-5" /> Gaz Ölçüm Ekipmanlı</span>
         </div>
       </section>
+      <ReferenceLogos />
 
       {/* 3. FUMİGASYON NEDİR & GÜVENLİK */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">

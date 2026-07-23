@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Package, 
   CheckCircle, 
@@ -66,6 +67,8 @@ export default function UrunYukPage() {
           </div>
         </div>
       </section>
+
+      <ReferenceLogos />
 
       {/* 2. KİMLER İÇİN UYGUN & DEĞERLENDİRME KRİTERLERİ */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">

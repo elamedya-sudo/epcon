@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   ShieldAlert, 
   MapPin, 
@@ -47,11 +48,11 @@ export default function KokarcaPage() {
           </div>
           <div className="hidden md:block rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl relative min-h-[400px]">
              <div className="absolute inset-0 bg-navy/20 z-10"></div>
-             <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1000&auto=format&fit=crop" alt="Kahverengi Kokarca Bina Kontrolü" className="w-full h-full object-cover absolute inset-0" />
+             <img src="https://images.pexels.com/photos/68513/bug-sheet-insect-brown-68513.jpeg?q=80&w=1000&auto=format&fit=crop" alt="Kahverengi Kokarca Bina Kontrolü" className="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </section>
-
+      <ReferenceLogos />
       {/* 2. KISA BİLGİ & BMSB YÖNLENDİRMESİ & RİSKLİ ALANLAR */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         

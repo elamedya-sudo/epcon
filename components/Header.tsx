@@ -9,7 +9,6 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [currentLang, setCurrentLang] = useState("TR");
 
-  // Sayfa yüklendiğinde aktif dili kontrol et
   useEffect(() => {
     if (document.cookie.includes("googtrans=/tr/en")) {
       setCurrentLang("EN");
@@ -18,7 +17,6 @@ export default function Header() {
     }
   }, []);
 
-  // Dil değiştirme fonksiyonu
   const switchLanguage = (lang: "TR" | "EN") => {
     if (lang === "EN") {
       document.cookie = "googtrans=/tr/en; path=/";
@@ -27,7 +25,6 @@ export default function Header() {
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
     }
-    // Değişikliğin uygulanması için anlık yenileme (Kullanıcı uyarı görmez)
     window.location.reload();
   };
 
@@ -38,7 +35,7 @@ export default function Header() {
 
   const menuItems = [
     { name: "Kurumsal", href: "/hakkimizda", isDropdown: false },
-    { name: "Ekibimiz", href: "/ekibimiz", isDropdown: false },
+    // "Ekibimiz" linki Şeref Bey'in talebiyle buradan kaldırıldı.
     {
       name: "Pest Kontrol",
       mainHref: "/pest-kontrol",
@@ -171,7 +168,6 @@ export default function Header() {
         {/* Sağ Taraf Butonlar ve Dil Seçici */}
         <div className="hidden sm:flex items-center gap-3">
           
-          {/* PROFESYONEL DİL BUTONLARI */}
           <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
             <button 
               onClick={() => switchLanguage("TR")}
@@ -205,7 +201,6 @@ export default function Header() {
         <div className="absolute top-full left-0 w-full bg-white border-b border-border shadow-xl lg:hidden z-50">
           <div className="flex flex-col p-6 space-y-2 max-h-[75vh] overflow-y-auto">
             
-            {/* Mobilde Dil Seçici */}
             <div className="flex items-center justify-between pb-4 border-b border-border/50 mb-2">
               <span className="text-sm font-bold text-navy flex items-center gap-2 translate">
                 <Globe size={16} className="text-pest-green" /> Dil / Language

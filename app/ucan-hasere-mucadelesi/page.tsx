@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Wind, 
   Droplets, 
@@ -49,6 +50,7 @@ export default function UcanHaserePage() {
         </div>
       </section>
 
+      <ReferenceLogos />
       {/* 2. ZARARLILAR VE ÜREME KAYNAKLARI */}
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
         <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import ReferenceLogos from "@/components/ReferenceLogos";
 import { 
   Home, 
   Building, 
@@ -57,6 +58,8 @@ export default function IlaclamaPage() {
           <span className="flex items-center gap-2"><ClipboardCheck className="w-5 h-5" /> Alana Özel Uygulama</span>
         </div>
       </section>
+
+      <ReferenceLogos />
 
       {/* 3. HİZMET KARTLARI */}
       <section className="py-20 px-6 md:px-10 bg-slate-50 border-b border-slate-200">
