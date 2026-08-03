@@ -77,36 +77,58 @@ export default function PestKontrolPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. HERO ALANI */}
-      <section className="relative bg-navy-deeper overflow-hidden px-6 py-20 md:px-10 md:py-28 text-center flex flex-col items-center justify-center">
+      {/* 1. HERO ALANI (Metin Solda, Görsel Sağda - 2 Sütunlu Yapı) */}
+      <section className="relative bg-navy-deeper py-20 lg:py-24 px-6 md:px-10 overflow-hidden flex items-center">
+        {/* Arka Plan Efektleri */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
         <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-10 blur-[80px] z-0" />
         
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 border border-pest-green/40 bg-pest-green/10 rounded px-4 py-1.5 mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-barlowCondensed text-xs md:text-sm font-semibold text-[#5dd88a] tracking-wider uppercase">
-              ENTEGRE ZARARLI YÖNETİMİ • İZLEME • RAPORLAMA
-            </span>
+        <div className="max-w-7xl mx-auto relative z-10 w-full grid lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Sol Kısım: Metinler */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <div className="inline-flex items-center gap-2 border border-pest-green/40 bg-pest-green/10 rounded px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-barlowCondensed text-[11px] md:text-sm font-semibold text-[#5dd88a] tracking-wider uppercase">
+                ENTEGRE ZARARLI YÖNETİMİ • İZLEME • RAPORLAMA
+              </span>
+            </div>
+            
+            <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05] mb-6">
+              Zararlı Risklerini Ölçülebilir ve <br className="hidden md:block" />
+              <span className="text-pest-green">İzlenebilir Bir Sistemle Yönetin</span>
+            </h1>
+            
+            <p className="text-base md:text-lg text-white/70 font-light max-w-2xl leading-relaxed mb-8">
+              EPCON, işletmenize özel pest kontrol programlarını; risk analizi, saha haritalaması, düzenli izleme, önleyici faaliyetler, hedefe yönelik müdahale ve dijital raporlama süreçleriyle yönetir.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm shadow-lg shadow-pest-green/20">
+                <ShieldCheck size={18} /> IPM Teknik Değerlendirme Talep Et
+              </Link>
+              <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
+                <MessageCircle size={18} className="text-[#25d366]"/> WhatsApp'tan Uzmana Sor
+              </a>
+            </div>
           </div>
-          
-          <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05] mb-6">
-            Zararlı Risklerini Ölçülebilir ve <br className="hidden md:block" />
-            <span className="text-pest-green">İzlenebilir Bir Sistemle Yönetin</span>
-          </h1>
-          
-          <p className="text-base md:text-lg text-white/70 font-light max-w-3xl leading-relaxed mb-10">
-            EPCON, işletmenize özel pest kontrol programlarını; risk analizi, saha haritalaması, düzenli izleme, önleyici faaliyetler, hedefe yönelik müdahale ve dijital raporlama süreçleriyle yönetir.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 items-center w-full justify-center">
-            <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm">
-              <ShieldCheck size={18} /> IPM Teknik Değerlendirme Talep Et
-            </Link>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
-              <MessageCircle size={18} className="text-[#25d366]"/> WhatsApp'tan Uzmana Sor
-            </a>
+
+          {/* Sağ Kısım: Görsel */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end items-center relative mt-8 lg:mt-0">
+            {/* Görsel arkası parlama (glow) efekti */}
+            <div className="absolute inset-0 bg-pest-green opacity-20 blur-[80px] rounded-full z-0"></div>
+            
+            {/* Şık çerçeveli görsel alanı */}
+            <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/5">
+              <img 
+                src="https://images.unsplash.com/photo-1638820842410-dbe10a8a61f0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVzdCUyMGNvbnRyb2x8ZW58MHx8MHx8fDA%3D" 
+                alt="Profesyonel Pest Kontrol Hizmeti" 
+                className="w-full h-full object-cover" 
+                loading="eager"
+              />
+            </div>
           </div>
+
         </div>
       </section>
 
@@ -260,7 +282,6 @@ export default function PestKontrolPage() {
             </h2>
           </div>
           
-          {/* Izgara yapısı tam 3x3 (md:grid-cols-3) olacak şekilde düzeltildi */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {sektorler.map((sektor, idx) => (
               <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 text-center hover:bg-white/10 transition-colors flex flex-col items-center justify-center">
