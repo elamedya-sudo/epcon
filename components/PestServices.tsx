@@ -5,18 +5,67 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function PestServices() {
-  // Tasarımdaki zararlı türü verileri ve SEO odaklı sayfaların URL'leri (Brif Bölüm 4.7'den[cite: 6])
   const services = [
-    { icon: "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fab3.svg", title: "Hamamböceği", desc: "Mutfak, depo, rögar ve ıslak alanlarda kaynağın tespiti ve hedefli uygulama.", link: "/hamambocegi-mucadelesi" },
-    { icon: "🐀", title: "Fare ve Sıçan", desc: "İzleme, güvenli istasyonlar ve giriş noktalarının kontrolü.", link: "/fare-sican-mucadelesi" },
-    { icon: "🛌", title: "Tahta Kurusu", desc: "Detaylı inceleme, hedefli uygulama ve takip kontrolü içeren program.", link: "/tahta-kurusu-mucadelesi" },
-    { icon: "🐜", title: "Karınca", desc: "Koloni ve besin kaynaklarının kontrolüne yönelik iç/dış alan çözümleri.", link: "/karinca-mucadelesi" },
-    { icon: "🦟", title: "Sivrisinek ve Karasinek", desc: "Üreme kaynağı, larva mücadelesi ve ergin uygulaması birleşik programı.", link: "/sivrisinek-karasinek-mucadelesi" },
-    { icon: "🐞", title: "Kahverengi Kokarca", desc: "Bina çevrelerinde mevsimsel giriş noktası tespiti ve hedefe yönelik mücadele.", link: "/kahverengi-kokarca-mucadelesi" },
-    { icon: "🐕", title: "Pire ve Kene", desc: "Konut, site ve hayvan yaşam alanlarında risk değerlendirmesine dayalı hizmet.", link: "/pire-kene-mucadelesi" },
-    { icon: "📦", title: "Güve ve Depo Zararlıları", desc: "Gıda, tekstil ve depo alanlarında feromon izleme, teşhis ve çözümler.", link: "/guve-depo-zararlilari" },
-    { icon: "🕷️", title: "Akrep ve Örümcek", desc: "Bina çevresi, bodrum ve giriş noktalarında risk azaltma ve kontrollü mücadele.", link: "/akrep-orumcek-mucadelesi" },
-    { icon: "🐍", title: "Yılan ve Sürüngenler", desc: "Açık alanlarda barınma koşullarının azaltılması ve çevresel risk kontrolü.", link: "/yilan-surungen-kontrolu" },
+    { 
+      icon: "https://images.pexels.com/photos/19294665/pexels-photo-19294665.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Hamamböceği", 
+      desc: "Mutfak, depo, rögar ve ıslak alanlarda kaynağın tespiti ve hedefli uygulama.", 
+      link: "/hamambocegi-mucadelesi" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/7180053/pexels-photo-7180053.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Fare ve Sıçan", 
+      desc: "İzleme, güvenli istasyonlar ve giriş noktalarının kontrolü.", 
+      link: "/fare-sican-mucadelesi" 
+    },
+    { 
+      icon: "https://images.unsplash.com/photo-1727198634627-645ef5356455?q=80&w=1000&auto=format&fit=crop", 
+      title: "Tahta Kurusu", 
+      desc: "Detaylı inceleme, hedefli uygulama ve takip kontrolü içeren program.", 
+      link: "/tahta-kurusu-mucadelesi" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/35702439/pexels-photo-35702439.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Karınca", 
+      desc: "Koloni ve besin kaynaklarının kontrolüne yönelik iç/dış alan çözümleri.", 
+      link: "/karinca-mucadelesi" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/27178285/pexels-photo-27178285.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Sivrisinek ve Karasinek", 
+      desc: "Üreme kaynağı, larva mücadelesi ve ergin uygulaması birleşik programı.", 
+      link: "/sivrisinek-karasinek-mucadelesi" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/68513/bug-sheet-insect-brown-68513.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Kahverengi Kokarca", 
+      desc: "Bina çevrelerinde mevsimsel giriş noktası tespiti ve hedefe yönelik mücadele.", 
+      link: "/kahverengi-kokarca-mucadelesi" 
+    },
+    { 
+      icon: "https://images.unsplash.com/photo-1598788682862-839f3d4c4ed7?q=80&w=1000&auto=format&fit=crop", 
+      title: "Pire ve Kene", 
+      desc: "Konut, site ve hayvan yaşam alanlarında risk değerlendirmesine dayalı hizmet.", 
+      link: "/pire-kene-mucadelesi" 
+    },
+    { 
+      icon: "https://images.unsplash.com/photo-1737682170996-3eccc13a71ec?q=80&w=1000&auto=format&fit=crop", 
+      title: "Güve ve Depo Zararlıları", 
+      desc: "Gıda, tekstil ve depo alanlarında feromon izleme, teşhis ve çözümler.", 
+      link: "/guve-depo-zararlilari" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/33210386/pexels-photo-33210386.png?q=80&w=1000&auto=format&fit=crop", 
+      title: "Akrep ve Örümcek", 
+      desc: "Bina çevresi, bodrum ve giriş noktalarında risk azaltma ve kontrollü mücadele.", 
+      link: "/akrep-orumcek-mucadelesi" 
+    },
+    { 
+      icon: "https://images.pexels.com/photos/38571564/pexels-photo-38571564.jpeg?q=80&w=1000&auto=format&fit=crop", 
+      title: "Yılan ve Sürüngenler", 
+      desc: "Açık alanlarda barınma koşullarının azaltılması ve çevresel risk kontrolü.", 
+      link: "/yilan-surungen-kontrolu" 
+    },
   ];
 
   return (
@@ -36,19 +85,21 @@ export default function PestServices() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
           {services.map((svc, index) => (
-             // Kural: Kartın tamamı tıklanabilir olacak (Brif Bölüm 4.7[cite: 6])
             <Link
               key={index}
               href={svc.link}
               className="bg-white border border-border rounded-xl p-6 flex flex-col h-full cursor-pointer transition-all duration-300 hover:border-navy hover:shadow-xl group"
             >
-              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-slate-50 mb-4 group-hover:scale-110 group-hover:bg-pest-green/10 transition-transform duration-300">
-                {svc.icon.includes("svg") ? (
-                  <img src={svc.icon} alt={svc.title} className="w-7 h-7 drop-shadow-sm" />
-                ) : (
-                  <span className="text-2xl leading-none">{svc.icon}</span>
-                )}
+              {/* Sabit boyutlu, yuvarlak kesimli fotoğraf alanı */}
+              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-slate-50 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-slate-200 overflow-hidden shrink-0">
+                <img 
+                  src={svc.icon} 
+                  alt={svc.title} 
+                  className="w-full h-full object-cover" 
+                  loading="lazy"
+                />
               </div>
+
               <h4 className="font-barlowCondensed text-lg font-bold text-navy mb-2 leading-tight">
                 {svc.title}
               </h4>
@@ -56,7 +107,6 @@ export default function PestServices() {
                 {svc.desc}
               </p>
               
-              {/* Kural: "Zararlıyı İncele →" butonu görünür olacak (Brif Bölüm 4.7[cite: 6]) */}
               <div className="mt-4 pt-4 border-t border-border/50 flex items-center text-xs font-bold text-navy group-hover:text-pest-green transition-colors">
                 Zararlıyı İncele <ArrowRight size={14} className="ml-1" />
               </div>
@@ -64,7 +114,6 @@ export default function PestServices() {
           ))}
         </div>
         
-        {/* Özel Kokarca Yönlendirmesi Notu (Bölüm 4.7 kuralı[cite: 6]) */}
         <div className="mt-8 bg-white border border-pest-green/30 rounded-lg p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
            <div>
               <h4 className="font-bold text-navy text-sm">Avustralya ihracatı için BMSB işlemi mi arıyorsunuz?</h4>

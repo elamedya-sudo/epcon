@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: "BMSB Fumigasyonu | EPCON Fumigasyon",
+  title: "BMSB Avustralya Yeni Zelanda Fumigasyon | EPCON Fumigasyon",
   description: "Sevkiyat ülkesi, ürün sınıfı, yükleme tarihi, konteyner yapısı ve güncel BMSB sezon şartları değerlendirilerek uygulama, gazdan arındırma ve kayıt süreci planlanır."
 };
 

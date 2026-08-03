@@ -116,22 +116,18 @@ export default function LeadHero({
   };
 
   return (
-    // Mobilde butonların ve formun sığması için padding değerleri (pt-24 pb-8) optimize edildi.
-    <section className="relative bg-navy-deeper overflow-hidden min-h-[100svh] lg:min-h-[86vh] px-6 pt-24 pb-8 md:px-10 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center font-barlow">
+    // Mobilde tek sütun (flex-col), Masaüstünde 12 sütunlu Izgara (grid) mimarisi kullanılıyor.
+    <section className="relative bg-navy-deeper overflow-hidden min-h-[100svh] lg:min-h-[86vh] px-6 pt-24 pb-12 md:px-10 md:py-20 flex flex-col lg:grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 lg:items-center font-barlow">
       
       {/* ── ARKA PLAN EFEKTLERİ ── */}
       {videoBackground ? (
         <div className="absolute inset-0 z-0 overflow-hidden bg-navy-deeper">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-70 pointer-events-none transform scale-[1.15] origin-center">
-            {/* Şeref Bey'in belirttiği başı sonu kırpılmış, sadece saha görüntüsü akan video buraya yüklenecek */}
             <source src={videoBackground} type="video/mp4" />
           </video>
-          {/* Sola doğru koyu, sağa doğru şeffaf ana gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper/95 via-navy-deeper/50 to-transparent" />
-          
           {/* SAĞ ALT KÖŞEYİ (TELEFON/LOGO) GİZLEYEN DEGRADE MASKE */}
           <div className="absolute bottom-0 right-0 w-80 h-48 bg-gradient-to-tl from-navy-deeper via-navy-deeper/90 to-transparent pointer-events-none" />
-          
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-deeper via-navy-deeper/80 to-transparent pointer-events-none" />
         </div>
       ) : backgroundImage ? (
@@ -147,69 +143,76 @@ export default function LeadHero({
         </>
       )}
 
-      {/* ── METİNLER ── */}
-      <div className={`relative z-10 lg:col-span-7 space-y-4 md:space-y-6 order-1 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
-        <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-[14px] py-[5px]">
-          <span className="w-2 h-2 rounded-full bg-pest-green animate-pulse" />
-          <span className="font-barlowCondensed text-[11px] md:text-xs font-bold text-pest-green tracking-wider uppercase">
-            {badgeText}
-          </span>
-        </div>
-
-        <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
-          {titleMain} <br />
-          <span className="text-pest-green">{titleHighlight}</span>
-        </h1>
-
-        <p className="text-sm md:text-lg text-white/80 font-light max-w-[550px] leading-relaxed">
-          {description}
-        </p>
-
-        {features && features.length > 0 && (
-          <div className="flex flex-col gap-1.5 md:gap-2 max-w-[550px] mt-1 md:mt-2">
-             {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-white/90 font-medium text-[13px] md:text-sm">
-                  <div className="text-pest-green">{feature.icon}</div>
-                  <span>{feature.label}</span>
-                </div>
-             ))}
+      {/* ── SOL İÇERİK BLOKLARI (Mobilde "contents" kullanılarak Flex sırası ayarlanır) ── */}
+      <div className={`contents lg:flex lg:flex-col lg:col-span-7 lg:gap-6 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
+        
+        {/* 1. BAŞLIK BÖLÜMÜ (Mobilde: 1. Sırada | Masaüstünde: 1. Sırada) */}
+        <div className="order-1 lg:order-1 space-y-4 md:space-y-6 relative z-10">
+          <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-[14px] py-[5px]">
+            <span className="w-2 h-2 rounded-full bg-pest-green animate-pulse" />
+            <span className="font-barlowCondensed text-[11px] md:text-xs font-bold text-pest-green tracking-wider uppercase">
+              {badgeText}
+            </span>
           </div>
-        )}
 
-        {/* ── YENİ YÖNLENDİRME BUTONLARI ── */}
-        <div className="flex flex-col sm:flex-row gap-3 pt-3 w-full max-w-2xl">
-          {/* Yaşam Alanı Butonu */}
-          <Link 
-            href="/sektorel-ilaclama" 
-            className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-pest-green text-navy px-5 py-3 rounded-lg hover:bg-white transition-all shadow-md"
-          >
-            <span className="font-bold text-base md:text-lg mb-0.5">Yaşam Alanınız İçin İlaçlama</span>
-            <span className="text-[11px] md:text-xs font-semibold opacity-80">Ev, villa, site ve ortak alanlar</span>
-          </Link>
-
-          {/* İşletme Butonu */}
-          <Link 
-            href="/pest-kontrol" 
-            className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-navy text-white px-5 py-3 rounded-lg hover:bg-navy-deeper transition-all shadow-md border border-white/20"
-          >
-            <span className="font-bold text-base md:text-lg mb-0.5">İşletmeniz İçin Pest Kontrol</span>
-            <span className="text-[11px] md:text-xs font-medium opacity-80">Fabrika, otel, depo, gıda tesisleri</span>
-          </Link>
+          <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
+            {titleMain} <br />
+            <span className="text-pest-green">{titleHighlight}</span>
+          </h1>
         </div>
 
-        {/* FÜMİGASYON ALT LİNKİ */}
-        <div className="pt-2 pb-2 text-center sm:text-left">
-          <Link 
-            href="/fumigasyon" 
-            className="inline-flex items-center gap-1 text-[13px] md:text-sm font-medium text-white/80 hover:text-pest-green transition-colors border-b border-transparent hover:border-pest-green pb-0.5"
-          >
-            İhracat için fümigasyon mu arıyorsunuz? <ArrowRight size={14} className="ml-1" />
-          </Link>
+        {/* 2. DÜĞMELER (Mobilde: 2. Sırada | Masaüstünde: 3. Sırada (Alt Kısımda)) */}
+        <div className="order-2 lg:order-3 w-full max-w-2xl relative z-10 pt-2 lg:pt-0">
+          <div className="flex flex-col sm:flex-row gap-3 w-full">
+            <Link 
+              href="/sektorel-ilaclama" 
+              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-pest-green text-navy px-5 py-3 rounded-lg hover:bg-white transition-all shadow-md"
+            >
+              <span className="font-bold text-base md:text-lg mb-0.5">Yaşam Alanınız İçin İlaçlama</span>
+              <span className="text-[11px] md:text-xs font-semibold opacity-80">Ev, villa, site ve ortak alanlar</span>
+            </Link>
+
+            <Link 
+              href="/pest-kontrol" 
+              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-navy text-white px-5 py-3 rounded-lg hover:bg-navy-deeper transition-all shadow-md border border-white/20"
+            >
+              <span className="font-bold text-base md:text-lg mb-0.5">İşletmeniz İçin Pest Kontrol</span>
+              <span className="text-[11px] md:text-xs font-medium opacity-80">Fabrika, otel, depo, gıda tesisleri</span>
+            </Link>
+          </div>
+
+          <div className="pt-3 pb-1 text-center sm:text-left">
+            <Link 
+              href="/fumigasyon" 
+              className="inline-flex items-center gap-1 text-[13px] md:text-sm font-medium text-white/80 hover:text-pest-green transition-colors border-b border-transparent hover:border-pest-green pb-0.5"
+            >
+              İhracat için fümigasyon mu arıyorsunuz? <ArrowRight size={14} className="ml-1" />
+            </Link>
+          </div>
         </div>
+
+        {/* 3. AÇIKLAMA VE ÖZELLİKLER (Mobilde: 4. Sırada (En Altta) | Masaüstünde: 2. Sırada (Ortada)) */}
+        <div className="order-4 lg:order-2 space-y-4 md:space-y-6 relative z-10 pt-2 lg:pt-0">
+          <p className="text-sm md:text-lg text-white/80 font-light max-w-[550px] leading-relaxed">
+            {description}
+          </p>
+
+          {features && features.length > 0 && (
+            <div className="flex flex-col gap-1.5 md:gap-2 max-w-[550px] mt-1 md:mt-2">
+               {features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-white/90 font-medium text-[13px] md:text-sm">
+                    <div className="text-pest-green">{feature.icon}</div>
+                    <span>{feature.label}</span>
+                  </div>
+               ))}
+            </div>
+          )}
+        </div>
+
       </div>
 
-      {/* ── FORM & BAŞARI ALANI ── */}
-      <div className={`relative z-10 lg:col-span-5 w-full max-w-[480px] justify-self-center lg:justify-self-end bg-white rounded-xl p-5 md:p-8 shadow-2xl order-2 border border-slate-100 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
+      {/* ── SAĞ İÇERİK: FORM (Mobilde: 3. Sırada (Düğmelerden hemen sonra) | Masaüstünde: Sağ Kolon) ── */}
+      <div className={`order-3 lg:order-none lg:col-span-5 w-full max-w-[480px] self-center justify-self-center lg:justify-self-end bg-white rounded-xl p-5 md:p-8 shadow-2xl border border-slate-100 relative z-10 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
         
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-10 text-center space-y-4 animate-in fade-in zoom-in duration-500">

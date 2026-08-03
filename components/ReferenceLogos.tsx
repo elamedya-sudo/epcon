@@ -12,7 +12,7 @@ export default function ReferenceLogos() {
     "/logolar/test/dsv-solutions-seeklogo.png",
     "/logolar/test/dufry_logo.jpeg",
     "/logolar/test/DUNYA-LOGO-RBG-Large.png.webp",
-    "/logolar/test/e9c1ef26-ed1f-4870-a47c-19d01c31b5cf-IMG_1827_2x.png",
+    "/logolar/test/okyanus.jpg",
     "/logolar/test/fenerbahce-spor-kulubu-seeklogo.png",
     "/logolar/test/image_1080.webp",
     "/logolar/test/images.png",
