@@ -54,7 +54,7 @@ export default function Ispm15Page() {
             {/* Şık çerçeveli görsel alanı */}
             <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 bg-navy-deeper">
               <img 
-                src="/images/fumigasyon/fumigasyon-resim2.jpg" 
+                src="/images/fumigasyon/ismp-15.png" 
                 alt="ISPM 15 Ahşap Ambalaj İlaçlaması" 
                 className="w-full h-full object-cover block"
                 loading="eager" 
