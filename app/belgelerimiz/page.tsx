@@ -158,7 +158,7 @@ export default function BelgelerimizPage() {
         </div>
       </section>
 
-      {/* POPUP (MODAL) EKRANI */}
+      {/* POPUP (MODAL) EKRANI VE FİLİGRAN (WATERMARK) */}
       {selectedImage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deeper/90 p-4" onClick={() => setSelectedImage(null)}>
           <div 
@@ -168,21 +168,35 @@ export default function BelgelerimizPage() {
             {/* Kapat Butonu */}
             <button 
               onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 md:-right-12 bg-white text-navy hover:text-pest-green p-3 rounded-full shadow-lg transition-colors"
+              className="absolute -top-12 right-0 md:-right-12 bg-white text-navy hover:text-pest-green p-3 rounded-full shadow-lg transition-colors z-50"
             >
               <X size={24} />
             </button>
             
-            {/* Belge Resmi */}
-            <div className="w-full h-full overflow-y-auto flex items-center justify-center">
-               <img 
-                 src={selectedImage} 
-                 alt="Sertifika" 
-                 className="max-w-full max-h-[85vh] object-contain rounded-lg"
-                 onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x1131.png?text=Belge+Hen%C3%BCz+Y%C3%BCklenmedi'; 
-                 }}
-               />
+            {/* Belge Resmi ve Watermark */}
+            <div className="w-full h-full overflow-y-auto flex items-center justify-center relative">
+               <div className="relative inline-block overflow-hidden rounded-lg">
+                 {/* Asıl Resim */}
+                 <img 
+                   src={selectedImage} 
+                   alt="Sertifika" 
+                   className="max-w-full max-h-[85vh] object-contain block select-none"
+                   onContextMenu={(e) => e.preventDefault()} // Sağ Tıklamayı Engeller
+                   onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x1131.png?text=Belge+Hen%C3%BCz+Y%C3%BCklenmedi'; 
+                   }}
+                 />
+                 
+                 {/* Otomatik Watermark Katmanı */}
+                 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none mix-blend-multiply opacity-20">
+                    <div className="-rotate-45 flex flex-col items-center justify-center gap-12 md:gap-24 select-none">
+                       <span className="text-3xl md:text-6xl font-black text-slate-800 tracking-widest whitespace-nowrap">www.epcon.com.tr</span>
+                       <span className="text-3xl md:text-6xl font-black text-slate-800 tracking-widest whitespace-nowrap">www.epcon.com.tr</span>
+                       <span className="text-3xl md:text-6xl font-black text-slate-800 tracking-widest whitespace-nowrap">www.epcon.com.tr</span>
+                    </div>
+                 </div>
+                 
+               </div>
             </div>
           </div>
         </div>

@@ -24,7 +24,9 @@ const referansLogolari = [
   "/logolar/test/tbmm-milli-saraylar-seeklogo.png",
   "/logolar/test/yesilay-yesilay-seeklogo.png",
   "/logolar/test/ytu-footer-logo.png",
-  "/logolar/test/yumtat.jpg"
+  "/logolar/test/yumtat.jpg",
+  "/logolar/test/optimal.jpg",
+  "/logolar/test/teknokent.png",
 ];
 
 export const metadata = {
