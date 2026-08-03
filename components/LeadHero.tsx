@@ -116,8 +116,8 @@ export default function LeadHero({
   };
 
   return (
-    // Mobilde tek sütun (flex-col), Masaüstünde 12 sütunlu Izgara (grid) mimarisi kullanılıyor.
-    <section className="relative bg-navy-deeper overflow-hidden min-h-[100svh] lg:min-h-[86vh] px-6 pt-24 pb-12 md:px-10 md:py-20 flex flex-col lg:grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 lg:items-center font-barlow">
+    // Mobilde pt-24 silinip pt-6 eklendi. Gaps (boşluklar) mobilde daraltıldı (gap-4).
+    <section className="relative bg-navy-deeper overflow-hidden min-h-[100svh] lg:min-h-[86vh] px-6 pt-6 pb-10 md:px-10 md:pt-24 md:pb-20 flex flex-col lg:grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-12 lg:items-center font-barlow">
       
       {/* ── ARKA PLAN EFEKTLERİ ── */}
       {videoBackground ? (
@@ -126,7 +126,6 @@ export default function LeadHero({
             <source src={videoBackground} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-navy-deeper/95 via-navy-deeper/50 to-transparent" />
-          {/* SAĞ ALT KÖŞEYİ (TELEFON/LOGO) GİZLEYEN DEGRADE MASKE */}
           <div className="absolute bottom-0 right-0 w-80 h-48 bg-gradient-to-tl from-navy-deeper via-navy-deeper/90 to-transparent pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-deeper via-navy-deeper/80 to-transparent pointer-events-none" />
         </div>
@@ -143,64 +142,64 @@ export default function LeadHero({
         </>
       )}
 
-      {/* ── SOL İÇERİK BLOKLARI (Mobilde "contents" kullanılarak Flex sırası ayarlanır) ── */}
+      {/* ── SOL İÇERİK BLOKLARI ── */}
       <div className={`contents lg:flex lg:flex-col lg:col-span-7 lg:gap-6 ${reverseLayout ? 'lg:order-2 lg:pl-10' : 'lg:order-1'}`}>
         
-        {/* 1. BAŞLIK BÖLÜMÜ (Mobilde: 1. Sırada | Masaüstünde: 1. Sırada) */}
-        <div className="order-1 lg:order-1 space-y-4 md:space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-[14px] py-[5px]">
+        {/* 1. BAŞLIK BÖLÜMÜ (space-y daraltıldı, yazı boyutu mobilde optimize edildi) */}
+        <div className="order-1 lg:order-1 space-y-3 md:space-y-6 relative z-10">
+          <div className="inline-flex items-center gap-2 border border-pest-green/30 bg-pest-green/10 rounded px-3 py-1 md:px-[14px] md:py-[5px]">
             <span className="w-2 h-2 rounded-full bg-pest-green animate-pulse" />
             <span className="font-barlowCondensed text-[11px] md:text-xs font-bold text-pest-green tracking-wider uppercase">
               {badgeText}
             </span>
           </div>
 
-          <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
+          <h1 className="font-barlowCondensed text-[32px] leading-tight sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase md:leading-[1.05]">
             {titleMain} <br />
             <span className="text-pest-green">{titleHighlight}</span>
           </h1>
         </div>
 
-        {/* 2. DÜĞMELER (Mobilde: 2. Sırada | Masaüstünde: 3. Sırada (Alt Kısımda)) */}
-        <div className="order-2 lg:order-3 w-full max-w-2xl relative z-10 pt-2 lg:pt-0">
-          <div className="flex flex-col sm:flex-row gap-3 w-full">
+        {/* 2. DÜĞMELER (Mobilde padding ve gap daraltıldı) */}
+        <div className="order-2 lg:order-3 w-full max-w-2xl relative z-10 pt-1 lg:pt-0">
+          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 w-full">
             <Link 
               href="/sektorel-ilaclama" 
-              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-pest-green text-navy px-5 py-3 rounded-lg hover:bg-white transition-all shadow-md"
+              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-pest-green text-navy px-4 py-2 md:px-5 md:py-3 rounded-lg hover:bg-white transition-all shadow-md"
             >
-              <span className="font-bold text-base md:text-lg mb-0.5">Yaşam Alanınız İçin İlaçlama</span>
-              <span className="text-[11px] md:text-xs font-semibold opacity-80">Ev, villa, site ve ortak alanlar</span>
+              <span className="font-bold text-[15px] md:text-lg mb-0.5">Yaşam Alanınız İçin İlaçlama</span>
+              <span className="text-[10px] md:text-xs font-semibold opacity-80">Ev, villa, site ve ortak alanlar</span>
             </Link>
 
             <Link 
               href="/pest-kontrol" 
-              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-navy text-white px-5 py-3 rounded-lg hover:bg-navy-deeper transition-all shadow-md border border-white/20"
+              className="group flex flex-1 flex-col items-center sm:items-start justify-center bg-navy text-white px-4 py-2 md:px-5 md:py-3 rounded-lg hover:bg-navy-deeper transition-all shadow-md border border-white/20"
             >
-              <span className="font-bold text-base md:text-lg mb-0.5">İşletmeniz İçin Pest Kontrol</span>
-              <span className="text-[11px] md:text-xs font-medium opacity-80">Fabrika, otel, depo, gıda tesisleri</span>
+              <span className="font-bold text-[15px] md:text-lg mb-0.5">İşletmeniz İçin Pest Kontrol</span>
+              <span className="text-[10px] md:text-xs font-medium opacity-80">Fabrika, otel, depo, gıda tesisleri</span>
             </Link>
           </div>
 
-          <div className="pt-3 pb-1 text-center sm:text-left">
+          <div className="pt-2 text-center sm:text-left">
             <Link 
               href="/fumigasyon" 
-              className="inline-flex items-center gap-1 text-[13px] md:text-sm font-medium text-white/80 hover:text-pest-green transition-colors border-b border-transparent hover:border-pest-green pb-0.5"
+              className="inline-flex items-center gap-1 text-[12px] md:text-sm font-medium text-white/80 hover:text-pest-green transition-colors border-b border-transparent hover:border-pest-green pb-0.5"
             >
               İhracat için fümigasyon mu arıyorsunuz? <ArrowRight size={14} className="ml-1" />
             </Link>
           </div>
         </div>
 
-        {/* 3. AÇIKLAMA VE ÖZELLİKLER (Mobilde: 4. Sırada (En Altta) | Masaüstünde: 2. Sırada (Ortada)) */}
-        <div className="order-4 lg:order-2 space-y-4 md:space-y-6 relative z-10 pt-2 lg:pt-0">
-          <p className="text-sm md:text-lg text-white/80 font-light max-w-[550px] leading-relaxed">
+        {/* 3. AÇIKLAMA VE ÖZELLİKLER */}
+        <div className="order-4 lg:order-2 space-y-3 md:space-y-6 relative z-10 pt-1 lg:pt-0">
+          <p className="text-[13px] md:text-lg text-white/80 font-light max-w-[550px] leading-relaxed">
             {description}
           </p>
 
           {features && features.length > 0 && (
-            <div className="flex flex-col gap-1.5 md:gap-2 max-w-[550px] mt-1 md:mt-2">
+            <div className="flex flex-col gap-1 md:gap-2 max-w-[550px] mt-1 md:mt-2">
                {features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-white/90 font-medium text-[13px] md:text-sm">
+                  <div key={idx} className="flex items-center gap-2 text-white/90 font-medium text-[12px] md:text-sm">
                     <div className="text-pest-green">{feature.icon}</div>
                     <span>{feature.label}</span>
                   </div>
@@ -211,8 +210,8 @@ export default function LeadHero({
 
       </div>
 
-      {/* ── SAĞ İÇERİK: FORM (Mobilde: 3. Sırada (Düğmelerden hemen sonra) | Masaüstünde: Sağ Kolon) ── */}
-      <div className={`order-3 lg:order-none lg:col-span-5 w-full max-w-[480px] self-center justify-self-center lg:justify-self-end bg-white rounded-xl p-5 md:p-8 shadow-2xl border border-slate-100 relative z-10 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
+      {/* ── SAĞ İÇERİK: FORM (Mobilde p-4 yapılarak alan kazanıldı) ── */}
+      <div className={`order-3 lg:order-none lg:col-span-5 w-full max-w-[480px] self-center justify-self-center lg:justify-self-end bg-white rounded-xl p-4 md:p-8 shadow-2xl border border-slate-100 relative z-10 ${reverseLayout ? 'lg:order-1 lg:justify-self-start' : 'lg:order-2'}`}>
         
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-10 text-center space-y-4 animate-in fade-in zoom-in duration-500">
@@ -234,26 +233,26 @@ export default function LeadHero({
           </div>
         ) : (
           <>
-            <h3 className="font-barlowCondensed text-xl md:text-2xl font-bold text-navy uppercase tracking-wide">
+            <h3 className="font-barlowCondensed text-lg md:text-2xl font-bold text-navy uppercase tracking-wide">
               TEKLİF TALEP ET
             </h3>
-            <p className="text-[13px] md:text-sm text-text-mid mb-4 md:mb-6 leading-relaxed">
+            <p className="text-[12px] md:text-sm text-text-mid mb-3 md:mb-6 leading-relaxed">
               Bilgilerinizi bırakın; uzman ekibimiz ihtiyacınızı değerlendirerek sizinle iletişime geçsin.
             </p>
 
-            <form className="space-y-3 md:space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-2 md:space-y-4" onSubmit={handleSubmit}>
               <div>
-                <input type="text" name="adSoyad" className="w-full border-2 border-border rounded-md px-[14px] py-[9px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
+                <input type="text" name="adSoyad" className="w-full border-2 border-border rounded-md px-3 py-2 md:px-[14px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Adınız Soyadınız" required/>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div>
-                  <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-[14px] py-[9px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
+                  <input type="tel" name="telefon" className="w-full border-2 border-border rounded-md px-3 py-2 md:px-[14px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors placeholder:text-text-muted" placeholder="Telefon" required/>
                 </div>
                 
                 <div className="relative" ref={ilceRef}>
                   <div 
-                    className="w-full border-2 border-border rounded-md px-[14px] py-[9px] md:py-[11px] text-sm bg-white outline-none focus:border-navy transition-colors cursor-pointer flex justify-between items-center"
+                    className="w-full border-2 border-border rounded-md px-3 py-2 md:px-[14px] md:py-[11px] text-sm bg-white outline-none focus:border-navy transition-colors cursor-pointer flex justify-between items-center"
                     onClick={() => setIsIlceOpen(!isIlceOpen)}
                   >
                     <span className={selectedIlce ? "text-text-dark" : "text-text-muted truncate"}>
@@ -299,9 +298,9 @@ export default function LeadHero({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div>
-                  <select name="mekan" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[9px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                  <select name="mekan" required defaultValue="" className="w-full border-2 border-border rounded-md px-3 py-2 md:px-[14px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
                     <option value="" disabled hidden>Mekân Türü</option>
                     {mekanTurleri.map((mekan, idx) => (
                       <option key={idx} value={mekan}>{mekan}</option>
@@ -309,7 +308,7 @@ export default function LeadHero({
                   </select>
                 </div>
                 <div>
-                  <select name="hizmet" required defaultValue="" className="w-full border-2 border-border rounded-md px-[14px] py-[9px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
+                  <select name="hizmet" required defaultValue="" className="w-full border-2 border-border rounded-md px-3 py-2 md:px-[14px] md:py-[11px] text-sm text-text-dark bg-white outline-none focus:border-navy transition-colors">
                     <option value="" disabled hidden>Hizmet Türü</option>
                     {hizmetTurleri.map((hizmet, idx) => (
                       <option key={idx} value={hizmet}>{hizmet}</option>
@@ -318,11 +317,11 @@ export default function LeadHero({
                 </div>
               </div>
 
-              <button type="submit" disabled={isSubmitting} className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-3 md:py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-2 disabled:opacity-60">
+              <button type="submit" disabled={isSubmitting} className="w-full bg-navy hover:bg-navy-dark text-white font-medium rounded-md py-2.5 md:py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm mt-1 md:mt-2 disabled:opacity-60">
                 {isSubmitting ? "Gönderiliyor..." : "Teklif Talebimi Gönder"}
               </button>
               
-              <div className="text-center mt-2 md:mt-3">
+              <div className="text-center mt-1 md:mt-3">
                 <span className="text-[10px] md:text-[11px] text-text-muted leading-tight block">
                     Bilgileriniz güvendedir. Talebinizi göndererek <Link href="/kvkk" className="underline hover:text-navy">KVKK Aydınlatma Metni</Link>'ni onaylamış olursunuz.
                 </span>
