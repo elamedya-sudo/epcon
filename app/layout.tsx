@@ -76,20 +76,20 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* GİZLİ ÇEVİRİ MOTORU BAŞLANGICI */}
-        <div id="google_translate_element" style={{ display: 'none' }}></div>
-        <Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
-        <Script id="google-translate-init" strategy="afterInteractive">
-          {`
-            function googleTranslateElementInit() {
-              new google.translate.TranslateElement({
-                pageLanguage: 'tr',
-                includedLanguages: 'en', // Sadece İngilizce'ye izin ver
-                autoDisplay: false
-              }, 'google_translate_element');
-            }
-          `}
-        </Script>
+        {/* GİZLİ ÇEVİRİ MOTORU (TR, EN, RU, DE, AR DESTEKLİ) */}
+<div id="google_translate_element" style={{ display: 'none' }}></div>
+<Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
+<Script id="google-translate-init" strategy="afterInteractive">
+  {`
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'tr',
+        includedLanguages: 'tr,en,ru,de,ar', 
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  `}
+</Script>
         {/* GİZLİ ÇEVİRİ MOTORU BİTİŞİ */}
 
         <Header />
