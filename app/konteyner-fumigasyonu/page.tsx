@@ -42,26 +42,49 @@ export default function KonteynerPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. HERO ALANI */}
-      <section className="relative bg-navy py-24 px-6 md:px-10 overflow-hidden">
+      {/* ── 1. HERO ALANI (Sol Metin, Sağ Görsel - Mobil Optimizasyonlu) ── */}
+      <section className="relative bg-navy pt-6 pb-12 px-6 md:py-24 md:px-10 overflow-hidden flex items-center">
         <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern-dots.svg')] bg-repeat"></div>
-        <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-white space-y-6">
-            <span className="inline-flex items-center gap-2 bg-pest-green/20 text-pest-green font-bold px-3 py-1.5 rounded-full text-sm uppercase tracking-wider border border-pest-green/30">
-              <PackageSearch className="w-4 h-4" /> KONTEYNER • YÜK • ÖLÇÜM
+        
+        <div className="max-w-7xl mx-auto relative z-10 w-full grid lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          {/* Sol Kısım: Metinler */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <span className="inline-flex items-center gap-2 bg-pest-green/20 text-pest-green font-bold px-4 py-1.5 rounded-full text-[11px] md:text-sm uppercase tracking-wider border border-pest-green/30 mb-4 md:mb-6">
+              <PackageSearch className="w-4 h-4 hidden sm:block" /> KONTEYNER • YÜK • ÖLÇÜM
             </span>
-            <h1 className="font-barlowCondensed text-4xl md:text-6xl font-extrabold uppercase leading-tight">
-              Konteyner Yüklerine Özel <span className="text-pest-green">Güvenli Fumigasyon</span>
+            <h1 className="font-barlowCondensed text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-white leading-tight mb-4 md:mb-6">
+              Konteyner Yüklerine Özel <br className="hidden lg:block"/> <span className="text-pest-green">Güvenli Fumigasyon</span>
             </h1>
-            <p className="text-lg text-white/80 font-light leading-relaxed">
+            <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed max-w-2xl mb-6 md:mb-10">
               İthalat ve ihracat yüklerinde konteyner tipi, yükün niteliği, ambalaj ve istif yapısı, gaz dolaşımı ve işlem nedeni değerlendirilerek uygun fumigasyon planı hazırlanır.
             </p>
-            <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al?type=konteyner" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">
-                Konteyner Fumigasyonu Teklifi Al
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
+              <Link href="/ucretsiz-teklif-al?type=konteyner" className="w-full sm:w-auto bg-pest-green text-navy font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white transition-colors shadow-lg text-center flex items-center justify-center">
+                Konteyner Fumigasyon Teklifi Al
               </Link>
+              <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-white/10 text-white font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20 text-center flex items-center justify-center">
+                WhatsApp'tan Uzmana Sor
+              </a>
             </div>
           </div>
+
+          {/* Sağ Kısım: Görsel */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end items-center relative mt-4 lg:mt-0">
+            {/* Görsel arkası yeşil parlama (glow) efekti */}
+            <div className="absolute inset-0 bg-pest-green opacity-20 blur-[80px] rounded-full z-0"></div>
+            
+            {/* Şık çerçeveli görsel alanı */}
+            <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 bg-navy-deeper">
+              <img 
+                src="/images/konteyner-1.png" 
+                alt="Konteyner Fümigasyonu" 
+                className="w-full h-full object-cover block"
+                loading="eager" 
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -80,7 +103,7 @@ export default function KonteynerPage() {
             ))}
           </ul>
         </div>
-        <div className="bg-navy text-white p-10 rounded-3xl">
+        <div className="bg-navy text-white p-10 rounded-3xl shadow-xl">
           <h2 className="font-barlowCondensed text-3xl font-bold uppercase mb-8">Uygulama Süreci</h2>
           <div className="space-y-6">
             {["Konteyner ve yük bilgilerinin alınması", "Saha ve sızdırmazlık değerlendirmesi", "Uygun fumigant ve operasyon planının belirlenmesi", "İzolasyon, uyarı ve güvenlik tedbirleri", "Uygulama ve gerekli kontroller", "Kontrollü havalandırma ve son gaz ölçümü", "Kayıt ve sevkiyata hazırlık"].map((step, idx) => (
@@ -114,7 +137,7 @@ export default function KonteynerPage() {
           </div>
           <div className="bg-white p-8 rounded-2xl border border-border shadow-sm">
             <h2 className="font-barlowCondensed text-3xl font-bold text-navy uppercase mb-6 flex items-center gap-3">
-              <ClipboardCheck className="w-8 h-8" /> Kayıt ve Raporlama
+              <ClipboardCheck className="text-pest-green w-8 h-8" /> Kayıt ve Raporlama
             </h2>
             <p className="text-text-mid leading-relaxed mb-6">
               Operasyon sonunda gümrük ve liman otoritesinin talep ettiği tüm yasal dokümanlar EPCON güvencesiyle düzenlenir.
@@ -138,9 +161,9 @@ export default function KonteynerPage() {
         </h2>
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+            <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm hover:border-pest-green transition-colors">
               <h3 className="font-bold text-navy text-lg mb-3 flex items-start gap-3">
-                <span className="text-pest-green font-black">Q.</span> {faq.q}
+                <span className="text-pest-green font-black">S.</span> {faq.q}
               </h3>
               <p className="text-text-mid text-sm leading-relaxed pl-7">
                 {faq.a}
@@ -159,11 +182,11 @@ export default function KonteynerPage() {
           <p className="text-lg font-medium mb-8">
             İthalat veya ihracat sevkiyatlarınızda konteyner tipi, içerik ve karantina gereklilikleri hakkında bilgi verin; teknik ekibimiz en uygun süreci planlasın.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al?type=konteyner" className="bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/ucretsiz-teklif-al?type=konteyner" className="w-full sm:w-auto bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">
               Konteyner Fümigasyonu Teklifi Al
             </Link>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">
+            <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-transparent text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy/10 transition-colors border-2 border-navy">
               WhatsApp'tan Hemen Ulaşın
             </a>
           </div>

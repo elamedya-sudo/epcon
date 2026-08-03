@@ -6,7 +6,8 @@ import {
   CheckCircle, 
   AlertTriangle,
   Target,
-  ShieldCheck
+  ShieldCheck,
+  ArrowRight
 } from 'lucide-react';
 
 export const metadata = {
@@ -17,29 +18,55 @@ export const metadata = {
 export default function Ispm15Page() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
-      <section className="relative bg-navy py-24 px-6 md:px-10 overflow-hidden">
+      
+      {/* ── 1. HERO ALANI (Sol Metin, Sağ Görsel - Mobil Optimizasyonlu) ── */}
+      <section className="relative bg-navy pt-6 pb-12 px-6 md:py-24 md:px-10 overflow-hidden flex items-center">
         <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern-dots.svg')] bg-repeat"></div>
-        <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-white space-y-6">
-            <span className="inline-flex items-center gap-2 bg-pest-green/20 text-pest-green font-bold px-3 py-1.5 rounded-full text-sm uppercase tracking-wider border border-pest-green/30">
-              <Package className="w-4 h-4" /> AHŞAP AMBALAJ VE İHRACAT UYGUNLUĞU
+        
+        <div className="max-w-7xl mx-auto relative z-10 w-full grid lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          {/* Sol Kısım: Metinler */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <span className="inline-flex items-center gap-2 bg-pest-green/20 text-pest-green font-bold px-4 py-1.5 rounded-full text-[11px] md:text-sm uppercase tracking-wider border border-pest-green/30 mb-4 md:mb-6">
+              <Package className="w-4 h-4 hidden sm:block" /> AHŞAP AMBALAJ VE İHRACAT UYGUNLUĞU
             </span>
-            <h1 className="font-barlowCondensed text-4xl md:text-5xl font-extrabold uppercase leading-tight">
-              ISPM 15 Kapsamında Ahşap Ambalajlara <span className="text-pest-green">Metil Bromür Fumigasyonu</span>
+            <h1 className="font-barlowCondensed text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-white leading-tight mb-4 md:mb-6">
+              ISPM 15 Kapsamında Ahşap Ambalajlara <br className="hidden lg:block"/> <span className="text-pest-green">Metil Bromür Fumigasyonu</span>
             </h1>
-            <p className="text-lg text-white/80 font-light leading-relaxed">
-              EPCON; ihracatta kullanılan uygun palet, sandık, kasa, takoz ve diğer ham ahşap ambalaj malzemelerine ISPM 15 kapsamında metil bromür fumigasyonu uygular.
+            <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed max-w-2xl mb-6 md:mb-10">
+              EPCON; ihracatta kullanılan uygun palet, sandık, kasa, takoz ve diğer ham ahşap ambalaj malzemelerine uluslararası geçerliliğe sahip ISPM 15 standartları kapsamında metil bromür fumigasyonu uygular.
             </p>
-            <div className="pt-4">
-              <Link href="/ucretsiz-teklif-al?type=ispm15" className="bg-pest-green text-navy font-bold text-lg px-8 py-4 rounded-lg hover:bg-white transition-colors shadow-lg inline-block">
-                ISPM 15 Metil Bromür Teklifi Talep Et
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
+              <Link href="/ucretsiz-teklif-al?type=ispm15" className="w-full sm:w-auto bg-pest-green text-navy font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white transition-colors shadow-lg text-center flex items-center justify-center">
+                ISPM 15 Teklifi Talep Et
               </Link>
+              <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-white/10 text-white font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20 text-center flex items-center justify-center">
+                WhatsApp'tan Uzmana Sor
+              </a>
             </div>
           </div>
+
+          {/* Sağ Kısım: Görsel */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end items-center relative mt-4 lg:mt-0">
+            {/* Görsel arkası yeşil parlama (glow) efekti */}
+            <div className="absolute inset-0 bg-pest-green opacity-20 blur-[80px] rounded-full z-0"></div>
+            
+            {/* Şık çerçeveli görsel alanı */}
+            <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 bg-navy-deeper">
+              <img 
+                src="/images/fumigasyon/fumigasyon-resim2.jpg" 
+                alt="ISPM 15 Ahşap Ambalaj İlaçlaması" 
+                className="w-full h-full object-cover block"
+                loading="eager" 
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 
       <ReferenceLogos />
+
       <section className="py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 mb-12">
           <h2 className="font-barlowCondensed text-3xl font-bold text-navy uppercase mb-4">ISPM 15 Nedir?</h2>
@@ -97,7 +124,11 @@ export default function Ispm15Page() {
         <div className="max-w-4xl mx-auto">
           <h2 className="font-barlowCondensed text-3xl md:text-5xl font-extrabold uppercase mb-6">İhracat Ahşap Ambalajlarınız İçin Uygun İşlem Planı</h2>
           <p className="text-lg font-medium mb-8">Palet, sandık, kasa veya diğer ahşap ambalaj bilgilerinizi paylaşın; teknik ekibimiz ISPM 15 kapsamında metil bromür fumigasyonu uygunluğunu değerlendirsin.</p>
-          <Link href="/ucretsiz-teklif-al?type=ispm15" className="inline-block bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg">ISPM 15 Metil Bromür Teklifi Talep Et</Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/ucretsiz-teklif-al?type=ispm15" className="w-full sm:w-auto bg-navy text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-navy-deeper transition-colors shadow-lg flex items-center justify-center gap-2">
+              ISPM 15 Teklifi Talep Et <ArrowRight size={18} />
+            </Link>
+          </div>
         </div>
       </section>
     </main>
