@@ -6,7 +6,7 @@ export default function FloatingButtons() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* WhatsApp Butonu */}
       <a
-        href="https://wa.me/905316901071"
+        href="https://wa.me/905332344388"
         target="_blank"
         rel="noreferrer"
         className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 group relative"
@@ -19,7 +19,7 @@ export default function FloatingButtons() {
 
       {/* Telefon Butonu */}
       <a
-        href="tel:+905316901071"
+        href="tel:+905332344388"
         className="w-14 h-14 bg-navy text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(26,45,143,0.4)] hover:scale-110 transition-transform duration-300"
         aria-label="Bizi Arayın"
       >

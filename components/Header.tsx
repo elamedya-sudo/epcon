@@ -128,8 +128,8 @@ export default function Header() {
               <span className="hidden md:inline opacity-50">|</span>
               <a href="tel:+902165057306" className="hover:text-white transition-colors notranslate">0216 505 73 06</a>
               <span className="opacity-50">|</span>
-              <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
-                WhatsApp: 0531 690 10 71
+              <a href="https://wa.me/905332344388" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
+                WhatsApp: 0533 234 43 88
               </a>
             </div>
           </div>
