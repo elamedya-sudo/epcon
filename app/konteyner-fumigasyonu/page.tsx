@@ -77,7 +77,7 @@ export default function KonteynerPage() {
             {/* Şık çerçeveli görsel alanı */}
             <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 bg-navy-deeper">
               <img 
-                src="/images/konteyner-1.png" 
+                src="/images/konteyner-2.png" 
                 alt="Konteyner Fümigasyonu" 
                 className="w-full h-full object-cover block"
                 loading="eager" 
