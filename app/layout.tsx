@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -74,6 +75,7 @@ export default function RootLayout({
         <ScrollToTop />
         <FloatingButtons /> 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
