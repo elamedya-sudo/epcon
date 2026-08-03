@@ -57,3 +57,17 @@ body { top: 0 !important; }
 /* Hover yapıldığında çıkan orijinal metin baloncuğunu gizle */
 #goog-gt-tt { display: none !important; }
 .goog-text-highlight { background: transparent !important; box-shadow: none !important; }
+
+/* ── MOBİL HERO (AÇILIŞ) ALANI OPTİMİZASYONU ── */
+/* Sayfaların ilk açılış ekranını mobilde yukarı çeker, formu/butonları görünür kılar */
+@media (max-width: 767px) {
+  main > section:first-of-type {
+    padding-top: 1.5rem !important; /* pt-6 karşılığı */
+    padding-bottom: 3rem !important; /* pb-12 karşılığı */
+  }
+
+  /* Başlık ve Butonlar arası boşlukları (gap) da mobilde daraltmak için */
+  main > section:first-of-type > div {
+    gap: 1rem !important; 
+  }
+}
