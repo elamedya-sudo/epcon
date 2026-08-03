@@ -181,7 +181,7 @@ export default function BelgelerimizPage() {
                    src={selectedImage} 
                    alt="Sertifika" 
                    className="max-w-full max-h-[85vh] object-contain block select-none"
-                   onContextMenu={(e) => e.preventDefault()} // Sağ Tıklamayı Engeller
+                   onContextMenu={(e) => e.preventDefault()} // Sağ Tıklamayı Engelle
                    onError={(e) => {
                       (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x1131.png?text=Belge+Hen%C3%BCz+Y%C3%BCklenmedi'; 
                    }}
