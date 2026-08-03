@@ -3,29 +3,30 @@
 import React, { useState, useEffect } from "react";
 import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown, FileText, Globe } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // SAYFA KONTROLÜ İÇİN EKLENDİ
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [currentLang, setCurrentLang] = useState("TR");
-  const pathname = usePathname(); // MEVCUT SAYFAYI YAKALIYORUZ
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (document.cookie.includes("googtrans=/tr/en")) {
-      setCurrentLang("EN");
-    } else {
-      setCurrentLang("TR");
-    }
+    if (document.cookie.includes("googtrans=/tr/en")) setCurrentLang("EN");
+    else if (document.cookie.includes("googtrans=/tr/ru")) setCurrentLang("RU");
+    else if (document.cookie.includes("googtrans=/tr/de")) setCurrentLang("DE");
+    else if (document.cookie.includes("googtrans=/tr/ar")) setCurrentLang("AR");
+    else setCurrentLang("TR");
   }, []);
 
-  const switchLanguage = (lang: "TR" | "EN") => {
-    if (lang === "EN") {
-      document.cookie = "googtrans=/tr/en; path=/";
-      document.cookie = `googtrans=/tr/en; domain=${window.location.hostname}; path=/`;
-    } else {
+  const switchLanguage = (lang: "TR" | "EN" | "RU" | "DE" | "AR") => {
+    if (lang === "TR") {
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
+    } else {
+      const targetLang = lang.toLowerCase();
+      document.cookie = `googtrans=/tr/${targetLang}; path=/`;
+      document.cookie = `googtrans=/tr/${targetLang}; domain=${window.location.hostname}; path=/`;
     }
     window.location.reload();
   };
@@ -173,18 +174,15 @@ export default function Header() {
         <div className="hidden sm:flex items-center gap-3">
           
           <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
-            <button 
-              onClick={() => switchLanguage("TR")}
-              className={`px-2.5 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
-            >
-              TR
-            </button>
-            <button 
-              onClick={() => switchLanguage("EN")}
-              className={`px-2.5 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
-            >
-              EN
-            </button>
+            {(["TR", "EN", "RU", "DE", "AR"] as const).map((lang) => (
+              <button 
+                key={lang}
+                onClick={() => switchLanguage(lang)}
+                className={`px-2 py-1 text-[11px] font-bold rounded transition-all outline-none ${currentLang === lang ? "bg-navy text-white shadow-sm" : "text-text-mid hover:text-navy"}`}
+              >
+                {lang}
+              </button>
+            ))}
           </div>
 
           <Link href="/belgelerimiz" className="bg-navy hover:bg-navy-deeper text-white text-sm font-bold px-5 py-2.5 rounded-md transition-all flex items-center gap-2 translate">
@@ -203,31 +201,27 @@ export default function Header() {
       {/* ── 3. MOBİL MENÜ ── */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white border-b border-border shadow-xl lg:hidden z-50">
-          {/* Mobil ekranlarda aşağı taşmaması için p-6'dan p-5'e ve calc(100dvh-80px) yapısına geçildi */}
           <div className="flex flex-col p-5 space-y-1 max-h-[calc(100dvh-80px)] overflow-y-auto pb-8">
             
-            {/* Dil Seçeneği Alanı Daraltıldı */}
-            <div className="flex items-center justify-between pb-3 border-b border-border/50 mb-1">
+            {/* Dil Seçeneği Alanı */}
+            <div className="flex flex-col gap-2 pb-3 border-b border-border/50 mb-1">
               <span className="text-[13px] font-bold text-navy flex items-center gap-2 translate">
                 <Globe size={14} className="text-pest-green" /> Dil / Language
               </span>
-              <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
-                <button 
-                  onClick={() => switchLanguage("TR")}
-                  className={`px-3 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "TR" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
-                >
-                  Türkçe
-                </button>
-                <button 
-                  onClick={() => switchLanguage("EN")}
-                  className={`px-3 py-1 text-xs font-bold rounded transition-all outline-none ${currentLang === "EN" ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
-                >
-                  English
-                </button>
+              <div className="grid grid-cols-5 gap-1 bg-slate-100 p-1 rounded-md border border-slate-200 text-center">
+                {(["TR", "EN", "RU", "DE", "AR"] as const).map((lang) => (
+                  <button 
+                    key={lang}
+                    onClick={() => switchLanguage(lang)}
+                    className={`py-1.5 text-xs font-bold rounded transition-all outline-none ${currentLang === lang ? "bg-navy text-white shadow-sm" : "text-text-mid"}`}
+                  >
+                    {lang}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Menü Linklerindeki Boşluklar (py-3 -> py-2.5) Daraltıldı */}
+            {/* Menü Linkleri */}
             <div className="translate flex flex-col">
               {menuItems.map((item, idx) => (
                 item.isDropdown ? (
@@ -252,7 +246,7 @@ export default function Header() {
               ))}
             </div>
             
-            {/* Alt Butonların Boşlukları Daraltıldı */}
+            {/* Alt Butonlar */}
             <div className="pt-4 flex flex-col gap-2 translate">
               <Link href="/belgelerimiz" className="w-full bg-navy text-white text-center py-2.5 rounded-md font-bold text-[15px]" onClick={() => setIsOpen(false)}>
                 Belgelerimiz
