@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown, FileText, Globe } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // SAYFA KONTROLÜ İÇİN EKLENDİ
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [currentLang, setCurrentLang] = useState("TR");
+  const pathname = usePathname(); // MEVCUT SAYFAYI YAKALIYORUZ
 
   useEffect(() => {
     if (document.cookie.includes("googtrans=/tr/en")) {
@@ -87,50 +89,52 @@ export default function Header() {
   return (
     <header className="w-full sticky top-0 z-50 font-barlow bg-white shadow-md flex flex-col notranslate">
       
-      {/* ── 1. ÜST BANT (Mobil Kayan Yazı) ── */}
-      <div className="w-full bg-navy-deeper text-white/90 text-xs py-2.5 overflow-hidden border-b border-white/5 relative flex items-center">
-        <style dangerouslySetInnerHTML={{__html: `
-          @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .marquee-mobile {
-            display: flex;
-            white-space: nowrap;
-            animation: scroll 15s linear infinite;
-            padding-left: 10px;
-          }
-          @media (min-width: 768px) {
-            .marquee-mobile {
-              animation: none;
-              width: 100%;
-              justify-content: space-between;
-              padding: 0 40px;
-              margin: 0 auto;
-              max-width: 80rem;
+      {/* ── 1. ÜST BANT (Sadece Anasayfada Görünecek) ── */}
+      {pathname === "/" && (
+        <div className="w-full bg-navy-deeper text-white/90 text-xs py-2.5 overflow-hidden border-b border-white/5 relative flex items-center">
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes scroll {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(-100%); }
             }
-          }
-        `}} />
-        
-        <div className="marquee-mobile gap-6 md:gap-4 min-w-max translate">
-          <div className="flex items-center gap-3 md:gap-4">
-            <span>Hizmet Saatleri: Pzt-Cmt 08.00-20.00</span>
-            <span className="hidden md:inline opacity-50">|</span>
-            <span className="flex items-center gap-1">
-              <MapPin size={12} className="text-pest-green" />
-              İstanbul merkezli, Türkiye genelinde hizmet
-            </span>
-          </div>
-          <div className="flex items-center gap-3 md:gap-4">
-            <span className="hidden md:inline opacity-50">|</span>
-            <a href="tel:+902165057306" className="hover:text-white transition-colors notranslate">0216 505 73 06</a>
-            <span className="opacity-50">|</span>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
-              WhatsApp: 0531 690 10 71
-            </a>
+            .marquee-mobile {
+              display: flex;
+              white-space: nowrap;
+              animation: scroll 15s linear infinite;
+              padding-left: 10px;
+            }
+            @media (min-width: 768px) {
+              .marquee-mobile {
+                animation: none;
+                width: 100%;
+                justify-content: space-between;
+                padding: 0 40px;
+                margin: 0 auto;
+                max-width: 80rem;
+              }
+            }
+          `}} />
+          
+          <div className="marquee-mobile gap-6 md:gap-4 min-w-max translate">
+            <div className="flex items-center gap-3 md:gap-4">
+              <span>Hizmet Saatleri: Pzt-Cmt 08.00-20.00</span>
+              <span className="hidden md:inline opacity-50">|</span>
+              <span className="flex items-center gap-1">
+                <MapPin size={12} className="text-pest-green" />
+                İstanbul merkezli, Türkiye genelinde hizmet
+              </span>
+            </div>
+            <div className="flex items-center gap-3 md:gap-4">
+              <span className="hidden md:inline opacity-50">|</span>
+              <a href="tel:+902165057306" className="hover:text-white transition-colors notranslate">0216 505 73 06</a>
+              <span className="opacity-50">|</span>
+              <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
+                WhatsApp: 0531 690 10 71
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ── 2. ANA MENÜ ── */}
       <nav className="w-full bg-transparent h-20 px-6 md:px-10 flex items-center justify-between">
@@ -199,11 +203,13 @@ export default function Header() {
       {/* ── 3. MOBİL MENÜ ── */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white border-b border-border shadow-xl lg:hidden z-50">
-          <div className="flex flex-col p-6 space-y-2 max-h-[75vh] overflow-y-auto">
+          {/* Mobil ekranlarda aşağı taşmaması için p-6'dan p-5'e ve calc(100dvh-80px) yapısına geçildi */}
+          <div className="flex flex-col p-5 space-y-1 max-h-[calc(100dvh-80px)] overflow-y-auto pb-8">
             
-            <div className="flex items-center justify-between pb-4 border-b border-border/50 mb-2">
-              <span className="text-sm font-bold text-navy flex items-center gap-2 translate">
-                <Globe size={16} className="text-pest-green" /> Dil / Language
+            {/* Dil Seçeneği Alanı Daraltıldı */}
+            <div className="flex items-center justify-between pb-3 border-b border-border/50 mb-1">
+              <span className="text-[13px] font-bold text-navy flex items-center gap-2 translate">
+                <Globe size={14} className="text-pest-green" /> Dil / Language
               </span>
               <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
                 <button 
@@ -221,35 +227,37 @@ export default function Header() {
               </div>
             </div>
 
+            {/* Menü Linklerindeki Boşluklar (py-3 -> py-2.5) Daraltıldı */}
             <div className="translate flex flex-col">
               {menuItems.map((item, idx) => (
                 item.isDropdown ? (
-                  <div key={idx} className="flex flex-col border-b border-border/50 pb-2">
-                    <div className="flex items-center justify-between py-2">
-                      <Link href={item.mainHref || "#"} onClick={() => setIsOpen(false)} className="text-base font-bold text-text-dark hover:text-pest-green transition-colors flex-grow">
+                  <div key={idx} className="flex flex-col border-b border-border/50 pb-1.5">
+                    <div className="flex items-center justify-between py-1.5">
+                      <Link href={item.mainHref || "#"} onClick={() => setIsOpen(false)} className="text-[15px] font-bold text-text-dark hover:text-pest-green transition-colors flex-grow">
                         {item.name}
                       </Link>
                       <button onClick={(e) => toggleDropdown(idx, e)} className="p-2 -mr-2 text-text-dark hover:text-pest-green">
-                        <ChevronDown size={18} className={`transition-transform duration-300 ${activeDropdown === idx ? "rotate-180" : ""}`} />
+                        <ChevronDown size={16} className={`transition-transform duration-300 ${activeDropdown === idx ? "rotate-180" : ""}`} />
                       </button>
                     </div>
-                    <div className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${activeDropdown === idx ? "max-h-[500px] mt-2 opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className={`flex flex-col pl-4 overflow-hidden transition-all duration-300 ${activeDropdown === idx ? "max-h-[500px] mt-1 opacity-100" : "max-h-0 opacity-0"}`}>
                       {item.items?.map((subItem, subIdx) => (
-                        <Link key={subIdx} href={subItem.href} onClick={() => setIsOpen(false)} className="py-2.5 text-sm font-medium text-text-mid hover:text-pest-green border-l-2 border-border pl-3">{subItem.name}</Link>
+                        <Link key={subIdx} href={subItem.href} onClick={() => setIsOpen(false)} className="py-2 text-[13px] font-medium text-text-mid hover:text-pest-green border-l-2 border-border pl-3">{subItem.name}</Link>
                       ))}
                     </div>
                   </div>
                 ) : (
-                  <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="block py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
+                  <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="block py-2.5 text-[15px] font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
                 )
               ))}
             </div>
             
-            <div className="pt-6 flex flex-col gap-3 translate">
-              <Link href="/belgelerimiz" className="w-full bg-navy text-white text-center py-3 rounded-md font-bold text-base" onClick={() => setIsOpen(false)}>
+            {/* Alt Butonların Boşlukları Daraltıldı */}
+            <div className="pt-4 flex flex-col gap-2 translate">
+              <Link href="/belgelerimiz" className="w-full bg-navy text-white text-center py-2.5 rounded-md font-bold text-[15px]" onClick={() => setIsOpen(false)}>
                 Belgelerimiz
               </Link>
-              <Link href="/ucretsiz-teklif-al" className="w-full bg-pest-green text-white text-center py-3 rounded-md font-bold text-base" onClick={() => setIsOpen(false)}>
+              <Link href="/ucretsiz-teklif-al" className="w-full bg-pest-green text-white text-center py-2.5 rounded-md font-bold text-[15px]" onClick={() => setIsOpen(false)}>
                 Teklif Al
               </Link>
             </div>
