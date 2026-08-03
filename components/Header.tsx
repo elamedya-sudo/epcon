@@ -54,6 +54,7 @@ export default function Header() {
       items: [
         { name: "Fumigasyon Hizmetleri", href: "/fumigasyon" },
         { name: "BMSB Fumigasyonu", href: "/bmsb-fumigasyonu" },
+        { name: "Avustralya Khapra Böceği", href: "/avustralya-khapra-bocegi-tedbirleri" },
         { name: "ISPM 15 Ahşap Ambalaj", href: "/ispm-15-hizmetleri" },
         { name: "Konteyner Fumigasyonu", href: "/konteyner-fumigasyonu" },
         { name: "Gemi ve Yat Fumigasyonu", href: "/gemi-yat-fumigasyonu" },
@@ -220,7 +221,6 @@ export default function Header() {
               </div>
             </div>
 
-            {/* flex flex-col sınıfı buraya eklendi */}
             <div className="translate flex flex-col">
               {menuItems.map((item, idx) => (
                 item.isDropdown ? (
@@ -240,7 +240,6 @@ export default function Header() {
                     </div>
                   </div>
                 ) : (
-                  // Link içine block sınıfı eklendi
                   <Link key={idx} href={item.href || "#"} onClick={() => setIsOpen(false)} className="block py-3 text-base font-bold text-text-dark hover:text-pest-green transition-colors border-b border-border/50">{item.name}</Link>
                 )
               ))}

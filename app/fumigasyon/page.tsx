@@ -128,6 +128,7 @@ export default async function FumigationPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: <ShieldCheck className="w-8 h-8 text-pest-green" />, title: "BMSB Fumigasyonu", desc: "Avustralya ve ilgili hedef ülke gerekliliklerine yönelik işlem, kayıt ve güvenli sevkiyata hazırlık.", href: "/bmsb-fumigasyonu" },
+              { icon: <ShieldAlert className="w-8 h-8 text-pest-green" />, title: "Avustralya Khapra Böceği", desc: "Yüksek riskli bitki ürünleri ve konteynerler için zorunlu karantina, fümigasyon ve AEI sertifikasyonu.", href: "/avustralya-khapra-bocegi-tedbirleri" },
               { icon: <Box className="w-8 h-8 text-pest-green" />, title: "ISPM 15 Hizmetleri", desc: "Ham ahşap ambalajların işlem, kayıt ve yetki kapsamına göre işaretleme süreci.", href: "/ispm-15-hizmetleri" },
               { icon: <PackageSearch className="w-8 h-8 text-pest-green" />, title: "Konteyner Fumigasyonu", desc: "Konteyner, yük, izolasyon, gaz ölçümü ve gazdan arındırma süreci.", href: "/konteyner-fumigasyonu" },
               { icon: <Ship className="w-8 h-8 text-pest-green" />, title: "Gemi ve Yat Fumigasyonu", desc: "Ambar, yaşam mahalli, depo ve uygun kapalı bölümlerde kontrollü uygulama.", href: "/gemi-yat-fumigasyonu" },
