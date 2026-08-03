@@ -1,58 +1,46 @@
+"use client";
+
 import React from "react";
-import { Award, ShieldCheck, Ship, Globe, FileCheck } from "lucide-react";
+import Link from "next/link";
+import { FileCheck } from "lucide-react";
 
 export default function TrustBar() {
-  // Brifteki (Bölüm 4.4) maddeler
-  const trustItems = [
-    {
-      icon: <Award size={18} className="text-white" />,
-      title: "TSE-HYB Belgeli",
-      desc: "Belgelendirilmiş hizmet altyapısı."
-    },
-    {
-      icon: <ShieldCheck size={18} className="text-white" />,
-      title: "BİYOSİDAL UYGULAMA İZİNLİ",
-      desc: "Yetkili biyosidal uygulama."
-    },
-    {
-      icon: <FileCheck size={18} className="text-white" />,
-      title: "FUMİGASYON YETKİ BELGELİ",
-      desc: "Profesyonel fumigasyon."
-    },
-    {
-      icon: <Ship size={18} className="text-white" />,
-      title: "HUDUT VE SAHİLLER YETKİLİ",
-      desc: "İlgili yönetmelik kapsamında."
-    },
-    {
-      icon: <Globe size={18} className="text-white" />,
-      title: "BMSB AVUSTRALYA AKREDİTASYONLU",
-      desc: "Kayıtlı fumigasyon hizmeti."
-    },
+  const belgeler = [
+    { label: "TSE-HYB", href: "/belgelerimiz" },
+    { label: "BİYOSİDAL YETKİ", href: "/belgelerimiz" },
+    { label: "FÜMİGASYON", href: "/belgelerimiz" },
+    { label: "HUDUT VE SAHİLLER", href: "/belgelerimiz" },
+    { label: "BMSB", href: "/belgelerimiz" },
   ];
 
   return (
-    <section className="w-full bg-pest-green py-5 px-6 md:px-10 font-barlow">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-y-6 gap-x-8 md:gap-x-12">
-        {trustItems.map((item, index) => (
-          <React.Fragment key={index}>
-            {/* Güven Maddesi */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/15 border border-white/10 rounded-lg flex items-center justify-center flex-shrink-0 shadow-inner">
-                {item.icon}
-              </div>
-              <div className="flex flex-col">
-                 <span className="text-white font-bold text-sm tracking-wide uppercase leading-tight">{item.title}</span>
-                 <span className="text-white/70 text-xs hidden sm:block">{item.desc}</span>
-              </div>
-            </div>
-            
-            {/* Masaüstünde Maddeler Arasındaki Ayırıcı Çizgi */}
-            {index < trustItems.length - 1 && (
-              <div className="hidden lg:block w-[1px] h-8 bg-white/20 self-center" />
-            )}
-          </React.Fragment>
-        ))}
+    <section className="w-full bg-slate-50 border-b border-slate-200 py-4 font-barlow relative z-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-10">
+        
+        {/* Yatay Kaydırma (Horizontal Scroll) Alanı */}
+        {/* [&::-webkit-scrollbar]:hidden sınıfları çirkin kaydırma çubuğunu gizler ama kaydırma çalışmaya devam eder */}
+        <div className="flex items-center gap-3 md:gap-4 overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          
+          {/* Başlık Kısmı (Sabit/Esnek) */}
+          <div className="flex items-center gap-2 flex-shrink-0 pr-2">
+            <FileCheck className="w-5 h-5 text-pest-green" />
+            <span className="font-bold text-navy text-[13px] md:text-sm tracking-wide uppercase">
+              YETKİ VE BELGELERİMİZ:
+            </span>
+          </div>
+
+          {/* Belgeler (Tıklanabilir Kayan Haplar) */}
+          {belgeler.map((belge, idx) => (
+            <Link 
+              key={idx} 
+              href={belge.href}
+              className="flex-shrink-0 bg-white border border-slate-200 text-text-dark hover:border-pest-green hover:text-pest-green text-xs font-bold px-4 py-2.5 rounded-full shadow-sm transition-all whitespace-nowrap flex items-center justify-center"
+            >
+              {belge.label}
+            </Link>
+          ))}
+
+        </div>
       </div>
     </section>
   );

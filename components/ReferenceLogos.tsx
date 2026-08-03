@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FileBadge } from "lucide-react";
 
 export default function ReferenceLogos() {
-  // Klasördeki tüm resimlerin isimleri tam eşleşecek şekilde eklendi
   const logos = [
     "/logolar/test/avek.png",
     "/logolar/test/donerci-bekirzade-logo-s12.png",
@@ -32,21 +31,39 @@ export default function ReferenceLogos() {
     "/logolar/test/yumtat.jpg"
   ];
 
+  const belgeler = [
+    "TSE-HYB", 
+    "BİYOSİDAL YETKİ", 
+    "FÜMİGASYON", 
+    "HUDUT VE SAHİLLER", 
+    "BMSB"
+  ];
+
   return (
     <section className="bg-surface-light pt-8 pb-10 border-b border-border overflow-hidden font-barlow">
       
-      {/* ── BELGELERİMİZ (Tıklanabilir Rozetler) ── */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 mb-10">
-        <Link href="/belgelerimiz" className="group flex flex-wrap items-center justify-center gap-3 md:gap-4 transition-all">
-          <span className="text-sm font-bold text-navy uppercase md:mr-2 flex items-center gap-2">
-            <FileBadge size={18} className="text-pest-green" /> Yetki ve Belgelerimiz:
-          </span>
-          <div className="h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm group-hover:border-pest-green transition-colors">TSE-HYB</div>
-          <div className="h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm group-hover:border-pest-green transition-colors">BİYOSİDAL YETKİ</div>
-          <div className="h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm group-hover:border-pest-green transition-colors">FÜMİGASYON</div>
-          <div className="h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm group-hover:border-pest-green transition-colors">HUDUT VE SAHİLLER</div>
-          <div className="h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm group-hover:border-pest-green transition-colors">BMSB</div>
-        </Link>
+      {/* ── BELGELERİMİZ (Mobilde Yatay Kaydırılabilir Rozetler) ── */}
+      <div className="max-w-7xl mx-auto px-4 md:px-10 mb-10">
+        <div className="flex items-center gap-3 md:gap-4 overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          
+          <Link href="/belgelerimiz" className="flex items-center gap-2 flex-shrink-0 group pr-2">
+            <FileBadge size={18} className="text-pest-green group-hover:scale-110 transition-transform" />
+            <span className="text-[13px] md:text-sm font-bold text-navy uppercase tracking-wide group-hover:text-pest-green transition-colors">
+              Yetki ve Belgelerimiz:
+            </span>
+          </Link>
+
+          {belgeler.map((belge, idx) => (
+            <Link 
+              key={idx}
+              href="/belgelerimiz"
+              className="flex-shrink-0 h-9 px-4 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[11px] md:text-xs font-bold text-slate-600 shadow-sm hover:border-pest-green hover:text-pest-green transition-colors"
+            >
+              {belge}
+            </Link>
+          ))}
+          
+        </div>
       </div>
 
       {/* ── REFERANS LOGOLARI (Kayan Şerit) ── */}
@@ -59,7 +76,6 @@ export default function ReferenceLogos() {
           .animate-scroll-logos {
             display: flex;
             width: max-content;
-            /* Logolar çok olduğu için süreyi uzattık (60s) ki çok hızlı akıp göz yormasın */
             animation: scroll-logos 60s linear infinite; 
           }
           .animate-scroll-logos:hover {
@@ -72,7 +88,6 @@ export default function ReferenceLogos() {
           {[...logos, ...logos].map((logo, idx) => (
             <div 
               key={idx} 
-              // En kritik ayar: Yükseklik sabit tutulur, genişlik orantılı uzar ancak max 160px ile sınırlandırılır.
               className="h-12 md:h-14 relative flex-shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
               <img 
