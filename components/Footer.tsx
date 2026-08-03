@@ -131,7 +131,7 @@ export default function Footer() {
           <div className="flex items-center gap-1">
             <span>Powered by</span>
             <a href="https://www.eladesign.org" target="_blank" rel="noreferrer" className="font-semibold text-white/50 hover:text-pest-green transition-colors flex items-center gap-0.5">
-              ELA Teknoloji ve Tasarım <ArrowUpRight size={12} />
+              ELA Teknoloji <ArrowUpRight size={12} />
             </a>
           </div>
         </div>
