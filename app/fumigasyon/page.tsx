@@ -59,29 +59,50 @@ export default async function FumigationPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. HERO ALANI (Mobilde yukarı çekildi: pt-6 pb-12 md:py-24 eklendi) */}
-      <section className="relative bg-navy pt-6 pb-12 px-6 md:py-24 md:px-10 overflow-hidden">
+      {/* 1. HERO ALANI (Sol Metin, Sağ Görsel - Mobil Optimizasyonlu) */}
+      <section className="relative bg-navy pt-6 pb-12 px-6 md:py-24 md:px-10 overflow-hidden flex items-center">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8ed7c1590f?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
         <div className="absolute inset-0 bg-navy/80 z-0"></div>
         
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <span className="inline-block bg-pest-green/20 text-pest-green font-bold px-4 py-1.5 rounded-full text-[11px] md:text-sm uppercase tracking-wider border border-pest-green/30 mb-4 md:mb-6">
-            FUMİGASYON • GAZ ÖLÇÜMÜ • GAZDAN ARINDIRMA • SEVKİYAT GÜVENLİĞİ
-          </span>
-          <h1 className="font-barlowCondensed text-[32px] sm:text-4xl md:text-6xl font-extrabold uppercase text-white leading-tight mb-4 md:mb-6 max-w-4xl mx-auto">
-            Güvenli, Kontrollü ve <span className="text-pest-green">İzlenebilir Fumigasyon</span>
-          </h1>
-          <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed max-w-3xl mx-auto mb-6 md:mb-10">
-            EPCON; ürün, yük, konteyner, depo, silo, gemi ve kapalı hacimlere yönelik fumigasyon hizmetlerini; insan sağlığı, çevre güvenliği, ürün bütünlüğü ve sevkiyat sürekliliğini esas alan kontrollü prosedürlerle gerçekleştirir. Uygulamalar tamamlandıktan sonra kontrollü havalandırma, gaz ölçümü ve gazdan arındırma işlemleri yapılarak yükler güvenli sevkiyata hazırlanır.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-            <Link href="/ucretsiz-teklif-al" className="bg-pest-green text-navy font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white transition-colors shadow-lg">
-              Teknik Değerlendirme Talep Et
-            </Link>
-            <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="bg-white/10 text-white font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20">
-              WhatsApp'tan Uzmana Sor
-            </a>
+        <div className="max-w-7xl mx-auto relative z-10 w-full grid lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          {/* Sol Kısım: Metinler */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <span className="inline-block bg-pest-green/20 text-pest-green font-bold px-4 py-1.5 rounded-full text-[11px] md:text-sm uppercase tracking-wider border border-pest-green/30 mb-4 md:mb-6">
+              FUMİGASYON • GAZ ÖLÇÜMÜ • GAZDAN ARINDIRMA • SEVKİYAT GÜVENLİĞİ
+            </span>
+            <h1 className="font-barlowCondensed text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-white leading-tight mb-4 md:mb-6">
+              Güvenli, Kontrollü ve <br className="hidden lg:block"/> <span className="text-pest-green">İzlenebilir Fumigasyon</span>
+            </h1>
+            <p className="text-sm md:text-lg text-white/80 font-light leading-relaxed max-w-2xl mb-6 md:mb-10">
+              EPCON; ürün, yük, konteyner, depo, silo, gemi ve kapalı hacimlere yönelik fumigasyon hizmetlerini; insan sağlığı, çevre güvenliği, ürün bütünlüğü ve sevkiyat sürekliliğini esas alan kontrollü prosedürlerle gerçekleştirir. Uygulamalar tamamlandıktan sonra kontrollü havalandırma, gaz ölçümü ve gazdan arındırma işlemleri yapılarak yükler güvenli sevkiyata hazırlanır.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
+              <Link href="/ucretsiz-teklif-al" className="w-full sm:w-auto bg-pest-green text-navy font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white transition-colors shadow-lg text-center flex items-center justify-center">
+                Teknik Değerlendirme Talep Et
+              </Link>
+              <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-white/10 text-white font-bold text-[15px] md:text-lg px-8 py-3.5 md:py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/20 text-center flex items-center justify-center">
+                WhatsApp'tan Uzmana Sor
+              </a>
+            </div>
           </div>
+
+          {/* Sağ Kısım: Görsel (806x520 boyutuna tam uyumlu olacak şekilde ayarlandı) */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end items-center relative mt-4 lg:mt-0">
+            {/* Görsel arkası yeşil parlama (glow) efekti */}
+            <div className="absolute inset-0 bg-pest-green opacity-20 blur-[80px] rounded-full z-0"></div>
+            
+            {/* Şık çerçeveli görsel alanı */}
+            <div className="relative z-10 w-full max-w-[550px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 bg-navy-deeper">
+              <img 
+                src="/images/fumigasyon.jpg" 
+                alt="Fumigasyon ve Gazdan Arındırma İşlemleri" 
+                className="w-full h-auto block"
+                loading="eager" 
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 

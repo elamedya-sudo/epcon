@@ -6,12 +6,22 @@ import { FileCheck, ShieldCheck, Award, FileText, ArrowRight, X } from "lucide-r
 export default function BelgelerimizPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // Gönderdiğin resimlerin birebir isimleri ve klasör yolları eklendi
+  // Gönderdiğin yeni resimler, belge numaraları ve geçerlilik tarihleri ile güncellenmiş liste
   const belgeler = [
     {
       kategori: "YETKİ VE RUHSATLAR",
       icon: <ShieldCheck className="w-8 h-8 text-navy" />,
       items: [
+        { 
+          adi: "Biyosidal Ürün Uygulama İzin Belgesi", 
+          no: "302060194/659", kapsam: "1. 2. 3. ve 4. Ana Grup", tarih: "20.01.2026", 
+          imagePath: "/images/belgelerimiz/yeni/20260122-biyosidal-urun-uygulama-izin-belgesi.png" 
+        },
+        { 
+          adi: "Zirai Fümigasyon Ruhsatı", 
+          no: "2017-004", kapsam: "Fümigasyon İşlemleri", tarih: "09.12.2025", 
+          imagePath: "/images/belgelerimiz/yeni/2025120900-FUM-RUHSAT.png" 
+        },
         { 
           adi: "Fümigasyon Operatör Belgesi", 
           no: "86", kapsam: "Tarım ve Köyişleri Bakanlığı", tarih: "Geçerli", 
@@ -21,16 +31,6 @@ export default function BelgelerimizPage() {
           adi: "Propestgas Güvenli ve Etkin Kullanım Belgesi", 
           no: "86", kapsam: "Barcan", tarih: "Geçerli", 
           imagePath: "/images/belgelerimiz/barcan-745x1024.jpg" 
-        },
-        { 
-          adi: "Biyosidal Ürün Uygulama İzin Belgesi", 
-          no: "BY-001", kapsam: "Halk Sağlığı Alanı", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/biyosidal-urun-izin-uygulama-belgesi.jpg" 
-        },
-        { 
-          adi: "Fumigasyon Yetki Belgesi", 
-          no: "2017/004", kapsam: "Zirai Fümigasyon Ruhsatı", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/fumigasyon-ruhsat-745x1024.jpg" 
         },
         { 
           adi: "Hudut ve Sahiller Yetki Belgesi", 
@@ -50,38 +50,38 @@ export default function BelgelerimizPage() {
       items: [
         { 
           adi: "TSE Hizmet Yeterlilik Belgesi", 
-          no: "34-HYB-5056", kapsam: "Haşere Kontrol Hizmetleri", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/tse-2021-745x1024.jpg" 
+          no: "34-HYB-5056", kapsam: "TS 8358 Haşere Mücadele Hizmetleri", tarih: "30.06.2027", 
+          imagePath: "/images/belgelerimiz/yeni/TSE-HYB-2027.png" 
         },
         { 
           adi: "ISO 9001:2015", 
-          no: "9101925879", kapsam: "Kalite Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-9001-745x1024.jpg" 
+          no: "102025921", kapsam: "Kalite Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/1.png" 
         },
         { 
           adi: "ISO 14001:2015", 
-          no: "9101925880", kapsam: "Çevre Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-14001-745x1024.jpg" 
+          no: "102025922", kapsam: "Çevre Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/2.png" 
         },
         { 
           adi: "ISO 22000:2018", 
-          no: "9101925882", kapsam: "Gıda Güvenliği Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-22000-745x1024.jpg" 
+          no: "102025924", kapsam: "Gıda Güvenliği Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/5.png" 
         },
         { 
-          adi: "ISO 30001", 
-          no: "9101925878", kapsam: "Risk Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-30001-745x1024.jpg" 
+          adi: "ISO 31000", 
+          no: "102025920", kapsam: "Risk Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/3.png" 
         },
         { 
-          adi: "ISO 45001", 
-          no: "9101925881", kapsam: "İş Sağlığı ve Güvenliği Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-45001-745x1024.jpg" 
+          adi: "ISO 45001:2018", 
+          no: "102025923", kapsam: "İş Sağlığı ve Güvenliği Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/6.png" 
         },
         { 
           adi: "ISO 10002:2018", 
-          no: "91019258383", kapsam: "Müşteri Memnuniyet Yönetim Sistemi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/iso-10002-745x1024.jpg" 
+          no: "102025925", kapsam: "Müşteri Memnuniyeti Yönetim Sistemi", tarih: "28.10.2026", 
+          imagePath: "/images/belgelerimiz/yeni/4.png" 
         }
       ]
     },
@@ -92,12 +92,12 @@ export default function BelgelerimizPage() {
         { 
           adi: "BİFUDER Üyeliği", 
           no: "Üye", kapsam: "Biyosidal ve Fumigasyon Derneği", tarih: "Aktif Üye", 
-          imagePath: "/images/belgelerimiz/bifuder2.png" // İleride eklenebilir
+          imagePath: "/images/belgelerimiz/bifuder2.png" 
         },
         { 
           adi: "Mesleki Sorumluluk Sigortası", 
           no: "SGR-00", kapsam: "Hizmet ve Operasyon Güvencesi", tarih: "Geçerli", 
-          imagePath: "/images/belgelerimiz/sorumluluk.png" // İleride eklenebilir
+          imagePath: "/images/belgelerimiz/sorumluluk.png" 
         }
       ]
     }
@@ -163,7 +163,7 @@ export default function BelgelerimizPage() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deeper/90 p-4" onClick={() => setSelectedImage(null)}>
           <div 
             className="relative max-w-3xl w-full h-auto max-h-[90vh] bg-white p-2 rounded-xl shadow-2xl flex flex-col"
-            onClick={(e) => e.stopPropagation()} // Resme tıklayınca kapanmasını engeller
+            onClick={(e) => e.stopPropagation()} 
           >
             {/* Kapat Butonu */}
             <button 
