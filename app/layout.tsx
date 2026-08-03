@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
-import Script from "next/script"; // Script import edildi
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,6 +22,10 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   title: "EPCON — Ev, Villa ve Site İlaçlaması | İstanbul",
   description: "TSE belgeli, fümigasyon ruhsatlı profesyonel ilaçlama hizmetleri.",
+  // Google Search Console Doğrulaması
+  verification: {
+    google: "i7n6JIGEl5BncWFCKYUyRVNtWYLePkLnSIh_WIWdH6U",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +37,20 @@ export default function RootLayout({
     <html lang="tr" className="scroll-smooth">
       <body className={`${barlow.variable} ${barlowCondensed.variable} font-barlow antialiased bg-white text-text-dark relative`}>
         
+        {/* GOOGLE ANALYTICS (GA4) ENTEGRASYONU */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-538444419"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-538444419');
+          `}
+        </Script>
+
         {/* GİZLİ ÇEVİRİ MOTORU BAŞLANGICI */}
         <div id="google_translate_element" style={{ display: 'none' }}></div>
         <Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
