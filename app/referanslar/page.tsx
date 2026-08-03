@@ -42,10 +42,10 @@ export default function ReferanslarPage() {
           KURUMSAL ÇÖZÜM ORTAKLARIMIZ
         </span>
         <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-navy mb-6">
-          Güveninize Layık Görüldük
+          Farklı Sektörlerde Güvenilir Hizmet
         </h1>
         <p className="text-text-mid max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Uzman mühendis kadromuzla, Türkiye'nin en seçkin kurumlarına, tarihi yapılarına ve sanayi devlerine entegre pest kontrol ve fümigasyon çözümleri sunuyoruz.
+          EPCON, 2011 yılından bu yana farklı sektörlerin ihtiyaçlarına özel; yetkili, izlenebilir ve sürdürülebilir pest kontrol, biyosidal uygulama ve fumigasyon hizmetleri sunmaktadır.
         </p>
       </section>
 
