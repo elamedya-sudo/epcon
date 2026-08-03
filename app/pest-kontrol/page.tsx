@@ -77,8 +77,8 @@ export default function PestKontrolPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
-      {/* 1. HERO ALANI (Metin Solda, Görsel Sağda - 2 Sütunlu Yapı) */}
-      <section className="relative bg-navy-deeper py-20 lg:py-24 px-6 md:px-10 overflow-hidden flex items-center">
+      {/* 1. HERO ALANI (Metin Solda, Görsel Sağda - Slider Yapısı) */}
+      <section className="relative bg-navy-deeper pt-6 pb-12 lg:py-24 px-6 md:px-10 overflow-hidden flex items-center">
         {/* Arka Plan Efektleri */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:30px_30px] z-0" />
         <div className="absolute right-[10%] bottom-[-40px] w-[300px] h-[300px] rounded-full bg-pest-green opacity-10 blur-[80px] z-0" />
@@ -86,7 +86,7 @@ export default function PestKontrolPage() {
         <div className="max-w-7xl mx-auto relative z-10 w-full grid lg:grid-cols-12 gap-12 items-center">
           
           {/* Sol Kısım: Metinler */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left mt-8 md:mt-0">
             <div className="inline-flex items-center gap-2 border border-pest-green/40 bg-pest-green/10 rounded px-4 py-1.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="font-barlowCondensed text-[11px] md:text-sm font-semibold text-[#5dd88a] tracking-wider uppercase">
@@ -94,38 +94,66 @@ export default function PestKontrolPage() {
               </span>
             </div>
             
-            <h1 className="font-barlowCondensed text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05] mb-6">
-              Zararlı Risklerini Ölçülebilir ve <br className="hidden md:block" />
+            <h1 className="font-barlowCondensed text-[32px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-[1.05] mb-6">
+              Zararlı Risklerini Ölçülebilir ve <br className="hidden lg:block" />
               <span className="text-pest-green">İzlenebilir Bir Sistemle Yönetin</span>
             </h1>
             
-            <p className="text-base md:text-lg text-white/70 font-light max-w-2xl leading-relaxed mb-8">
+            <p className="text-[13px] md:text-lg text-white/70 font-light max-w-2xl leading-relaxed mb-8 line-clamp-4 md:line-clamp-none">
               EPCON, işletmenize özel pest kontrol programlarını; risk analizi, saha haritalaması, düzenli izleme, önleyici faaliyetler, hedefe yönelik müdahale ve dijital raporlama süreçleriyle yönetir.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-sm shadow-lg shadow-pest-green/20">
-                <ShieldCheck size={18} /> IPM Teknik Değerlendirme Talep Et
+              <Link href="/ucretsiz-teklif-al?type=ipm" className="w-full sm:w-auto bg-pest-green hover:bg-pest-green-dark text-white font-bold rounded-md px-8 py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 tracking-wide text-[15px] shadow-lg shadow-pest-green/20">
+                <ShieldCheck size={18} /> IPM Değerlendirme Talep Et
               </Link>
-              <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-8 py-4 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 text-sm">
+              <a href="https://wa.me/905316901071" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border border-white/20 hover:border-white/45 bg-transparent hover:bg-white/5 text-white font-bold rounded-md px-8 py-3.5 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 text-[15px]">
                 <MessageCircle size={18} className="text-[#25d366]"/> WhatsApp'tan Uzmana Sor
               </a>
             </div>
           </div>
 
-          {/* Sağ Kısım: Görsel */}
+          {/* Sağ Kısım: Görsel Slider */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end items-center relative mt-8 lg:mt-0">
             {/* Görsel arkası parlama (glow) efekti */}
             <div className="absolute inset-0 bg-pest-green opacity-20 blur-[80px] rounded-full z-0"></div>
             
-            {/* Şık çerçeveli görsel alanı */}
-            <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/5">
-              <img 
-                src="images/pest-control/hero.png" 
-                alt="Profesyonel Pest Kontrol Hizmeti" 
-                className="w-full h-full object-cover" 
-                loading="eager"
-              />
+            {/* Şık çerçeveli görsel alanı ve Slider CSS Entegrasyonu */}
+            <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/5 bg-navy-deeper">
+              
+              <style dangerouslySetInnerHTML={{__html: `
+                @keyframes slide-hero {
+                  0%, 28% { transform: translateX(0); }
+                  33%, 61% { transform: translateX(-33.3333%); }
+                  66%, 94% { transform: translateX(-66.6666%); }
+                  100% { transform: translateX(0); }
+                }
+                .animate-hero-slide {
+                  display: flex;
+                  width: 300%;
+                  height: 100%;
+                  animation: slide-hero 15s ease-in-out infinite;
+                }
+                .slide-item {
+                  width: 33.3333%;
+                  height: 100%;
+                  flex-shrink: 0;
+                }
+              `}} />
+
+              {/* Slider Track (Kayan Şerit) */}
+              <div className="animate-hero-slide">
+                <div className="slide-item">
+                  <img src="/images/pest-1.png" alt="Pest Kontrol Operasyonu 1" className="w-full h-full object-cover" loading="eager" />
+                </div>
+                <div className="slide-item">
+                  <img src="/images/pest-2.png" alt="Pest Kontrol Operasyonu 2" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="slide-item">
+                  <img src="/images/pest-3.png" alt="Pest Kontrol Operasyonu 3" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </div>
+
             </div>
           </div>
 
