@@ -121,7 +121,7 @@ export default function PestKontrolPage() {
             {/* Şık çerçeveli görsel alanı */}
             <div className="relative z-10 w-full max-w-[450px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/5">
               <img 
-                src="https://images.unsplash.com/photo-1638820842410-dbe10a8a61f0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVzdCUyMGNvbnRyb2x8ZW58MHx8MHx8fDA%3D" 
+                src="images/pest-control/hero.png" 
                 alt="Profesyonel Pest Kontrol Hizmeti" 
                 className="w-full h-full object-cover" 
                 loading="eager"
