@@ -1,12 +1,38 @@
 import React from "react";
 import { MapPin, Phone, Mail, Building2, Send, MessageCircle, Clock } from "lucide-react";
+import { client } from "@/sanity/lib/client";
 
 export const metadata = {
   title: "İletişim | EPCON",
   description: "EPCON Çevre Sağlığı Sistemleri iletişim bilgileri, adres, telefon, WhatsApp ve e-posta detayları.",
 };
 
-export default function ContactPage() {
+// Sitenin bu sayfasını her 60 saniyede bir arka planda yenilemeye zorluyoruz
+export const revalidate = 60;
+
+export default async function ContactPage() {
+  
+  // Sanity'den ayarları çekiyoruz
+  let settings = null;
+  try {
+    settings = await client.fetch('*[_type == "siteSettings"][0]', {}, { next: { revalidate: 60 } });
+  } catch (e) {
+    console.error("İletişim ayarları çekilemedi:", e);
+  }
+
+  // Panel boşsa veya silindiyse sitenin çökmemesi için orijinal veriler (Fallback)
+  const phone = settings?.phone || "0216 505 73 06";
+  const whatsapp = settings?.whatsapp || "0531 690 10 71";
+  const address = settings?.address || "Armağanevler Mahallesi Güngör Sokak\nNo:89/A Ümraniye/İstanbul";
+  const email = settings?.email || "info@epcon.com.tr";
+  const workingHours = settings?.workingHours || "Pzt - Cmt: 08:00 - 20:00";
+  const companyName = settings?.companyName || "EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.";
+  const contactDescription = settings?.contactDescription || "Pest kontrol, fumigasyon, biyosidal uygulama ve bitki sağlığı hizmetleri hakkında bilgi ve teklif almak için bizimle iletişime geçebilirsiniz. Teknik ekibimiz talebinizi değerlendirerek sizinle iletişime geçecektir.";
+
+  // Linklere tıklandığında hata vermemesi için boşlukları siliyoruz
+  const cleanTel = phone.replace(/\s+/g, "");
+  const cleanWa = "90" + whatsapp.replace(/^0/, "").replace(/\s+/g, "");
+
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow">
       
@@ -40,14 +66,14 @@ export default function ContactPage() {
 
               {/* Kısa Açıklama ve Ünvan Kartı */}
               <div className="bg-slate-50 border border-border rounded-xl p-6 md:p-8 mb-8">
-                <p className="text-sm md:text-base text-navy/80 leading-relaxed mb-6">
-                  Pest kontrol, fumigasyon, biyosidal uygulama ve bitki sağlığı hizmetleri hakkında bilgi ve teklif almak için bizimle iletişime geçebilirsiniz. Teknik ekibimiz talebinizi değerlendirerek sizinle iletişime geçecektir.
+                <p className="text-sm md:text-base text-navy/80 leading-relaxed mb-6 whitespace-pre-line">
+                  {contactDescription}
                 </p>
                 <div className="flex items-start gap-3 pt-6 border-t border-border">
                   <Building2 size={22} className="text-navy flex-shrink-0 mt-1" />
                   <div>
                     <span className="text-xs text-text-muted block mb-1">Tam Firma Ünvanı</span>
-                    <strong className="text-base text-navy block leading-snug">EPCON Çevre Sağlığı Sistemleri San. ve Tic. Ltd. Şti.</strong>
+                    <strong className="text-base text-navy block leading-snug">{companyName}</strong>
                   </div>
                 </div>
               </div>
@@ -60,8 +86,8 @@ export default function ContactPage() {
                   </div>
                   <div className="mt-1">
                     <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Adres</span>
-                    <span className="text-base text-navy font-medium leading-relaxed">
-                      Armağanevler Mahallesi Güngör Sokak<br />No:89/A Ümraniye/İstanbul
+                    <span className="text-base text-navy font-medium leading-relaxed whitespace-pre-line">
+                      {address}
                     </span>
                   </div>
                 </li>
@@ -73,7 +99,7 @@ export default function ContactPage() {
                     </div>
                     <div className="mt-1 flex flex-col">
                       <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Telefon</span>
-                      <a href="tel:+902165057306" className="text-base text-navy font-bold hover:text-pest-green transition-colors">0216 505 73 06</a>
+                      <a href={`tel:${cleanTel}`} className="text-base text-navy font-bold hover:text-pest-green transition-colors">{phone}</a>
                     </div>
                   </li>
 
@@ -83,7 +109,7 @@ export default function ContactPage() {
                     </div>
                     <div className="mt-1 flex flex-col">
                       <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">WhatsApp</span>
-                      <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="text-base text-navy font-bold hover:text-[#25d366] transition-colors">0531 690 10 71</a>
+                      <a href={`https://wa.me/${cleanWa}`} target="_blank" rel="noreferrer" className="text-base text-navy font-bold hover:text-[#25d366] transition-colors">{whatsapp}</a>
                     </div>
                   </li>
                 </div>
@@ -95,7 +121,7 @@ export default function ContactPage() {
                     </div>
                     <div className="mt-1 flex flex-col">
                       <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">E-posta</span>
-                      <a href="mailto:info@epcon.com.tr" className="text-base text-navy font-medium hover:text-pest-green transition-colors">info@epcon.com.tr</a>
+                      <a href={`mailto:${email}`} className="text-base text-navy font-medium hover:text-pest-green transition-colors">{email}</a>
                     </div>
                   </li>
 
@@ -105,7 +131,7 @@ export default function ContactPage() {
                     </div>
                     <div className="mt-1 flex flex-col">
                       <span className="text-xs text-text-muted block mb-0.5 font-bold uppercase tracking-wider">Çalışma Saatleri</span>
-                      <span className="text-base text-navy font-medium">Pzt - Cmt: 08:00 - 20:00</span>
+                      <span className="text-base text-navy font-medium">{workingHours}</span>
                     </div>
                   </li>
                 </div>

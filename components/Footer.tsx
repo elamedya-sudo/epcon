@@ -1,10 +1,26 @@
-"use client";
-
 import React from "react";
 import { Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { client } from "@/sanity/lib/client";
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+
+  // Sanity'den genel ayarları çekiyoruz (60 saniyede bir güncellenir)
+  let settings = null;
+  try {
+    settings = await client.fetch('*[_type == "siteSettings"][0]', {}, { next: { revalidate: 60 } });
+  } catch (e) {
+    console.error("Footer ayarları çekilemedi:", e);
+  }
+
+  // Sanity'de veri yoksa eski değerleri varsayılan (fallback) olarak kullan
+  const phone = settings?.phone || "0216 505 73 06";
+  const whatsapp = settings?.whatsapp || "0531 690 10 71";
+  const address = settings?.address || "Armağanevler Mahallesi Güngör Sokak No:89/A Ümraniye/İstanbul";
+
+  // Linkler için boşlukları temizleyip formatlıyoruz
+  const cleanTel = phone.replace(/\s+/g, "");
+  const cleanWa = "90" + whatsapp.replace(/^0/, "").replace(/\s+/g, "");
 
   const quickLinks = [
     { name: "Ana Sayfa", href: "/" },
@@ -41,40 +57,16 @@ export default function Footer() {
               Hizmet yeterliliğini TSE belgesiyle kanıtlamış olan firmamız; fümigasyon ruhsatlı uzman kadrosuyla, İstanbul merkezli olarak Türkiye genelinde endüstriyel, ticari ve konut alanlarına yönelik profesyonel pest kontrol hizmetleri sunmaktadır.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              {/* Instagram */}
-              <a 
-                href="https://www.instagram.com/epconcevresagligi/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60"
-              >
+              <a href="https://www.instagram.com/epconcevresagligi/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              {/* Facebook */}
-              <a 
-                href="https://www.facebook.com/people/Epcon/61592191441217" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60"
-              >
+              <a href="https://www.facebook.com/people/Epcon/61592191441217" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
-              {/* LinkedIn */}
-              <a 
-                href="https://www.linkedin.com/company/epconcs/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60"
-              >
+              <a href="https://www.linkedin.com/company/epconcs/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
               </a>
-              {/* YouTube */}
-              <a 
-                href="https://www.youtube.com/@epconcevresagligi" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60"
-              >
+              <a href="https://www.youtube.com/@epconcevresagligi" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-pest-green hover:text-white flex items-center justify-center transition-colors text-white/60">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96C1 9.88 1 12 1 12s0 2.12.46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96C23 14.12 23 12 23 12s0-2.12-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
               </a>
             </div>
@@ -103,13 +95,13 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-pest-green mt-0.5 flex-shrink-0" />
-                <span className="text-white/60 leading-relaxed">Armağanevler Mahallesi Güngör Sokak No:89/A Ümraniye/İstanbul</span>
+                <span className="text-white/60 leading-relaxed">{address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-pest-green flex-shrink-0" />
                 <div className="flex flex-col">
-                  <a href="tel:+902165057306" className="hover:text-white transition-colors">0216 505 73 06</a>
-                  <a href="https://wa.me/905316901071" target="_blank" rel="noreferrer" className="hover:text-white transition-colors font-bold">0531 690 10 71</a>
+                  <a href={`tel:${cleanTel}`} className="hover:text-white transition-colors">{phone}</a>
+                  <a href={`https://wa.me/${cleanWa}`} target="_blank" rel="noreferrer" className="hover:text-white transition-colors font-bold">{whatsapp}</a>
                 </div>
               </li>
             </ul>

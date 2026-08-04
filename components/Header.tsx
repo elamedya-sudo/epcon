@@ -5,11 +5,22 @@ import { Phone, MapPin, Menu, X, ShieldCheck, ChevronDown, FileText, Globe } fro
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Header() {
+// Dışarıdan gelecek settings prop'unu tanımlıyoruz
+export default function Header({ settings }: { settings?: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [currentLang, setCurrentLang] = useState("TR");
   const pathname = usePathname();
+
+  // Admin panelindeysek site menüsünü tamamen gizle
+  if (pathname?.startsWith("/admin")) return null;
+
+  // Sanity verilerini al, yoksa varsayılanları kullan
+  const phone = settings?.phone || "0216 505 73 06";
+  const whatsapp = settings?.whatsapp || "0533 234 43 88";
+  
+  const cleanTel = phone.replace(/\s+/g, "");
+  const cleanWa = "90" + whatsapp.replace(/^0/, "").replace(/\s+/g, "");
 
   useEffect(() => {
     if (document.cookie.includes("googtrans=/tr/en")) setCurrentLang("EN");
@@ -127,10 +138,10 @@ export default function Header() {
             </div>
             <div className="flex items-center gap-3 md:gap-4">
               <span className="hidden md:inline opacity-50">|</span>
-              <a href="tel:+902165057306" className="hover:text-white transition-colors notranslate">0216 505 73 06</a>
+              <a href={`tel:${cleanTel}`} className="hover:text-white transition-colors notranslate">{phone}</a>
               <span className="opacity-50">|</span>
-              <a href="https://wa.me/905332344388" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
-                WhatsApp: 0533 234 43 88
+              <a href={`https://wa.me/${cleanWa}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors font-medium notranslate">
+                WhatsApp: {whatsapp}
               </a>
             </div>
           </div>
@@ -146,7 +157,6 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Masaüstü Menü */}
         <div className="hidden lg:flex items-center gap-5 xl:gap-7 relative h-full translate">
           {menuItems.map((item, idx) => (
             item.isDropdown ? (
@@ -170,7 +180,6 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Sağ Taraf Butonlar ve Dil Seçici */}
         <div className="hidden sm:flex items-center gap-3">
           
           <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
@@ -203,7 +212,6 @@ export default function Header() {
         <div className="absolute top-full left-0 w-full bg-white border-b border-border shadow-xl lg:hidden z-50">
           <div className="flex flex-col p-5 space-y-1 max-h-[calc(100dvh-80px)] overflow-y-auto pb-8">
             
-            {/* Dil Seçeneği Alanı */}
             <div className="flex flex-col gap-2 pb-3 border-b border-border/50 mb-1">
               <span className="text-[13px] font-bold text-navy flex items-center gap-2 translate">
                 <Globe size={14} className="text-pest-green" /> Dil / Language
@@ -221,7 +229,6 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Menü Linkleri */}
             <div className="translate flex flex-col">
               {menuItems.map((item, idx) => (
                 item.isDropdown ? (
@@ -246,7 +253,6 @@ export default function Header() {
               ))}
             </div>
             
-            {/* Alt Butonlar */}
             <div className="pt-4 flex flex-col gap-2 translate">
               <Link href="/belgelerimiz" className="w-full bg-navy text-white text-center py-2.5 rounded-md font-bold text-[15px]" onClick={() => setIsOpen(false)}>
                 Belgelerimiz

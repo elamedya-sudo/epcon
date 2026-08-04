@@ -1,9 +1,9 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReferenceLogos from "@/components/ReferenceLogos";
+import { client } from "@/sanity/lib/client"; 
+import { PortableText } from '@portabletext/react';
 import { 
   CheckCircle2, 
   HelpCircle, 
@@ -15,43 +15,66 @@ import {
   ShieldAlert
 } from 'lucide-react';
 
+export const revalidate = 60; 
+
+// --- SANITY YENİ YAZILARI İÇİN KURUMSAL TASARIM BİLEŞENLERİ ---
+const RichTextComponents = {
+  block: {
+    h2: ({ children }: any) => <h2 className="text-3xl font-extrabold text-navy mt-10 mb-4">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-2xl font-bold text-navy mt-8 mb-4">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-xl font-bold text-navy mt-6 mb-3">{children}</h4>,
+    normal: ({ children }: any) => <p className="text-lg text-text-mid leading-relaxed mb-5">{children}</p>,
+    blockquote: ({ children }: any) => <blockquote className="border-l-4 border-pest-green pl-4 italic text-navy/70 my-6 bg-slate-50 p-4 rounded-r-lg">{children}</blockquote>,
+  },
+  list: {
+    bullet: ({ children }: any) => <ul className="list-disc pl-6 mb-6 space-y-2 marker:text-pest-green text-lg text-text-mid">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal pl-6 mb-6 space-y-2 marker:text-navy font-bold text-lg text-text-mid">{children}</ol>,
+  },
+  marks: {
+    strong: ({ children }: any) => <strong className="font-bold text-navy">{children}</strong>,
+    link: ({ children, value }: any) => (
+      <a href={value.href} className="text-pest-green font-bold hover:underline" target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+  },
+};
+// -------------------------------------------------------------
+
 interface BlogPost {
   slug: string;
   title: string;
-  image: string;
-  content: string;
+  image: string | null;
+  oldContent: string | null;
+  body: any | null;
   category?: string;
   steps?: { title: string; desc: string }[];
   faqs?: { q: string; a: string }[];
 }
 
-// HATA ÇÖZÜMÜ BURADA: params artık Promise olarak tanımlandı ve await ediliyor.
 export default async function SinglePostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   let post: BlogPost | null = null;
 
   try {
-    const rootPath = path.join(process.cwd(), "data", "post.json");
-    const appPath = path.join(process.cwd(), "app", "data", "post.json");
+    const query = `*[_type == "post" && slug.current == $slug][0] {
+      title,
+      "slug": slug.current,
+      "image": coalesce(mainImage.asset->url, oldImageUrl),
+      "category": categories[0]->title,
+      oldContent,
+      body
+    }`;
     
-    let filePath = "";
-    if (fs.existsSync(rootPath)) filePath = rootPath;
-    else if (fs.existsSync(appPath)) filePath = appPath;
-
-    if (filePath) {
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const allPosts: BlogPost[] = JSON.parse(fileContents);
-      post = allPosts.find((p) => p.slug === slug) || null;
-    }
+    post = await client.fetch(query, { slug }, { next: { revalidate: 60 } });
   } catch (error) {
-    console.error("Yazı çekilirken hata oluştu:", error);
+    console.error("Yazı Sanity'den çekilirken hata oluştu:", error);
   }
 
   if (!post) {
     notFound();
   }
 
-  // 1. DİNAMİK FORM YÖNLENDİRMESİ
   let formType = "genel";
   if (slug.includes("hamambocegi")) formType = "hamambocegi";
   else if (slug.includes("fare") || slug.includes("sican")) formType = "fare_sican";
@@ -67,7 +90,6 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
   else if (post.category?.toLowerCase().includes("fumigasyon")) formType = "urun_yuk";
   else if (post.category?.toLowerCase().includes("ilaçlama")) formType = "ilaclama_genel";
 
-  // 2. AKILLI VARSAYILANLAR (JSON'da yoksa bile sayfayı zengin gösterir)
   const isFumigation = post.category?.toLowerCase().includes("fumigasyon");
 
   const defaultSteps = isFumigation ? [
@@ -98,7 +120,6 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
   return (
     <main className="flex flex-col min-h-screen bg-white font-barlow pb-10">
       
-      {/* 1. HERO ALANI */}
       <section className="relative bg-navy py-20 px-6 md:px-10 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src={post.image || "/images/hero-bg.jpg"} alt={post.title} className="w-full h-full object-cover opacity-20 mix-blend-luminosity" />
@@ -116,15 +137,17 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 -mt-10 relative z-20">
         
-        {/* SOL İÇERİK ALANI */}
         <div className="lg:col-span-8 space-y-12">
           
-          {/* Ana Metin (JSON HTML İçeriği) */}
           <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-slate-100 prose prose-lg max-w-none text-text-mid prose-headings:font-barlowCondensed prose-headings:text-navy prose-headings:uppercase prose-a:text-pest-green">
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            {/* Sanity'den gelen veriye özel yazdığımız kurumsal stili (RichTextComponents) uyguluyoruz */}
+            {post.body && post.body.length > 0 ? (
+              <PortableText value={post.body} components={RichTextComponents} />
+            ) : post.oldContent ? (
+              <div dangerouslySetInnerHTML={{ __html: post.oldContent }} />
+            ) : null}
           </div>
 
-          {/* Kutu Kutu Detaylandırma (Adımlar) */}
           <div className="space-y-6">
             <h3 className="font-barlowCondensed text-3xl font-bold text-navy uppercase flex items-center gap-3 border-b border-slate-200 pb-4">
               <ShieldCheck className="text-pest-green w-8 h-8" /> 
@@ -143,7 +166,6 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
             </div>
           </div>
 
-          {/* Sık Sorulan Sorular */}
           <div className="space-y-6">
             <h3 className="font-barlowCondensed text-3xl font-bold text-navy uppercase flex items-center gap-3 border-b border-slate-200 pb-4">
               <HelpCircle className="text-pest-green w-8 h-8" /> 
@@ -165,11 +187,9 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
 
         </div>
 
-        {/* SAĞ YAPIŞKAN SİDEBAR (Teklif ve İletişim) */}
         <div className="lg:col-span-4 space-y-6">
           <div className="sticky top-28 space-y-6">
             
-            {/* Dinamik Teklif Kutusu */}
             <div className="bg-navy p-8 rounded-2xl shadow-xl text-center border-t-4 border-pest-green relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10">
                  <ShieldAlert className="w-24 h-24 text-white" />
@@ -188,7 +208,6 @@ export default async function SinglePostPage({ params }: { params: Promise<{ slu
               </Link>
             </div>
 
-            {/* İletişim Kutusu */}
             <div className="bg-slate-50 border border-slate-200 p-8 rounded-2xl shadow-sm">
               <h4 className="font-barlowCondensed text-xl font-bold uppercase text-navy mb-4">
                 Uzmanımıza Danışın

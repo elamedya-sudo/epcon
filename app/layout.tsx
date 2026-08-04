@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { client } from "@/sanity/lib/client"; // SANITY BAĞLANTISI EKLENDİ
 
 const barlow = Barlow({
   subsets: ["latin", "latin-ext"],
@@ -29,11 +30,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// COMPONENT ASYNC YAPILDI (Sunucu tarafında veri çekebilmek için)
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  // HEADER İÇİN GENEL AYARLARI ÇEKİYORUZ (60 saniyede bir güncellenir)
+  let settings = null;
+  try {
+    settings = await client.fetch('*[_type == "siteSettings"][0]', {}, { next: { revalidate: 60 } });
+  } catch (e) {
+    console.error("Layout ayarları çekilemedi:", e);
+  }
+
   return (
     <html lang="tr" className="scroll-smooth">
       <head>
@@ -77,22 +88,23 @@ export default function RootLayout({
         </Script>
 
         {/* GİZLİ ÇEVİRİ MOTORU (TR, EN, RU, DE, AR DESTEKLİ) */}
-<div id="google_translate_element" style={{ display: 'none' }}></div>
-<Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
-<Script id="google-translate-init" strategy="afterInteractive">
-  {`
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'tr',
-        includedLanguages: 'tr,en,ru,de,ar', 
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  `}
-</Script>
+        <div id="google_translate_element" style={{ display: 'none' }}></div>
+        <Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" />
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({
+                pageLanguage: 'tr',
+                includedLanguages: 'tr,en,ru,de,ar', 
+                autoDisplay: false
+              }, 'google_translate_element');
+            }
+          `}
+        </Script>
         {/* GİZLİ ÇEVİRİ MOTORU BİTİŞİ */}
 
-        <Header />
+        {/* SETTINGS VERİSİNİ HEADER'A PROP OLARAK YOLLUYORUZ */}
+        <Header settings={settings} />
         {children}
         <Footer />
         <ScrollToTop />

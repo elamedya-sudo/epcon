@@ -1,12 +1,29 @@
 import React from "react";
 import { Phone } from "lucide-react";
+import { client } from "@/sanity/lib/client";
 
-export default function FloatingButtons() {
+export default async function FloatingButtons() {
+  let settings = null;
+  try {
+    settings = await client.fetch('*[_type == "siteSettings"][0]', {}, { next: { revalidate: 60 } });
+  } catch (e) {
+    console.error("Buton ayarları çekilemedi:", e);
+  }
+
+  // Panelden buton kapatıldıysa (aktif değilse) ekranda hiçbir şey gösterme
+  if (settings?.floatingButtonActive === false) return null;
+
+  const phone = settings?.phone || "0216 505 73 06";
+  const whatsapp = settings?.whatsapp || "0533 234 43 88";
+
+  const cleanTel = phone.replace(/\s+/g, "");
+  const cleanWa = "90" + whatsapp.replace(/^0/, "").replace(/\s+/g, "");
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       {/* WhatsApp Butonu */}
       <a
-        href="https://wa.me/905332344388"
+        href={`https://wa.me/${cleanWa}`}
         target="_blank"
         rel="noreferrer"
         className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 group relative"
@@ -19,7 +36,7 @@ export default function FloatingButtons() {
 
       {/* Telefon Butonu */}
       <a
-        href="tel:+905332344388"
+        href={`tel:${cleanTel}`}
         className="w-14 h-14 bg-navy text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_rgba(26,45,143,0.4)] hover:scale-110 transition-transform duration-300"
         aria-label="Bizi Arayın"
       >
