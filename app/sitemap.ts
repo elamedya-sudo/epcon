@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import fs from 'fs';
-import path from 'path';
+// fs ve path modüllerini sildik, yerine Sanity client'ımızı ekledik
+import { client } from "@/sanity/lib/client"; 
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Sitenizin ana URL'sini buraya yazın
   const baseUrl = 'https://www.epcon.com.tr';
 
@@ -64,31 +64,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8, // Ana sayfa önceliği 1, diğerleri 0.8
   }));
 
-  // 2. DİNAMİK YAZILAR (JSON'dan Okuma)
+  // 2. DİNAMİK YAZILAR (Sanity'den Okuma)
   let dynamicUrls: MetadataRoute.Sitemap = [];
   
   try {
-    const rootPath = path.join(process.cwd(), "data", "post.json");
-    const appPath = path.join(process.cwd(), "app", "data", "post.json");
+    // Sadece slug ve son güncellenme tarihini almamız sitemap için yeterli
+    const query = `*[_type == "post"] {
+      "slug": slug.current,
+      _updatedAt
+    }`;
     
-    let filePath = "";
-    if (fs.existsSync(rootPath)) filePath = rootPath;
-    else if (fs.existsSync(appPath)) filePath = appPath;
-
-    if (filePath) {
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const posts = JSON.parse(fileContents);
-      
-      dynamicUrls = posts.map((post: any) => ({
-        // Not: Link yapınız /yazi ise burayı `${baseUrl}/${post.slug}` olarak ayarlayabilirsiniz.
-        url: `${baseUrl}/${post.slug}`, 
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      }));
-    }
+    // İşlemi build alırken engellememesi için await ekledik
+    const posts = await client.fetch(query);
+    
+    dynamicUrls = posts.map((post: any) => ({
+      url: `${baseUrl}/${post.slug}`, 
+      lastModified: new Date(post._updatedAt || new Date()), // Sanity'den gelen gerçek tarih
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }));
   } catch (error) {
-    console.error("Sitemap oluşturulurken JSON okuma hatası:", error);
+    console.error("Sitemap oluşturulurken Sanity okuma hatası:", error);
   }
 
   return [...staticUrls, ...dynamicUrls];
